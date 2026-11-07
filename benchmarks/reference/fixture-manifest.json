@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-11-07T08:34:57.453456+00:00",
+  "git_commit": "a86ccff48f1adb7f40a0fe82c141a2a446e5ad19",
+  "working_tree_dirty": false,
+  "source_sha256": "b7ea5717e5ace6d43c39475c4fa891b3f2be1c7cd8aeab75bff15569d25073e1",
+  "dataset_sha256": "2f672766b83123e74ed2158db5406b56c47ea08f44848ee6900273e10ba568a8",
+  "configuration": {
+    "dataset": "eval/datasets/support_v1.json",
+    "output": "results/eval",
+    "embedding": "fixture",
+    "embedding_model": "fixture-blake2-token-hash-v1",
+    "embedding_revision": null,
+    "generator": "fixture",
+    "generator_model": null,
+    "nlist": 4,
+    "nprobe": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "k": 3,
+    "rerank_n": 0,
+    "dtype": "fp32",
+    "threads": 1,
+    "cache_bytes": 8192,
+    "embedding_build_seconds": 0.00044049997813999653,
+    "generation_settings": {
+      "temperature": 0,
+      "seed": 42
+    }
+  },
+  "hardware": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "pybind11": "3.1.0",
+    "faiss-cpu": "1.15.1",
+    "sentence-transformers": null,
+    "vortex-retrieval": "0.1.0"
+  },
+  "process_memory": {
+    "peak_rss_bytes": 44044288,
+    "current_rss_bytes": 43159552,
+    "method": "GetProcessMemoryInfo; process-wide working set"
+  },
+  "limitations": [
+    "Small project-authored fixture; labels are not an independent benchmark.",
+    "Lexical support is a token-overlap proxy, not semantic faithfulness.",
+    "Fixture generation is extractive plumbing verification, not LLM evaluation."
+  ]
+}

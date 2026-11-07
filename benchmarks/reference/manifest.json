@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-11-07T08:34:56.884249+00:00",
+  "git_commit": "a86ccff48f1adb7f40a0fe82c141a2a446e5ad19",
+  "working_tree_dirty": false,
+  "source_sha256": "b7ea5717e5ace6d43c39475c4fa891b3f2be1c7cd8aeab75bff15569d25073e1",
+  "dataset_sha256": null,
+  "configuration": {
+    "vectors": 10000,
+    "dimension": 64,
+    "queries": 100,
+    "nlist": 32,
+    "k": 10,
+    "seed": 42,
+    "output": "results/benchmark",
+    "skip_faiss": false,
+    "dataset_sha256": "16f3b35c350b6807435d21e9ee346bfa2df3057c706c03ec01749f43acf6dcee",
+    "distribution": "numpy default_rng normal(0,1)",
+    "build_seconds": 0.017908900044858456,
+    "avx2_available": true,
+    "cache_semantics": "application cache only; OS page cache is uncontrolled",
+    "latency_semantics": "sequential Python wall time including binding overhead",
+    "memory_semantics": "resident_bytes counts cached payload only, excludes index metadata and OS pages",
+    "original_matrix_bytes": 2560000,
+    "logical_cpu_count": 12,
+    "build_description": "CMake Release; GNU 16.1.0 MinGW-w64 UCRT; -O3 -DNDEBUG; no fast-math; scalar or runtime AVX2; static C++ runtime",
+    "compiler": "c++ (Rev5, Built by MSYS2 project) 16.1.0"
+  },
+  "hardware": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]"
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "pybind11": "3.1.0",
+    "faiss-cpu": "1.15.1",
+    "sentence-transformers": null,
+    "vortex-retrieval": "0.1.0"
+  },
+  "process_memory": {
+    "peak_rss_bytes": 81108992,
+    "current_rss_bytes": 75948032,
+    "method": "GetProcessMemoryInfo; process-wide working set"
+  }
+}

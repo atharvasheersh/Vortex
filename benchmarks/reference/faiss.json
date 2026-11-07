@@ -1,0 +1,74 @@
+[
+  {
+    "family": "flat",
+    "nprobe": 0,
+    "ann_recall": 1.0,
+    "p50_ms": 0.14725001528859138,
+    "p95_ms": 0.16576998168602586,
+    "p99_ms": 0.23545203963294675,
+    "sequential_qps": 6639.489120580912,
+    "build_seconds": 0.0025019999593496323,
+    "serialized_bytes": 2560045,
+    "threads": 1
+  },
+  {
+    "family": "ivf",
+    "nprobe": 1,
+    "ann_recall": 0.13099999999999995,
+    "p50_ms": 0.011900090612471104,
+    "p95_ms": 0.013970100553706285,
+    "p99_ms": 0.02448106883093719,
+    "sequential_qps": 80012.7815756453,
+    "build_seconds": 0.03276089997962117,
+    "serialized_bytes": 2648587,
+    "threads": 1
+  },
+  {
+    "family": "ivf",
+    "nprobe": 2,
+    "ann_recall": 0.233,
+    "p50_ms": 0.017200014553964138,
+    "p95_ms": 0.01923003001138568,
+    "p99_ms": 0.0222200516145677,
+    "sequential_qps": 57185.33623669291,
+    "build_seconds": 0.03276089997962117,
+    "serialized_bytes": 2648587,
+    "threads": 1
+  },
+  {
+    "family": "ivf",
+    "nprobe": 4,
+    "ann_recall": 0.3759999999999999,
+    "p50_ms": 0.014750054106116295,
+    "p95_ms": 0.027205084916204214,
+    "p99_ms": 0.027853979263454703,
+    "sequential_qps": 54764.504094076314,
+    "build_seconds": 0.03276089997962117,
+    "serialized_bytes": 2648587,
+    "threads": 1
+  },
+  {
+    "family": "ivf",
+    "nprobe": 8,
+    "ann_recall": 0.568,
+    "p50_ms": 0.02605002373456955,
+    "p95_ms": 0.07136996136978269,
+    "p99_ms": 0.10187795152887773,
+    "sequential_qps": 23541.59746165383,
+    "build_seconds": 0.03276089997962117,
+    "serialized_bytes": 2648587,
+    "threads": 1
+  },
+  {
+    "family": "ivf",
+    "nprobe": 32,
+    "ann_recall": 1.0,
+    "p50_ms": 0.13365002814680338,
+    "p95_ms": 0.14098002575337884,
+    "p99_ms": 0.15558701590634913,
+    "sequential_qps": 8438.390797427617,
+    "build_seconds": 0.03276089997962117,
+    "serialized_bytes": 2648587,
+    "threads": 1
+  }
+]

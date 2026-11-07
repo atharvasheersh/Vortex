@@ -20,6 +20,29 @@ Vortex implements storage, distance kernels, top-k selection, k-means, IVF lists
 | Evaluation | Labeled retrieval metrics, per-query evidence, lexical answer diagnostics, run manifests |
 | Integration | Offline fixture; optional pinned sentence-transformer embeddings and external HTTP generation |
 
+## Measured release results
+
+One local Windows Release run: Intel Core i7-1255U, GNU 16.1.0, 10,000 vectors x 64 dimensions, 100 queries, k=10, 32 lists, one thread, seed 42. These in-memory query timings include Python binding overhead; mapped/cache experiments are reported separately. This small synthetic run does not establish general superiority or production capacity.
+
+| Configuration | ANN Recall@10 | p95 ms |
+| --- | ---: | ---: |
+| Vortex exact FP32 | 1.000 | 0.103 |
+| Vortex IVF nprobe=4 | 0.374 | 0.031 |
+| Vortex IVF nprobe=32 | 1.000 | 0.128 |
+| FAISS flat | 1.000 | 0.166 |
+| FAISS ivf nprobe=4 | 0.376 | 0.027 |
+| FAISS ivf nprobe=32 | 1.000 | 0.141 |
+
+Original FP32 vectors are retained: total snapshots use approximately 273 bytes/vector for FP32, 401 for FP16 and 341 for INT8. In this run the additional encoding increases total storage, and decoding/cache overhead can increase latency.
+
+The fictional 12-query fixture achieves relevant-chunk Recall@3 of 1.000 with exact search and 0.667 with one IVF probe; extractive answer exact match is 0.917 and 0.667 respectively. These are fixture integration results, not real LLM evaluations.
+
+![Measured systems trade-offs](assets/systems.png)
+
+![Illustrative retrieval and answer diagnostics](assets/fixture-quality.png)
+
+Full measurements, run identity, limitations and reproduction commands are in [the benchmark report](docs/benchmark_results.md). Raw exported evidence is in [benchmarks/reference](benchmarks/reference/).
+
 ## Build and test
 
 Requirements: Python 3.10+, a C++20 compiler, and CMake 3.20+. No vector database is required. Build dependencies for Python packaging are installed automatically.
@@ -103,7 +126,7 @@ The 16-chunk, 12-query support fixture is fictional and illustrative. The defaul
 
 For real model integration, install `.[embeddings]`, use `--embedding sentence-transformers`, and supply both `--embedding-model` and a pinned `--embedding-revision`. Select `--generator http` and set `VORTEX_GENERATION_URL` and `VORTEX_GENERATION_MODEL`. The endpoint accepts a JSON model/prompt request and returns an `answer` or `response` string. The adapter requests temperature 0 and seed 42; endpoint compliance must be checked separately. External model execution requires the relevant packages, model access, and endpoint.
 
-See [evaluation methodology](docs/evaluation.md) and the measured release results below.
+See [evaluation methodology](docs/evaluation.md) and the measured release results above.
 
 ## Limitations
 

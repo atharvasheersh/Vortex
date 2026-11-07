@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "name": "aster-support-fixture-v1",
+  "labeling_notes": "Project-authored fictional support facts with explicit relevant chunks. This small illustrative fixture is not an external benchmark or a human annotation study.",
+  "chunks": [
+    {"id": 101, "text": "Aster refunds are available within 30 days of purchase. Customers must provide the original receipt."},
+    {"id": 102, "text": "Aster shipping takes five business days for standard deliveries. Express shipping takes two business days."},
+    {"id": 103, "text": "Aster password reset links expire after 20 minutes. Request another link if the first one expires."},
+    {"id": 104, "text": "Aster support is available Monday through Friday from 09:00 to 17:00 UTC."},
+    {"id": 105, "text": "Aster invoices can be downloaded from the billing page. Only workspace administrators can change billing details."},
+    {"id": 106, "text": "Aster workspaces allow up to 12 members on the basic plan. The team plan allows up to 50 members."},
+    {"id": 107, "text": "Aster data exports remain available for seven days. Export files use the CSV format."},
+    {"id": 108, "text": "Aster account deletion includes a 14 day cancellation window. Deletion requests are submitted from account settings."},
+    {"id": 109, "text": "Aster API requests are limited to 100 requests per minute. Requests exceeding the limit receive status 429."},
+    {"id": 110, "text": "Aster API keys can be rotated from the developer page. Old API keys stop working immediately after rotation."},
+    {"id": 111, "text": "Aster backups are created every 24 hours. Backup retention lasts 21 days."},
+    {"id": 112, "text": "Aster attachments can be at most 25 megabytes each. Executable attachments are rejected."},
+    {"id": 113, "text": "Aster project names must contain between 3 and 60 characters. Project names may contain spaces."},
+    {"id": 114, "text": "Aster audit logs are retained for 90 days. Workspace administrators can export audit logs."},
+    {"id": 115, "text": "Aster maintenance is scheduled on Sundays at 02:00 UTC. Notices are posted 48 hours in advance."},
+    {"id": 116, "text": "Aster notifications can be paused for eight hours. Notification preferences are saved per user."}
+  ],
+  "cases": [
+    {"query_id": "refund-window", "query": "What is the Aster refunds window?", "relevant_chunk_ids": [101], "reference_answer": "Aster refunds are available within 30 days of purchase."},
+    {"query_id": "shipping-standard", "query": "How long does standard shipping take?", "relevant_chunk_ids": [102], "reference_answer": "Aster shipping takes five business days for standard deliveries."},
+    {"query_id": "password-expiry", "query": "When do password reset links expire?", "relevant_chunk_ids": [103], "reference_answer": "Aster password reset links expire after 20 minutes."},
+    {"query_id": "support-hours", "query": "What are the Aster support hours?", "relevant_chunk_ids": [104], "reference_answer": "Aster support is available Monday through Friday from 09:00 to 17:00 UTC."},
+    {"query_id": "invoice-download", "query": "Where can invoices be downloaded?", "relevant_chunk_ids": [105], "reference_answer": "Aster invoices can be downloaded from the billing page."},
+    {"query_id": "basic-members", "query": "How many members are allowed on the basic plan?", "relevant_chunk_ids": [106], "reference_answer": "Aster workspaces allow up to 12 members on the basic plan."},
+    {"query_id": "exports-duration", "query": "How long do data exports remain available?", "relevant_chunk_ids": [107], "reference_answer": "Aster data exports remain available for seven days."},
+    {"query_id": "deletion-cancel", "query": "What is the account deletion cancellation window?", "relevant_chunk_ids": [108], "reference_answer": "Aster account deletion includes a 14 day cancellation window."},
+    {"query_id": "api-limit", "query": "What is the API requests limit per minute?", "relevant_chunk_ids": [109], "reference_answer": "Aster API requests are limited to 100 requests per minute."},
+    {"query_id": "backup-retention", "query": "What is the backup retention duration?", "relevant_chunk_ids": [111], "reference_answer": "Backup retention lasts 21 days."},
+    {"query_id": "attachment-size", "query": "What is the maximum size of attachments?", "relevant_chunk_ids": [112], "reference_answer": "Aster attachments can be at most 25 megabytes each."},
+    {"query_id": "audit-retention", "query": "How long are audit logs retained?", "relevant_chunk_ids": [114], "reference_answer": "Aster audit logs are retained for 90 days."}
+  ]
+}

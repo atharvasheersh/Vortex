@@ -1,0 +1,497 @@
+{
+  "status": "passed",
+  "size": 10000,
+  "dimension": 64,
+  "k": 10,
+  "nlist": 32,
+  "query_count": 100,
+  "repeats": 3,
+  "seed": 42,
+  "query_seed": 2026,
+  "iterations": 8,
+  "threads_for_single_query": 1,
+  "batch_threads": 4,
+  "quality_target": 0.95,
+  "cache_budget": 8388608,
+  "snapshot_path": "10000/collection.vtx",
+  "stages_seconds": {
+    "generate": 0.017169200000353158,
+    "insert": 0.02406590001191944,
+    "numpy_verification": 0.008090200019069016,
+    "ivf_build": 0.01935890002641827,
+    "faiss_flat_build": 0.08414650009945035,
+    "save": 0.005013399990275502,
+    "open_mapped": 0.020786700071766973
+  },
+  "dataset_sha256": "210ca028ef187823719de20ba3dfeaf2b87eae8673dcb11323522491dc9e0174",
+  "memory_stages": {
+    "arrays": {
+      "peak_rss_bytes": 40476672,
+      "current_rss_bytes": 40476672,
+      "method": "GetProcessMemoryInfo; process-wide working set",
+      "system_available_bytes": 3233206272
+    },
+    "built_flat": {
+      "peak_rss_bytes": 45531136,
+      "current_rss_bytes": 44048384,
+      "method": "GetProcessMemoryInfo; process-wide working set",
+      "system_available_bytes": 3228577792
+    },
+    "built_ivf": {
+      "peak_rss_bytes": 61562880,
+      "current_rss_bytes": 46219264,
+      "method": "GetProcessMemoryInfo; process-wide working set",
+      "system_available_bytes": 3229270016
+    },
+    "with_faiss_baseline": {
+      "peak_rss_bytes": 66220032,
+      "current_rss_bytes": 66220032,
+      "method": "GetProcessMemoryInfo; process-wide working set",
+      "system_available_bytes": 3217096704
+    },
+    "after_builder_release": {
+      "peak_rss_bytes": 66367488,
+      "current_rss_bytes": 61337600,
+      "method": "GetProcessMemoryInfo; process-wide working set",
+      "system_available_bytes": 3219079168
+    },
+    "mapped_before_queries": {
+      "peak_rss_bytes": 66367488,
+      "current_rss_bytes": 61587456,
+      "method": "GetProcessMemoryInfo; process-wide working set",
+      "system_available_bytes": 3230093312
+    },
+    "mapped_after_queries": {
+      "peak_rss_bytes": 66772992,
+      "current_rss_bytes": 66772992,
+      "method": "GetProcessMemoryInfo; process-wide working set",
+      "system_available_bytes": 3221803008
+    }
+  },
+  "exact": {
+    "p50_ms": 0.08835000000000001,
+    "p95_ms": 0.10547000000000001,
+    "p99_ms": 0.1468369999999996,
+    "qps_excluding_loop_overhead": 10661.738574170162,
+    "median_round_p95_ms": 0.10478499999999999,
+    "rounds": [
+      {
+        "p50_ms": 0.0972,
+        "p95_ms": 0.10478499999999999,
+        "p99_ms": 0.11002500000000001,
+        "qps_excluding_loop_overhead": 10251.4685228659
+      },
+      {
+        "p50_ms": 0.0872,
+        "p95_ms": 0.101925,
+        "p99_ms": 0.19026100000000007,
+        "qps_excluding_loop_overhead": 10896.569759839602
+      },
+      {
+        "p50_ms": 0.08715,
+        "p95_ms": 0.106905,
+        "p99_ms": 0.13997500000000054,
+        "qps_excluding_loop_overhead": 10862.362998446682
+      }
+    ],
+    "recall_at_k": 1.0,
+    "mean_scanned": 10000.0,
+    "nprobe": 0,
+    "query_count": 100,
+    "repeats": 3
+  },
+  "numpy_checked_query_ids": [
+    0,
+    50,
+    99
+  ],
+  "ivf": [
+    {
+      "p50_ms": 0.0107,
+      "p95_ms": 0.025005000000000003,
+      "p99_ms": 0.031714999999999986,
+      "qps_excluding_loop_overhead": 74921.3326007692,
+      "median_round_p95_ms": 0.019374999999999996,
+      "rounds": [
+        {
+          "p50_ms": 0.01475,
+          "p95_ms": 0.028029999999999992,
+          "p99_ms": 0.03466500000000075,
+          "qps_excluding_loop_overhead": 57110.22272986865
+        },
+        {
+          "p50_ms": 0.0096,
+          "p95_ms": 0.010924999999999999,
+          "p99_ms": 0.01395800000000003,
+          "qps_excluding_loop_overhead": 101957.58564437194
+        },
+        {
+          "p50_ms": 0.011,
+          "p95_ms": 0.019374999999999996,
+          "p99_ms": 0.02827600000000014,
+          "qps_excluding_loop_overhead": 78591.6378497328
+        }
+      ],
+      "recall_at_k": 0.14,
+      "mean_scanned": 310.55,
+      "nprobe": 1,
+      "query_count": 100,
+      "repeats": 3
+    },
+    {
+      "p50_ms": 0.0225,
+      "p95_ms": 0.0446,
+      "p99_ms": 0.05846899999999994,
+      "qps_excluding_loop_overhead": 38365.62440053712,
+      "median_round_p95_ms": 0.035335,
+      "rounds": [
+        {
+          "p50_ms": 0.02765,
+          "p95_ms": 0.050755,
+          "p99_ms": 0.058724000000000165,
+          "qps_excluding_loop_overhead": 32027.671908528966
+        },
+        {
+          "p50_ms": 0.0227,
+          "p95_ms": 0.035335,
+          "p99_ms": 0.06539900000000005,
+          "qps_excluding_loop_overhead": 40418.738126995675
+        },
+        {
+          "p50_ms": 0.02205,
+          "p95_ms": 0.0237,
+          "p99_ms": 0.02753700000000002,
+          "qps_excluding_loop_overhead": 44982.23201835275
+        }
+      ],
+      "recall_at_k": 0.36500000000000005,
+      "mean_scanned": 1249.04,
+      "nprobe": 4,
+      "query_count": 100,
+      "repeats": 3
+    },
+    {
+      "p50_ms": 0.03705,
+      "p95_ms": 0.0446,
+      "p99_ms": 0.0997169999999998,
+      "qps_excluding_loop_overhead": 25686.69086923762,
+      "median_round_p95_ms": 0.044834999999999986,
+      "rounds": [
+        {
+          "p50_ms": 0.03485,
+          "p95_ms": 0.044834999999999986,
+          "p99_ms": 0.07557000000000008,
+          "qps_excluding_loop_overhead": 27058.473360932974
+        },
+        {
+          "p50_ms": 0.03495,
+          "p95_ms": 0.04635499999999995,
+          "p99_ms": 0.17282400000000003,
+          "qps_excluding_loop_overhead": 24627.508927471987
+        },
+        {
+          "p50_ms": 0.03905,
+          "p95_ms": 0.041804999999999995,
+          "p99_ms": 0.04793500000000002,
+          "qps_excluding_loop_overhead": 25490.69589599796
+        }
+      ],
+      "recall_at_k": 0.5539999999999999,
+      "mean_scanned": 2505.56,
+      "nprobe": 8,
+      "query_count": 100,
+      "repeats": 3
+    },
+    {
+      "p50_ms": 0.0694,
+      "p95_ms": 0.10705500000000008,
+      "p99_ms": 0.27490899999999974,
+      "qps_excluding_loop_overhead": 13008.7505528719,
+      "median_round_p95_ms": 0.114445,
+      "rounds": [
+        {
+          "p50_ms": 0.0695,
+          "p95_ms": 0.14030499999999999,
+          "p99_ms": 0.33364400000000033,
+          "qps_excluding_loop_overhead": 11946.14677035922
+        },
+        {
+          "p50_ms": 0.069,
+          "p95_ms": 0.07612,
+          "p99_ms": 0.08716900000000015,
+          "qps_excluding_loop_overhead": 14308.608058608057
+        },
+        {
+          "p50_ms": 0.0698,
+          "p95_ms": 0.114445,
+          "p99_ms": 0.18282000000000015,
+          "qps_excluding_loop_overhead": 12984.146357297739
+        }
+      ],
+      "recall_at_k": 0.8140000000000002,
+      "mean_scanned": 5019.68,
+      "nprobe": 16,
+      "query_count": 100,
+      "repeats": 3
+    },
+    {
+      "p50_ms": 0.09035,
+      "p95_ms": 0.10713,
+      "p99_ms": 0.24643999999999996,
+      "qps_excluding_loop_overhead": 10301.985536012307,
+      "median_round_p95_ms": 0.107005,
+      "rounds": [
+        {
+          "p50_ms": 0.09845000000000001,
+          "p95_ms": 0.107005,
+          "p99_ms": 0.1157120000000002,
+          "qps_excluding_loop_overhead": 10121.969735310491
+        },
+        {
+          "p50_ms": 0.08804999999999999,
+          "p95_ms": 0.094465,
+          "p99_ms": 0.10449400000000025,
+          "qps_excluding_loop_overhead": 11177.180667948318
+        },
+        {
+          "p50_ms": 0.0879,
+          "p95_ms": 0.1954899999999999,
+          "p99_ms": 0.3834060000000008,
+          "qps_excluding_loop_overhead": 9714.113635701311
+        }
+      ],
+      "recall_at_k": 0.9560000000000002,
+      "mean_scanned": 7513.31,
+      "nprobe": 24,
+      "query_count": 100,
+      "repeats": 3
+    },
+    {
+      "p50_ms": 0.1034,
+      "p95_ms": 0.12282500000000002,
+      "p99_ms": 0.20923399999999998,
+      "qps_excluding_loop_overhead": 9233.411406956453,
+      "median_round_p95_ms": 0.14279,
+      "rounds": [
+        {
+          "p50_ms": 0.1034,
+          "p95_ms": 0.14279,
+          "p99_ms": 0.2909500000000002,
+          "qps_excluding_loop_overhead": 9061.746742302046
+        },
+        {
+          "p50_ms": 0.1036,
+          "p95_ms": 0.11301,
+          "p99_ms": 0.11666700000000003,
+          "qps_excluding_loop_overhead": 9583.868432654155
+        },
+        {
+          "p50_ms": 0.10295,
+          "p95_ms": 0.18531999999999998,
+          "p99_ms": 0.209234,
+          "qps_excluding_loop_overhead": 9073.504459627442
+        }
+      ],
+      "recall_at_k": 0.9870000000000002,
+      "mean_scanned": 8749.45,
+      "nprobe": 28,
+      "query_count": 100,
+      "repeats": 3
+    },
+    {
+      "p50_ms": 0.1162,
+      "p95_ms": 0.1511,
+      "p99_ms": 0.22938999999999973,
+      "qps_excluding_loop_overhead": 8207.530135314813,
+      "median_round_p95_ms": 0.137175,
+      "rounds": [
+        {
+          "p50_ms": 0.117,
+          "p95_ms": 0.137175,
+          "p99_ms": 0.1689080000000003,
+          "qps_excluding_loop_overhead": 8245.110649384915
+        },
+        {
+          "p50_ms": 0.11605,
+          "p95_ms": 0.16257499999999994,
+          "p99_ms": 0.2883520000000008,
+          "qps_excluding_loop_overhead": 7925.940016485955
+        },
+        {
+          "p50_ms": 0.11565,
+          "p95_ms": 0.130085,
+          "p99_ms": 0.16334400000000018,
+          "qps_excluding_loop_overhead": 8469.838903664053
+        }
+      ],
+      "recall_at_k": 1.0,
+      "mean_scanned": 10000.0,
+      "nprobe": 32,
+      "query_count": 100,
+      "repeats": 3
+    }
+  ],
+  "selected_ivf": {
+    "p50_ms": 0.09035,
+    "p95_ms": 0.10713,
+    "p99_ms": 0.24643999999999996,
+    "qps_excluding_loop_overhead": 10301.985536012307,
+    "median_round_p95_ms": 0.107005,
+    "rounds": [
+      {
+        "p50_ms": 0.09845000000000001,
+        "p95_ms": 0.107005,
+        "p99_ms": 0.1157120000000002,
+        "qps_excluding_loop_overhead": 10121.969735310491
+      },
+      {
+        "p50_ms": 0.08804999999999999,
+        "p95_ms": 0.094465,
+        "p99_ms": 0.10449400000000025,
+        "qps_excluding_loop_overhead": 11177.180667948318
+      },
+      {
+        "p50_ms": 0.0879,
+        "p95_ms": 0.1954899999999999,
+        "p99_ms": 0.3834060000000008,
+        "qps_excluding_loop_overhead": 9714.113635701311
+      }
+    ],
+    "recall_at_k": 0.9560000000000002,
+    "mean_scanned": 7513.31,
+    "nprobe": 24,
+    "query_count": 100,
+    "repeats": 3
+  },
+  "selection_rule": "smallest predeclared nprobe achieving mean Recall@10 >= 0.95 on measured queries; not held-out tuning",
+  "batch_4_workers": {
+    "rounds": [
+      {
+        "seconds": 0.004176100017502904,
+        "qps": 23945.78663846153
+      },
+      {
+        "seconds": 0.0043120000045746565,
+        "qps": 23191.094595062317
+      },
+      {
+        "seconds": 0.004053900018334389,
+        "qps": 24667.603924056973
+      }
+    ],
+    "median_qps": 23945.78663846153
+  },
+  "faiss_flat": {
+    "rounds": [
+      {
+        "p50_ms": 0.0691,
+        "p95_ms": 0.1128,
+        "p99_ms": 0.14375700000000063,
+        "qps_excluding_loop_overhead": 13254.51316173157
+      },
+      {
+        "p50_ms": 0.0602,
+        "p95_ms": 0.08473499999999998,
+        "p99_ms": 0.102816,
+        "qps_excluding_loop_overhead": 15540.98156839586
+      },
+      {
+        "p50_ms": 0.060149999999999995,
+        "p95_ms": 0.07061999999999999,
+        "p99_ms": 0.08605200000000002,
+        "qps_excluding_loop_overhead": 15974.44089456869
+      }
+    ],
+    "median_round_p95_ms": 0.08473499999999998,
+    "exact_neighbor_agreement": 1.0
+  },
+  "snapshot_bytes": 2728584,
+  "mapped_ivf": {
+    "p50_ms": 0.4579,
+    "p95_ms": 0.5500050000000001,
+    "p99_ms": 0.5886009999999998,
+    "qps_excluding_loop_overhead": 2129.8800877510594,
+    "median_round_p95_ms": 0.5362750000000001,
+    "rounds": [
+      {
+        "p50_ms": 0.4658,
+        "p95_ms": 0.5529000000000001,
+        "p99_ms": 0.5984999999999999,
+        "qps_excluding_loop_overhead": 2075.011671940654
+      },
+      {
+        "p50_ms": 0.45565,
+        "p95_ms": 0.4841700000000001,
+        "p99_ms": 0.538434,
+        "qps_excluding_loop_overhead": 2172.35461516738
+      },
+      {
+        "p50_ms": 0.45489999999999997,
+        "p95_ms": 0.5362750000000001,
+        "p99_ms": 0.5662949999999999,
+        "qps_excluding_loop_overhead": 2144.6571229424694
+      }
+    ],
+    "recall_at_k": 0.9650000000000001,
+    "mean_scanned": 7531.3,
+    "nprobe": 24,
+    "query_count": 20,
+    "repeats": 3,
+    "cache_stats": {
+      "hits": 488907,
+      "misses": 626,
+      "evictions": 0,
+      "resident_bytes": 2564096,
+      "bytes_served": 125320448,
+      "mapped_bytes_fetched": 2564096,
+      "miss_nanoseconds": 837400
+    }
+  },
+  "elapsed_seconds": 0.47496929997578263,
+  "manifest": {
+    "schema_version": 1,
+    "created_utc": "2026-11-07T11:16:21.386148+00:00",
+    "git_commit": "13450d720ad45ae65388f9d356674609f11771b3",
+    "working_tree_dirty": true,
+    "source_sha256": "b7ea5717e5ace6d43c39475c4fa891b3f2be1c7cd8aeab75bff15569d25073e1",
+    "dataset_sha256": null,
+    "configuration": {
+      "size": 10000,
+      "dimension": 64,
+      "queries": 100,
+      "repeats": 3,
+      "k": 10,
+      "nlist": 32,
+      "ivf_iterations": 8,
+      "training_limit": 10000,
+      "kernel": "auto",
+      "avx2_available": true,
+      "seed": 42,
+      "query_seed": 2026,
+      "distribution": "independent standard-normal float32; identical corpus prefixes and query set across sizes",
+      "build": "installed 0.1.0 native extension; GNU 16.1.0 MinGW UCRT; CMake Release -O3; static runtime",
+      "measurement": "100 unique sequential queries, three randomized-order rounds; table uses median round p95",
+      "mapped_measurement": "20 queries, three rounds, 8MiB application cache; OS cache not flushed",
+      "memory": "separate subprocess per size; process working set includes arrays, builders, baseline and mappings",
+      "runner_sha256": "b2963e7892086668e4b160a2eed3cff4cd43ee5de693122c44991ec8bc0cd9c0"
+    },
+    "hardware": {
+      "platform": "Windows-11-10.0.26300-SP0",
+      "machine": "AMD64",
+      "processor": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]"
+    },
+    "packages": {
+      "numpy": "2.5.4",
+      "pybind11": "3.1.0",
+      "faiss-cpu": "1.15.1",
+      "sentence-transformers": null,
+      "vortex-retrieval": "0.1.0"
+    },
+    "process_memory": {
+      "peak_rss_bytes": 66781184,
+      "current_rss_bytes": 61337600,
+      "method": "GetProcessMemoryInfo; process-wide working set"
+    }
+  }
+}

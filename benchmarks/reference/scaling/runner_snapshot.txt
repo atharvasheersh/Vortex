@@ -1,0 +1,269 @@
+"""Isolated local scalability measurements of the unchanged retrieval engine."""
+import argparse
+import ctypes
+import gc
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+import traceback
+
+import numpy as np
+
+from vortex import Index, avx2_available
+from vortex.evaluation import manifest, process_memory, write_json
+
+
+def available_memory():
+    if sys.platform != "win32":
+        return None
+    class Status(ctypes.Structure):
+        _fields_ = [("length",ctypes.c_uint32),("load",ctypes.c_uint32)] + [
+            (field,ctypes.c_uint64) for field in ("total_phys","available_phys","total_page",
+             "available_page","total_virtual","available_virtual","available_extended")]
+    status = Status()
+    status.length = ctypes.sizeof(status)
+    if not ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(status)):
+        return None
+    return status.available_phys
+
+
+def memory_stage(result, label):
+    result.setdefault("memory_stages",{})[label] = {**process_memory(),
+        "system_available_bytes":available_memory()}
+
+
+def ids_of(row):
+    return [hit[0] for hit in row["hits"]]
+
+
+def stats(times):
+    return {"p50_ms":float(np.percentile(times,50)),
+            "p95_ms":float(np.percentile(times,95)),
+            "p99_ms":float(np.percentile(times,99)),
+            "qps_excluding_loop_overhead":len(times)/(sum(times)/1000)}
+
+
+def engine_measure(index,queries,truth,k,probe,repeats,mode,raw):
+    for query in queries[:5]:
+        index.search(query,k=k,nprobe=probe)
+    rounds=[]
+    actual=[None]*len(queries)
+    all_times=[]
+    scans=[]
+    for repeat in range(repeats):
+        order=np.random.default_rng(1700+repeat).permutation(len(queries))
+        times=[]
+        for query_id in order:
+            start=time.perf_counter_ns()
+            row=index.search(queries[query_id],k=k,nprobe=probe)
+            elapsed=(time.perf_counter_ns()-start)/1e6
+            retrieved=ids_of(row)
+            if actual[query_id] is not None:
+                assert actual[query_id]==retrieved,"search output changed between repeats"
+            actual[query_id]=retrieved
+            times.append(elapsed)
+            scans.append(row["scanned"])
+            raw.append({"mode":mode,"nprobe":probe,"repeat":repeat,"query_id":int(query_id),
+                        "wall_ms":elapsed,"native_ms":row["milliseconds"],
+                        "scanned":row["scanned"],"ids":retrieved})
+        all_times.extend(times)
+        rounds.append(stats(times))
+    recall=(float(np.mean([len(set(found)&set(expected))/len(expected)
+                          for found,expected in zip(actual,truth)])) if truth is not None else None)
+    summary={**stats(all_times),"median_round_p95_ms":float(np.median([r["p95_ms"] for r in rounds])),
+             "rounds":rounds,"recall_at_k":recall,"mean_scanned":float(np.mean(scans)),
+             "nprobe":probe,"query_count":len(queries),"repeats":repeats}
+    return summary,actual
+
+
+def numpy_reference(vectors,queries,truth,k):
+    checked=[]
+    for query_id in sorted(set([0,len(queries)//2,len(queries)-1])):
+        query=queries[query_id].astype(np.float64)
+        best_ids=np.empty(0,dtype=np.int64)
+        best_scores=np.empty(0,dtype=np.float64)
+        for start in range(0,len(vectors),16384):
+            difference=vectors[start:start+16384].astype(np.float64)-query
+            scores=np.einsum("ij,ij->i",difference,difference)
+            identifiers=np.arange(start,start+len(scores))
+            selected=np.argpartition(scores,min(k,len(scores))-1)[:k]
+            best_ids=np.concatenate([best_ids,identifiers[selected]])
+            best_scores=np.concatenate([best_scores,scores[selected]])
+            order=np.lexsort((best_ids,best_scores))[:k]
+            best_ids,best_scores=best_ids[order],best_scores[order]
+        assert truth[query_id]==best_ids.tolist(),f"NumPy exact disagreement for query {query_id}"
+        checked.append(query_id)
+    return checked
+
+
+def run_case(args):
+    output=Path(args.output)/str(args.size)
+    output.mkdir(parents=True,exist_ok=True)
+    state={"status":"running","size":args.size,"dimension":args.dimension,"k":args.k,
+           "nlist":args.nlist,"query_count":args.queries,"repeats":args.repeats,
+           "seed":42,"query_seed":2026,"iterations":8,"threads_for_single_query":1,
+           "batch_threads":4,"quality_target":0.95,"cache_budget":8*1024*1024,
+           "snapshot_path":f"{args.size}/collection.vtx"}
+    timings=state.setdefault("stages_seconds",{})
+    raw=[]
+    started=time.perf_counter()
+    raw_bytes=args.size*args.dimension*4
+    required=int(raw_bytes*4.5+128*1024*1024)
+    free=available_memory()
+    if free is not None and free < required+512*1024*1024:
+        state.update(status="resource_limited",estimated_headroom_bytes=required,
+                     available_bytes=free,reason="Insufficient currently available memory for the benchmark's duplicate buffers")
+        write_json(output/"result.json",state)
+        return
+    try:
+        print(f"[{args.size:,}] generate {args.dimension}D FP32 corpus",flush=True)
+        start=time.perf_counter()
+        vectors=np.random.default_rng(42).standard_normal((args.size,args.dimension),dtype=np.float32)
+        queries=np.random.default_rng(2026).standard_normal((args.queries,args.dimension),dtype=np.float32)
+        timings["generate"]=time.perf_counter()-start
+        digest=hashlib.sha256()
+        digest.update(memoryview(vectors).cast("B"));digest.update(memoryview(queries).cast("B"))
+        state["dataset_sha256"]=digest.hexdigest()
+        memory_stage(state,"arrays")
+        index=Index(args.dimension,metric="l2",threads=4)
+        start=time.perf_counter()
+        for identifier,vector in enumerate(vectors):
+            index.add(identifier,vector)
+            if identifier and identifier%100000==0:
+                print(f"[{args.size:,}] inserted {identifier:,}",flush=True)
+                free=available_memory()
+                if free is not None and free<384*1024*1024:
+                    raise MemoryError("stopping before available physical memory falls below 384 MiB")
+        timings["insert"]=time.perf_counter()-start
+        memory_stage(state,"built_flat")
+        print(f"[{args.size:,}] exact search, {args.queries} queries x {args.repeats} rounds",flush=True)
+        state["exact"],truth=engine_measure(index,queries,None,args.k,0,args.repeats,"exact",raw)
+        state["exact"]["recall_at_k"]=1.0
+        start=time.perf_counter()
+        state["numpy_checked_query_ids"]=numpy_reference(vectors,queries,truth,args.k)
+        timings["numpy_verification"]=time.perf_counter()-start
+        print(f"[{args.size:,}] exact p95={state['exact']['median_round_p95_ms']:.3f}ms; NumPy reference passed",flush=True)
+        start=time.perf_counter()
+        index.build_ivf(args.nlist,iterations=8,seed=42,training_limit=10000)
+        timings["ivf_build"]=time.perf_counter()-start
+        memory_stage(state,"built_ivf")
+        print(f"[{args.size:,}] IVF trained and assigned in {timings['ivf_build']:.3f}s",flush=True)
+        state["ivf"]=[]
+        for probe in [1,4,8,16,24,28,32]:
+            if probe>args.nlist:continue
+            value,actual=engine_measure(index,queries,truth,args.k,probe,args.repeats,"ivf",raw)
+            if probe==args.nlist:assert actual==truth,"all-list IVF differs from exhaustive search"
+            state["ivf"].append(value)
+            print(f"[{args.size:,}] nprobe={probe:2} recall={value['recall_at_k']:.3f} p95={value['median_round_p95_ms']:.3f}ms",flush=True)
+            write_json(output/"progress.json",state)
+        qualified=[r for r in state["ivf"] if r["recall_at_k"]>=.95]
+        state["selected_ivf"]=min(qualified,key=lambda row:row["nprobe"])
+        state["selection_rule"]="smallest predeclared nprobe achieving mean Recall@10 >= 0.95 on measured queries; not held-out tuning"
+        batch=[]
+        index.search_batch(queries[:5],k=args.k)
+        for repeat in range(args.repeats):
+            start=time.perf_counter()
+            result=index.search_batch(queries,k=args.k)
+            elapsed=time.perf_counter()-start
+            assert [ids_of(row) for row in result]==truth
+            batch.append({"seconds":elapsed,"qps":len(queries)/elapsed})
+        state["batch_4_workers"]={"rounds":batch,"median_qps":float(np.median([r["qps"] for r in batch]))}
+        start=time.perf_counter()
+        import faiss
+        faiss.omp_set_num_threads(1)
+        baseline=faiss.IndexFlatL2(args.dimension)
+        baseline.add(vectors)
+        timings["faiss_flat_build"]=time.perf_counter()-start
+        faiss_rounds=[]
+        agreements=[]
+        for query in queries[:5]:baseline.search(query[None,:],args.k)
+        for repeat in range(args.repeats):
+            times=[]
+            for query_id in np.random.default_rng(1700+repeat).permutation(len(queries)):
+                start=time.perf_counter_ns()
+                _,returned=baseline.search(queries[query_id:query_id+1],args.k)
+                times.append((time.perf_counter_ns()-start)/1e6)
+                agreements.append(len(set(returned[0].tolist())&set(truth[query_id]))/args.k)
+            faiss_rounds.append(stats(times))
+        state["faiss_flat"]={"rounds":faiss_rounds,
+                             "median_round_p95_ms":float(np.median([r["p95_ms"] for r in faiss_rounds])),
+                             "exact_neighbor_agreement":float(np.mean(agreements))}
+        memory_stage(state,"with_faiss_baseline")
+        del baseline
+        snapshot=output/"collection.vtx"
+        start=time.perf_counter()
+        index.save(str(snapshot))
+        timings["save"]=time.perf_counter()-start
+        state["snapshot_bytes"]=snapshot.stat().st_size
+        del index,vectors
+        gc.collect()
+        memory_stage(state,"after_builder_release")
+        start=time.perf_counter()
+        reopened=Index.open(str(snapshot),cache_bytes=state["cache_budget"],threads=4)
+        timings["open_mapped"]=time.perf_counter()-start
+        memory_stage(state,"mapped_before_queries")
+        for query_id in [0,args.queries//2,args.queries-1]:
+            assert ids_of(reopened.search(queries[query_id],k=args.k))==truth[query_id]
+        probe=state["selected_ivf"]["nprobe"]
+        print(f"[{args.size:,}] mapped verification passed; testing nprobe={probe} with 8MiB cache",flush=True)
+        reopened.clear_cache()
+        cache_before=reopened.cache_stats()
+        value,_=engine_measure(reopened,queries[:20],truth[:20],args.k,probe,args.repeats,"mapped_ivf",raw)
+        value["cache_stats"]=reopened.cache_stats()
+        assert value["cache_stats"]["resident_bytes"]<=state["cache_budget"]
+        state["mapped_ivf"]=value
+        memory_stage(state,"mapped_after_queries")
+        del reopened
+        state["status"]="passed"
+        state["elapsed_seconds"]=time.perf_counter()-started
+        state["manifest"]=manifest({
+            "size":args.size,"dimension":args.dimension,"queries":args.queries,"repeats":args.repeats,
+            "k":args.k,"nlist":args.nlist,"ivf_iterations":8,"training_limit":10000,
+            "kernel":"auto","avx2_available":avx2_available(),"seed":42,"query_seed":2026,
+            "distribution":"independent standard-normal float32; identical corpus prefixes and query set across sizes",
+            "build":"installed 0.1.0 native extension; GNU 16.1.0 MinGW UCRT; CMake Release -O3; static runtime",
+            "measurement":"100 unique sequential queries, three randomized-order rounds; table uses median round p95",
+            "mapped_measurement":"20 queries, three rounds, 8MiB application cache; OS cache not flushed",
+            "memory":"separate subprocess per size; process working set includes arrays, builders, baseline and mappings",
+            "runner_sha256":hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        })
+        print(f"[{args.size:,}] PASSED in {state['elapsed_seconds']:.1f}s; peak RSS={process_memory()['peak_rss_bytes']/1048576:.1f}MiB",flush=True)
+    except Exception as exc:
+        state.update(status="failed",error=str(exc),traceback=traceback.format_exc(),
+                     elapsed_seconds=time.perf_counter()-started)
+        print(state["traceback"],flush=True)
+    finally:
+        write_json(output/"result.json",state)
+        with (output/"queries.jsonl").open("w",encoding="utf-8") as handle:
+            for row in raw:handle.write(json.dumps(row,allow_nan=False)+"\n")
+
+
+def parent(args):
+    root=Path(args.output)
+    root.mkdir(parents=True,exist_ok=True)
+    for size in [1000,10000,100000,1000000]:
+        command=[sys.executable,str(Path(__file__).resolve()),"--size",str(size),"--dimension",str(args.dimension),
+                 "--queries",str(args.queries),"--repeats",str(args.repeats),"--nlist",str(args.nlist),"--k",str(args.k),"--output",str(root)]
+        result=subprocess.run(command,check=False)
+        if result.returncode:
+            folder=root/str(size);folder.mkdir(exist_ok=True)
+            if not (folder/"result.json").exists():
+                write_json(folder/"result.json",{"status":"process_failed","size":size,"exit_code":result.returncode})
+    print("All requested sizes attempted.",flush=True)
+
+
+if __name__=="__main__":
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--size",type=int)
+    parser.add_argument("--dimension",type=int,default=64)
+    parser.add_argument("--queries",type=int,default=100)
+    parser.add_argument("--repeats",type=int,default=3)
+    parser.add_argument("--nlist",type=int,default=32)
+    parser.add_argument("--k",type=int,default=10)
+    parser.add_argument("--output",default="results/scaling")
+    options=parser.parse_args()
+    run_case(options) if options.size else parent(options)

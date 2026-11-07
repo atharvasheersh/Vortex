@@ -1,0 +1,16 @@
+/.venv/
+/build*/
+/.work/
+/data/
+/results/
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg-info/
+.pytest_cache/
+.coverage
+/.env
+/Vortex_RAG_Eval_Low_Level_Project_Blueprint.docx
+/docs/system_design.docx
+/docs/project_summary.docx

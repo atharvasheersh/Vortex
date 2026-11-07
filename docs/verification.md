@@ -18,4 +18,6 @@
 | Reproducibility | JSON/CSV outputs and manifests | Configuration, source and dataset fingerprints |
 | Portability | CMake and CI | Windows and Linux build jobs; Linux sanitizer job |
 
-The repository's current CI run is the authority for remote platform verification. A configured CI job alone does not establish a successful run.
+Local Windows GCC Release and Debug CTest runs pass, with 63,666 native assertions. All 55 Python tests pass against the built extension and installed package. A separate fresh checkout passes native tests, installed-package tests, the quick start, and offline evaluation. Architecture, measured plots, and both private Word documents were rendered and visually reviewed.
+
+The [initial hosted CI run](https://github.com/atharvasheersh/Vortex/actions/runs/42356271644) failed before runner assignment because of an account restriction. None of its Windows/MSVC, Linux, or Linux sanitizer steps executed. Local MinGW sanitizer linking was unavailable because the installed toolchain lacks libsanitizer.spec. Remote platform and sanitizer validation remain pending; configured jobs are not evidence of passing checks.

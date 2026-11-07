@@ -67,7 +67,7 @@ ctest --test-dir build -C Release --output-on-failure
 
 The native library has no third-party runtime algorithm dependencies. The Python extension is optional for the CMake build. Enable it with `-DVORTEX_PYTHON=ON`; the standard package installation builds it automatically.
 
-On Windows, MSVC is supported by the build configuration and CI. MinGW-w64 is also usable: put its compiler on PATH, use the Ninja generator, and select it with `-DCMAKE_CXX_COMPILER=g++`. For package builds, set the `CMAKE_ARGS` environment variable to that compiler option and `CMAKE_GENERATOR=Ninja`. MinGW runtime libraries are linked statically. The explicit AVX2 implementation is enabled for GCC/Clang; MSVC uses the scalar fallback.
+On Windows, the build configuration targets MSVC; this release was exercised locally with MinGW-w64. Put the MinGW compiler on PATH, use the Ninja generator, and select it with `-DCMAKE_CXX_COMPILER=g++`. For package builds, set the `CMAKE_ARGS` environment variable to that compiler option and `CMAKE_GENERATOR=Ninja`. MinGW runtime libraries are linked statically. The explicit AVX2 implementation is enabled for GCC/Clang; MSVC uses the scalar fallback.
 
 Linux sanitizer build:
 
@@ -137,6 +137,12 @@ See [evaluation methodology](docs/evaluation.md) and the measured release result
 - Metadata remains in RAM, and the OS controls mapped-page residency. Application-cold benchmarks do not flush the OS cache.
 - Metadata headers are checksummed; full vector payload integrity is not checksummed. Non-finite fetched values are rejected.
 - HNSW, PQ, GPU support, online index maintenance, filtering, distributed search, and crash recovery are future work.
+
+## Verification status
+
+Local Windows GCC Release and Debug tests pass, including 63,666 native assertions and 55 Python tests. A separate fresh checkout also passes the native suite, installed-package tests, quick start, and offline evaluation.
+
+The [first hosted CI run](https://github.com/atharvasheersh/Vortex/actions/runs/42356271644) could not start any job because of an account restriction. Windows/MSVC, Linux, and Linux sanitizer execution remain unverified. The local MinGW installation also lacks its sanitizer runtime; no sanitizer pass is claimed.
 
 ## Development layout
 

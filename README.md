@@ -4,7 +4,7 @@ A C++20 vector retrieval engine with custom exact search, IVF indexing, persiste
 
 Vortex implements storage, distance kernels, top-k selection, k-means, IVF lists, quantization, and caching itself. FAISS is used only by the benchmark scripts.
 
-![Vortex system architecture](assets/system-architecture.png)
+[![Vortex architecture showing embeddings entering exact or IVF search, ranked IDs resolving to text for generation, and the mapped snapshot backing retrieval.](assets/system-architecture.png)](assets/system-architecture.svg)
 
 ## Capabilities
 

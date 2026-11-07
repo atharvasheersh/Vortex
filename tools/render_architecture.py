@@ -1,68 +1,162 @@
-"""Generate the editable system diagram and its README PNG."""
+"""Render the editable Vortex architecture plate and its README preview."""
+
 from pathlib import Path
+
 import matplotlib
+
 matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
+from matplotlib import pyplot as plt
+from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Rectangle
+
+ASSETS = Path(__file__).resolve().parents[1] / "assets"
+INK = "#122C42"
+MUTED = "#385363"
+TEAL = "#006E67"
+LINE = "#718B95"
+PAPER = "#FBFCFA"
+WHITE = "#FFFFFF"
 
 
 def render():
-    plt.rcParams.update({"font.family":"DejaVu Sans","svg.fonttype":"none"})
-    fig,ax = plt.subplots(figsize=(16,10))
-    fig.patch.set_facecolor("#f6f8fc")
-    ax.set(xlim=(0,16),ylim=(0,10))
-    ax.axis("off")
-    ax.text(.45,9.5,"VORTEX",fontsize=26,weight="bold",color="#14233d")
-    ax.text(.45,9.08,"Persistent vector retrieval with reproducible quality and systems evaluation",fontsize=13,color="#455a75")
-    boundary = FancyBboxPatch((4.55,2.25),7.25,6.2,boxstyle="round,pad=0.12",linewidth=1.5,
-                             edgecolor="#91a8c5",facecolor="#eaf0fa")
-    ax.add_patch(boundary)
-    ax.text(4.8,8.1,"C++20 ENGINE",fontsize=12,weight="bold",color="#294f83")
-    def box(x,y,w,h,title,detail,color="#ffffff"):
-        ax.add_patch(FancyBboxPatch((x,y),w,h,boxstyle="round,pad=0.06",linewidth=1,
-                                   edgecolor="#bdc9da",facecolor=color,zorder=3))
-        ax.text(x+w/2,y+h*.66,title,ha="center",va="center",fontsize=14,weight="bold",color="#14233d",zorder=4)
-        ax.text(x+w/2,y+h*.27,detail,ha="center",va="center",fontsize=12,color="#455a75",zorder=4)
-    def arrow(a,b,label=None):
-        ax.add_patch(FancyArrowPatch(a,b,arrowstyle="-|>",mutation_scale=15,linewidth=1.3,color="#566d8c",zorder=2))
-        if label:
-            ax.text((a[0]+b[0])/2,(a[1]+b[1])/2+.1,label,ha="center",fontsize=9,color="#455a75")
-    box(.5,7.15,3.15,1,"Documents and chunks","Offline text preparation")
-    box(.5,5.45,3.15,1,"Embedding model","External pretrained model\nor explicit offline fixture")
-    box(.5,3.75,3.15,1,"Question","Natural-language query")
-    box(5,6.65,6.3,1,"Python and C++ API","Validated inputs  |  Query engine  |  Worker pool")
-    box(5,4.95,2.8,1,"Exact search","Exhaustive top-k")
-    box(8.5,4.95,2.8,1,"IVF search","Centroids + nprobe lists")
-    box(5,3.5,6.3,.9,"Candidates and optional reranking","Bounded heap  |  Stable IDs  |  FP32 originals")
-    box(5,2.5,6.3,.65,"Storage access","FP32 / FP16 / INT8  |  Bounded LRU block cache")
-    box(12.5,6.65,3,1,"Chunk lookup","IDs resolve to text")
-    box(12.5,4.95,3,1,"Generation","External model endpoint\nor extractive fixture")
-    box(12.5,3.5,3,.9,"Answer and evidence","Per-query result log")
-    box(5,.85,6.3,1,"Versioned mapped snapshot","Stable IDs + original vectors + encoded vectors\nCentroids + list offsets + postings")
-    box(.5,.85,3.15,1,"Evaluation harness","Labels + ranking metrics\nAnswer diagnostics + manifest")
-    box(12.5,.85,3,1,"Systems measurements","Latency / QPS / cache / RSS\nFAISS baselines and plots")
-    arrow((2.075,7.15),(2.075,6.45))
-    arrow((3.65,5.95),(5,6.95),"embeddings")
-    arrow((2.075,4.75),(2.075,5.45))
-    arrow((6.4,6.65),(6.4,5.95)); arrow((9.9,6.65),(9.9,5.95))
-    arrow((6.4,4.95),(6.4,4.4)); arrow((9.9,4.95),(9.9,4.4))
-    arrow((8.15,3.5),(8.15,3.15)); arrow((8.15,2.5),(8.15,1.85))
-    arrow((11.3,6.95),(12.5,6.95),"top-k IDs")
-    arrow((14,6.65),(14,5.95)); arrow((14,4.95),(14,4.4))
-    arrow((11.8,2.75),(12.1,2.75))
-    arrow((12.1,2.75),(12.1,1.35))
-    arrow((12.1,1.35),(12.5,1.35))
-    arrow((14,3.5),(14,2.1))
-    arrow((14,2.1),(2.075,2.1),"evidence and answers to evaluation")
-    arrow((2.075,2.1),(2.075,1.85))
-    ax.text(.5,.35,"External models are separate from the engine. Offline fixtures verify plumbing and do not establish LLM quality.",
-            fontsize=10,color="#455a75")
-    fig.subplots_adjust(left=.01,right=.99,bottom=.02,top=.99)
-    target = Path("assets")
-    target.mkdir(exist_ok=True)
-    fig.savefig(target/"system-architecture.png",dpi=170,facecolor=fig.get_facecolor(),metadata={"Software":"Vortex"})
-    fig.savefig(target/"system-architecture.svg",facecolor=fig.get_facecolor(),metadata={"Creator":"Vortex","Date":None})
+    plt.rcParams.update(
+        {
+            "font.family": "DejaVu Sans",
+            "svg.fonttype": "none",
+            "svg.hashsalt": "vortex-architecture",
+        }
+    )
+    fig = plt.figure(figsize=(12, 7.1), facecolor=PAPER)
+    ax = fig.add_axes((0, 0, 1, 1), xlim=(0, 1200), ylim=(710, 0))
+    ax.set_axis_off()
+
+    def label(x, y, value, size=11, *, color=INK, bold=False):
+        ax.text(
+            x,
+            y,
+            value,
+            va="center",
+            fontsize=size,
+            color=color,
+            weight="bold" if bold else "normal",
+            linespacing=1.3,
+            zorder=4,
+        )
+
+    def panel(x, y, width, height, fill=WHITE, edge="#C5D3D5"):
+        ax.add_patch(
+            FancyBboxPatch(
+                (x, y),
+                width,
+                height,
+                boxstyle="round,pad=0,rounding_size=9",
+                facecolor=fill,
+                edgecolor=edge,
+                linewidth=0.9,
+            )
+        )
+
+    def arrow(points):
+        # A single head marks the destination, including on elbow connectors.
+        if len(points) > 2:
+            xs, ys = zip(*points[:-1])
+            ax.plot(xs, ys, color=TEAL, linewidth=1.5, solid_capstyle="round")
+        ax.add_patch(
+            FancyArrowPatch(
+                points[-2],
+                points[-1],
+                arrowstyle="-|>",
+                mutation_scale=11,
+                linewidth=1.5,
+                color=TEAL,
+                shrinkA=0,
+                shrinkB=1,
+                zorder=3,
+            )
+        )
+
+    def card(x, y, width, title, detail, *, fill=WHITE):
+        panel(x, y, width, 76, fill)
+        label(x + 15, y + 25, title, 14, bold=True)
+        label(x + 15, y + 54, detail, 10.7, color=MUTED)
+
+    # Align the input and output lanes with the dispatch and ranking stages.
+    ax.add_patch(Rectangle((30, 23), 6, 42, color=TEAL))
+    label(48, 44, "VORTEX", 25, bold=True)
+    label(239, 45, "Vector retrieval architecture", 22)
+    ax.plot([30, 1170], [83, 83], color=LINE, linewidth=0.7)
+
+    label(30, 123, "INPUTS", 11, color=TEAL, bold=True)
+    card(30, 156, 237, "Chunks + question", "Corpus text or query text")
+    arrow([(148, 232), (148, 270)])
+    panel(30, 270, 237, 105)
+    label(45, 296, "Embedding model", 14, bold=True)
+    label(45, 341, "Pretrained model or\noffline hash encoder", color=MUTED)
+    arrow([(267, 321), (290, 321), (290, 194), (332, 194)])
+
+    panel(311, 99, 556, 381, fill="#E7F3EF", edge="#84AFA5")
+    label(332, 123, "C++20 RETRIEVAL ENGINE", 11, color=TEAL, bold=True)
+    card(
+        332,
+        156,
+        514,
+        "Python and C++ API",
+        "Validate vectors  /  dispatch batch queries to workers",
+    )
+    arrow([(452, 232), (452, 263)])
+    arrow([(722, 232), (722, 263)])
+    card(332, 263, 248, "Exact search", "Score every vector")
+    card(598, 263, 248, "IVF search", "Probe selected centroid lists")
+    arrow([(452, 339), (452, 373)])
+    arrow([(722, 339), (722, 373)])
+    card(
+        332,
+        373,
+        514,
+        "Ranked results",
+        "Stable top-k IDs  /  optional rerank with FP32 originals",
+    )
+
+    label(929, 123, "ANSWER PIPELINE", 11, color=TEAL, bold=True)
+    arrow([(846, 411), (893, 411), (893, 194), (929, 194)])
+    card(929, 156, 241, "Chunk lookup", "Resolve ranked IDs to text")
+    arrow([(1049, 232), (1049, 263)])
+    card(929, 263, 241, "Generation", "API or extractive fixture")
+    arrow([(1049, 339), (1049, 373)])
+    card(929, 373, 241, "Answer + evidence", "Log results for each query")
+
+    # This band describes the backing store, outside the query sequence.
+    arrow([(589, 504), (589, 480)])
+    panel(30, 504, 1140, 73, fill=INK, edge=INK)
+    label(49, 527, "PERSISTENT STORAGE", 10.5, color="#A4E3CD", bold=True)
+    label(49, 554, "Mapped .vtx snapshot", 15, color=WHITE, bold=True)
+    label(378, 527, "Vectors and index", 13, color=WHITE, bold=True)
+    label(378, 553, "IDs, FP32 originals, centroids and postings", 10.6, color=WHITE)
+    label(819, 527, "Encoded reads", 13, color=WHITE, bold=True)
+    label(819, 553, "FP32 / FP16 / INT8  ·  bounded LRU cache", 10.6, color=WHITE)
+
+    label(30, 609, "EVALUATION", 11, color=TEAL, bold=True)
+    ax.plot([30, 1170], [627, 627], color=LINE, linewidth=0.7)
+    for x, title, detail in [
+        (30, "Retrieval quality", "Recall@k and nDCG against labels"),
+        (422, "Answer diagnostics", "Token F1 and evidence text overlap"),
+        (811, "System benchmarks", "Latency, QPS, RSS and FAISS baselines"),
+    ]:
+        label(x, 650, title, 14, bold=True)
+        label(x, 679, detail, 11, color=MUTED)
+
+    ASSETS.mkdir(exist_ok=True)
+    fig.savefig(
+        ASSETS / "system-architecture.png", dpi=200, metadata={"Software": "Vortex"}
+    )
+    svg = ASSETS / "system-architecture.svg"
+    fig.savefig(svg, metadata={"Creator": "Vortex", "Date": None})
+    # Normalize the SVG backend's platform newlines and path padding for Git.
+    lines = svg.read_text(encoding="utf-8").splitlines()
+    svg.write_text(
+        "".join(line.rstrip() + "\n" for line in lines), encoding="utf-8", newline="\n"
+    )
     plt.close(fig)
 
 
-if __name__ == "__main__": render()
+if __name__ == "__main__":
+    render()

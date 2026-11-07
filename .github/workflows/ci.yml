@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install pybind11 numpy pytest ninja
+      - run: python -m pip install pybind11 numpy pytest ninja faiss-cpu
       - run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DVORTEX_PYTHON=ON
       - run: cmake --build build --config Release --parallel 2
       - run: ctest --test-dir build -C Release --output-on-failure

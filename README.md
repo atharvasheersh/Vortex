@@ -43,6 +43,39 @@ The fictional 12-query fixture achieves relevant-chunk Recall@3 of 1.000 with ex
 
 Full measurements, run identity, limitations and reproduction commands are in [the benchmark report](docs/benchmark_results.md). Raw exported evidence is in [benchmarks/reference](benchmarks/reference/).
 
+## Scalability through one million vectors
+
+All four sizes passed locally with synthetic **64D FP32** vectors, top-10 retrieval, 32 IVF lists, 100 queries and three randomized-order rounds. Latency below is the median of the three round p95 values. The IVF operating point uses the smallest tested nprobe reaching mean Recall@10 of at least 0.95 on the measured queries.
+
+| Vectors | Exact p95 ms | IVF p95 ms | IVF Recall@10 | Process peak MiB |
+| ---: | ---: | ---: | ---: | ---: |
+| 1,000 | 0.017 | 0.018 | 0.991 | 57.1 |
+| 10,000 | 0.105 | 0.107 | 0.956 | 63.7 |
+| 100,000 | 2.573 | 8.555 | 0.971 | 134.8 |
+| 1,000,000 | 32.575 | 88.578 | 0.978 | 847.2 |
+
+The million-vector insertion and IVF build took 3.299 seconds. Process peak memory includes input arrays, builders, reference calculations and the FAISS baseline. High-recall IVF is slower than exact search in this fixed configuration. The reopened million-vector snapshot with an 8 MiB application cache measured **936.460 ms p95** on a 20-query subset; the OS page cache was not flushed.
+
+This establishes local million-vector capacity at 64 dimensions. It does not establish the same behavior at 768 dimensions or production load. The input generator and query set differ from the initial 10k run above, so timings from the two experiments should not be combined into one scaling curve.
+
+![Local scaling measurements](assets/scalability.png)
+
+See the [methodology and complete results](docs/scalability.md) and [recorded evidence](benchmarks/reference/scaling/). To validate or regenerate the published tables without repeating the large run:
+
+```bash
+python benchmarks/validate_scaling.py
+python benchmarks/report_scaling.py --output-dir results/scaling-report
+```
+
+To collect new measurements, install the benchmark extra and select an unused output directory:
+
+```bash
+python benchmarks/run_scaling.py --output results/scaling-new
+python benchmarks/report_scaling.py --input-dir results/scaling-new --output-dir results/scaling-new/report
+```
+
+`--sizes` selects a subset, and existing result files are never overwritten. The runner isolates each size in a child process and reports nonzero status if any size fails or cannot meet its memory-headroom check. It requires no cloud service.
+
 ## Build and test
 
 Requirements: Python 3.10+, a C++20 compiler, and CMake 3.20+. No vector database is required. Build dependencies for Python packaging are installed automatically.
@@ -140,7 +173,7 @@ See [evaluation methodology](docs/evaluation.md) and the measured release result
 
 ## Verification status
 
-Local Windows GCC Release and Debug tests pass, including 63,666 native assertions and 55 Python tests. A separate fresh checkout also passes the native suite, installed-package tests, quick start, and offline evaluation.
+Local Windows GCC Release and Debug tests pass, including 63,666 native assertions. The expanded Python suite has 63 passing tests, including runner smoke checks and evidence-integrity validation. The original release also passed a separate fresh-checkout check of the native suite, installed package, quick start and offline evaluation.
 
 The [first hosted CI run](https://github.com/atharvasheersh/Vortex/actions/runs/42356271644) could not start any job because of an account restriction. Windows/MSVC, Linux, and Linux sanitizer execution remain unverified. The local MinGW installation also lacks its sanitizer runtime; no sanitizer pass is claimed.
 

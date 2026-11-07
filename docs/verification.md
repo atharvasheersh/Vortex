@@ -15,9 +15,13 @@
 | RAG plumbing | Separate chunk lookup and generation | Fictional support fixture and evidence log |
 | External models | Optional pinned embedder and HTTP adapter | Local contract tests; real-model results require configured access |
 | Baselines | Separate FAISS benchmark | Matched data/metric/thread count; saved sweeps |
+| Scalability | Isolated 1k/10k/100k/1m runs at 64D | Saved query logs, full-probe agreement, NumPy samples and FAISS exact checks |
+| Benchmark tooling | Public scaling runner and archive validator | Small subprocess run, argument rejection, overwrite protection and tamper detection |
 | Reproducibility | JSON/CSV outputs and manifests | Configuration, source and dataset fingerprints |
 | Portability | CMake and CI | Windows and Linux build jobs; Linux sanitizer job |
 
-Local Windows GCC Release and Debug CTest runs pass, with 63,666 native assertions. All 55 Python tests pass against the built extension and installed package. A separate fresh checkout passes native tests, installed-package tests, the quick start, and offline evaluation. Architecture, measured plots, and both private Word documents were rendered and visually reviewed.
+Local Windows GCC Release and Debug CTest runs pass, with 63,666 native assertions. The expanded Python suite has 63 passing tests, including eight scaling-runner/evidence checks. The original 55-test release also passed separate fresh-checkout verification of native tests, the installed package, quick start and offline evaluation. Architecture, measured plots, and both private Word documents were rendered and visually reviewed.
+
+The four scale runs retain the unchanged native-engine revision and the historical runner hash in each manifest. Public validation recomputes recall and percentiles from all 9,840 query records, checks full-probe and mapped agreement, and verifies the export checksums. New full-size measurements are intentionally outside CI; CI exercises the maintained runner with a small fixture and includes its FAISS dependency. Large generated snapshots and private documents remain excluded from Git.
 
 The [initial hosted CI run](https://github.com/atharvasheersh/Vortex/actions/runs/42356271644) failed before runner assignment because of an account restriction. None of its Windows/MSVC, Linux, or Linux sanitizer steps executed. Local MinGW sanitizer linking was unavailable because the installed toolchain lacks libsanitizer.spec. Remote platform and sanitizer validation remain pending; configured jobs are not evidence of passing checks.

@@ -14,7 +14,7 @@ All rates retain their declared denominators. The full JSON includes article-clu
 
 The exact answer F1 interval is 36.60% to 50.75%. Exact labeled Recall@5 is
 82.67%, with Hit@5 of 84%. All 900 HTTP requests completed without retries.
-Sixteen empty outputs were retained with zero answer scores.
+Sixteen citation-only answers were retained with zero answer scores.
 
 Abstention and citation compliance are weak in this experiment. The oracle uses
 the required insufficient-evidence marker on 1 of 30 source-unanswerable cases.

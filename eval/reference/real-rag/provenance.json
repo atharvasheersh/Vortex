@@ -85,7 +85,7 @@
   "implementation_hashes": {
     "eval/run_real_rag.py": "4318daabeb9487fd29cbf1517293284f2fea781d82a9a8f4a878676ba8a2d63d",
     "eval/prepare_real_rag.py": "6a5a3718caa986dee41c7537302465179062824182359892982a22adeddeb738",
-    "eval/report_real_rag.py": "2fefe8029fa1b65640dacf4d3f0ddd774a68184576625351bff8bf2a9bcc56c2",
+    "eval/report_real_rag.py": "0bd82f627ecfcf23419554624fe5128e5f382d94df678a4602afc80fb11bec79",
     "eval/real_rag_spec.md": "87920e1cca9466172e0a9ee809213094c8ca303cc6e8e445a8d7dbe9970ed37d",
     "python/vortex/real_rag.py": "8e3c2cce0fa68d43f53d5733c16ef25c942e487687338bd64cff3d41169e15f5"
   },
@@ -119,5 +119,6 @@
   "model_execution": "Local CPU; runtime residency reported size_vram zero; no paid API or cloud resource used",
   "timing_conditions": "Fixed condition order, retained operating-system and model-server prompt caches; stage sums",
   "hardware_conditions": "Shared Windows desktop with background applications and no CPU affinity or machine isolation",
-  "memory_scope": "Encoder-client and generation-client process counters; model server is a separate process"
+  "memory_scope": "Encoder-client and generation-client process counters; model server is a separate process",
+  "output_accounting": "16 citation-only responses become empty scored answers after citation removal; zero raw responses were empty"
 }

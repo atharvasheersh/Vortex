@@ -89,6 +89,11 @@ def report(args):
             ),
             "retry_attempts": sum(max(0, len(r["attempts"]) - 1) for r in rows),
             "empty_outputs": sum(r["scores"]["empty_output"] for r in rows),
+            "empty_output_definition": "Answer text is empty after citation removal",
+            "raw_empty_outputs": sum(not r["answer"].strip() for r in rows),
+            "citation_only_outputs": sum(
+                r["scores"]["empty_output"] and bool(r["answer"].strip()) for r in rows
+            ),
             "generation_length_stops": sum(
                 (r["generation_response"] or {}).get("done_reason") == "length"
                 for r in rows

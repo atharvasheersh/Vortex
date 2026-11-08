@@ -13,14 +13,16 @@
 | Python API | pybind11 | Dtype, shape, contiguity, batch errors, installed-package checks |
 | Retrieval metrics | Python deterministic calculations | Hand-calculated ranking fixtures |
 | RAG plumbing | Separate chunk lookup and generation | Fictional support fixture and evidence log |
-| External models | Optional pinned embedder and HTTP adapter | Local contract tests; real-model results require configured access |
+| External models | Pinned MiniLM encoder and local Gemma generation | 10 development smoke records and 900 held-out records; official scoring agreement |
 | Baselines | Separate FAISS benchmark | Matched data/metric/thread count; saved sweeps |
 | Scalability | Isolated 1k/10k/100k/1m runs at 64D | Saved query logs, full-probe agreement, NumPy samples and FAISS exact checks |
 | Benchmark tooling | Public scaling runner and archive validator | Small subprocess run, argument rejection, overwrite protection and tamper detection |
 | Reproducibility | JSON/CSV outputs and manifests | Configuration, source and dataset fingerprints |
 | Portability | CMake and CI | Windows and Linux build jobs; Linux sanitizer job |
 
-Local Windows GCC Release and Debug CTest runs pass, with 63,666 native assertions. The expanded Python suite has 63 passing tests, including eight scaling-runner/evidence checks. The original 55-test release also passed separate fresh-checkout verification of native tests, the installed package, quick start and offline evaluation. Architecture, measured plots, and both private Word documents were rendered and visually reviewed.
+Local Windows GCC Release and Debug CTest runs pass, with 63,666 native assertions. The expanded Python suite has 73 passing tests, including eight scaling-runner/evidence checks and ten real-data scoring, recovery, concurrent-report and stable-ID checks. The original 55-test release also passed separate fresh-checkout verification of native tests, the installed package, quick start and offline evaluation. Architecture, measured plots, and both private Word documents were rendered and visually reviewed.
+
+The real-model experiment records 900 held-out generations across five conditions, with zero failed HTTP requests or retries and 16 citation-only answers scored zero. The independent official SQuAD scorer agrees on every stored answer score. Data auditing verifies source spans and split separation. Public hashes and local records are checked by eval/validate_real_rag.py. The archived collector preserves measured source bytes before the maintained runner's stable-ID reference-check correction. Human semantic and citation review is pending at the owner's request.
 
 The four scale runs retain the unchanged native-engine revision and the historical runner hash in each manifest. Public validation recomputes recall and percentiles from all 9,840 query records, checks full-probe and mapped agreement, and verifies the export checksums. New full-size measurements are intentionally outside CI; CI exercises the maintained runner with a small fixture and includes its FAISS dependency. Large generated snapshots and private documents remain excluded from Git.
 

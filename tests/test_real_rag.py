@@ -29,6 +29,8 @@ def test_squad_normalization_multiple_references_and_citations():
     )
     assert helpers.answer_scores("INSUFFICIENT_EVIDENCE [2]", [])["abstained"]
     assert not helpers.answer_scores("Maybe INSUFFICIENT_EVIDENCE", [])["abstained"]
+    assert helpers.answer_scores("[123]", ["Paris"])["empty_output"]
+    assert helpers.answer_scores("[123]", ["Paris"])["squad_token_f1"] == 0
 
 
 def test_context_enforces_utf8_budget_and_preserves_citation_ids():

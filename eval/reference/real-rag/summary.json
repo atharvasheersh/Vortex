@@ -9,6 +9,9 @@
       "failed_http_attempts": 0,
       "retry_attempts": 0,
       "empty_outputs": 9,
+      "empty_output_definition": "Answer text is empty after citation removal",
+      "raw_empty_outputs": 0,
+      "citation_only_outputs": 9,
       "generation_length_stops": 0,
       "squad_token_f1_answerable": {
         "mean": 0.028485827214382267,
@@ -92,6 +95,9 @@
       "failed_http_attempts": 0,
       "retry_attempts": 0,
       "empty_outputs": 1,
+      "empty_output_definition": "Answer text is empty after citation removal",
+      "raw_empty_outputs": 0,
+      "citation_only_outputs": 1,
       "generation_length_stops": 0,
       "squad_token_f1_answerable": {
         "mean": 0.5993624744053451,
@@ -175,6 +181,9 @@
       "failed_http_attempts": 0,
       "retry_attempts": 0,
       "empty_outputs": 2,
+      "empty_output_definition": "Answer text is empty after citation removal",
+      "raw_empty_outputs": 0,
+      "citation_only_outputs": 2,
       "generation_length_stops": 0,
       "squad_token_f1_answerable": {
         "mean": 0.43531827722012595,
@@ -288,6 +297,9 @@
       "failed_http_attempts": 0,
       "retry_attempts": 0,
       "empty_outputs": 2,
+      "empty_output_definition": "Answer text is empty after citation removal",
+      "raw_empty_outputs": 0,
+      "citation_only_outputs": 2,
       "generation_length_stops": 0,
       "squad_token_f1_answerable": {
         "mean": 0.43291352191733146,
@@ -401,6 +413,9 @@
       "failed_http_attempts": 0,
       "retry_attempts": 0,
       "empty_outputs": 2,
+      "empty_output_definition": "Answer text is empty after citation removal",
+      "raw_empty_outputs": 0,
+      "citation_only_outputs": 2,
       "generation_length_stops": 0,
       "squad_token_f1_answerable": {
         "mean": 0.43291352191733146,

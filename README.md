@@ -161,6 +161,46 @@ For real model integration, install `.[embeddings]`, use `--embedding sentence-t
 
 See [evaluation methodology](docs/evaluation.md) and the measured release results above.
 
+## Real model RAG quality
+
+One local CPU experiment used commit-pinned all-MiniLM-L6-v2 embeddings and the
+existing Gemma 3 1B Q4_K_M model. Development tuning used 50 answerable and 10
+source-unanswerable training questions. Held-out evaluation used 150 answerable
+and 30 source-unanswerable questions from public SQuAD 2.0 development data,
+with 1,767 indexed chunks and five generation conditions.
+
+| Condition | Answer token F1 | Answer exact match |
+| --- | ---: | ---: |
+| No context with the evidence-only prompt | 2.85% | 0.67% |
+| Source-evidence oracle | 59.94% | 39.33% |
+| Exact FP32 retrieval | 43.53% | 26.67% |
+| Selected FP32 IVF | 43.29% | 26.67% |
+| Selected INT8 IVF with FP32 reranking | 43.29% | 26.67% |
+
+These answer metrics use all 150 answerable questions per condition. All 900
+held-out HTTP requests completed, with zero retries. Sixteen citation-only answers were
+retained and scored zero. The exact condition's article-bootstrap 95% interval
+for answer F1 is 36.60% to 50.75%.
+
+Exact labeled Recall@5 was 82.67%, with Hit@5 of 84%. The development quality
+gates selected full-list probing for IVF and INT8 reranking. These configurations
+matched the exact top-five neighbors on all 180 test queries. Identical prompts
+produced 21 differing normalized answers across the exact/IVF pairs despite the
+requested temperature and seed. Their small answer-score difference includes
+runtime output variation.
+
+Abstention and citation use need attention. The source-evidence oracle emitted
+the required insufficient-evidence marker on 1 of 30 source-unanswerable cases.
+Only 6 of 175 substantive exact-retrieval responses included citations, although
+all eight citation mentions used supplied IDs. Contexts were truncated in 95 of
+180 exact-retrieval records. Human semantic and citation review is pending at the
+owner's request. Source-unanswerable labels apply to the original paragraph,
+and public data can overlap model pretraining.
+
+See the [recorded results and provenance](eval/reference/real-rag/),
+[reproduction and scoring method](docs/real_rag.md), and
+[frozen experiment specification](eval/real_rag_spec.md).
+
 ## Limitations
 
 - Original FP32 vectors are retained for reranking. FP16/INT8 reduce the encoded search payload but increase total snapshot size in this release.
@@ -173,7 +213,7 @@ See [evaluation methodology](docs/evaluation.md) and the measured release result
 
 ## Verification status
 
-Local Windows GCC Release and Debug tests pass, including 63,666 native assertions. The expanded Python suite has 63 passing tests, including runner smoke checks and evidence-integrity validation. The original release also passed a separate fresh-checkout check of the native suite, installed package, quick start and offline evaluation.
+Local Windows GCC Release and Debug tests pass, including 63,666 native assertions. The expanded Python suite has 73 passing tests, including scaling evidence checks and ten real-data scoring, recovery and stable-ID regressions. The original release also passed a separate fresh-checkout check of the native suite, installed package, quick start and offline evaluation.
 
 The [first hosted CI run](https://github.com/atharvasheersh/Vortex/actions/runs/42356271644) could not start any job because of an account restriction. Windows/MSVC, Linux, and Linux sanitizer execution remain unverified. The local MinGW installation also lacks its sanitizer runtime; no sanitizer pass is claimed.
 

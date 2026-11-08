@@ -1,5 +1,11 @@
 # Evaluation methodology
 
+The [real-model experiment](real_rag.md) adds pretrained embeddings and local
+generation over a source-separated SQuAD 2.0 subset. Its
+[recorded aggregate results](../eval/reference/real-rag/) include article-cluster
+bootstrap intervals, held-out per-condition counts and model provenance.
+The fictional fixture described below retains its original scoring contract.
+
 ## Retrieval
 
 ANN neighbor recall compares returned IDs against exhaustive top-k IDs on the same corpus and metric. Labeled retrieval metrics instead compare against the relevant_chunk_ids in a versioned dataset. They must not be combined under one ambiguous recall label.

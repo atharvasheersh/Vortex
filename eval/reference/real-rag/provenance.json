@@ -1,0 +1,123 @@
+{
+  "dataset": "SQuAD 2.0",
+  "license": "CC-BY-SA-4.0",
+  "attribution": "Rajpurkar, Jia and Liang, Know What You Don't Know, ACL 2018",
+  "source": "https://rajpurkar.github.io/SQuAD-explorer/",
+  "files": [
+    {
+      "url": "https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v2.0.json",
+      "sha256": "68dcfbb971bd3e96d5b46c7177b16c1a4e7d4bdef19fb204502738552dede002"
+    },
+    {
+      "url": "https://rajpurkar.github.io/SQuAD-explorer/dataset/dev-v2.0.json",
+      "sha256": "80a5225e94905956a6446d296ca1093975c4d3b3260f1d6c8f68bc2ab77182d8"
+    }
+  ],
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "window_wordpieces": 160,
+  "overlap_wordpieces": 32,
+  "development_articles": [
+    "Houston",
+    "Eritrea",
+    "Black_people",
+    "Infrared",
+    "Samurai",
+    "Software_testing",
+    "Nigeria",
+    "Biodiversity",
+    "Tajikistan",
+    "Immaculate_Conception"
+  ],
+  "development_chunks": 541,
+  "test_chunks": 1767,
+  "case_counts": {
+    "development": 60,
+    "test": 180
+  },
+  "prepared_hashes": {
+    "development": "36d93dfeeaf8690e45cc320ac2bac8d54ab80ba43362bd376bc3fd4d04e088d2",
+    "test": "1214cfb99a066dfe0aa4deb223b9d7a418e503b02dd809b70da5e5049dde62eb"
+  },
+  "answerability_scope": "source paragraph; corpus-wide negative judgments unverified",
+  "generator": {
+    "model": {
+      "name": "gemma3:1b",
+      "model": "gemma3:1b",
+      "modified_at": "2026-02-19T22:24:27.3945894+05:30",
+      "size": 815319791,
+      "digest": "8648f39daa8fbf5b18c7b4e6a8fb4990c692751d49917417b8842ca5758e7ffc",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "gemma3",
+        "families": [
+          "gemma3"
+        ],
+        "parameter_size": "999.89M",
+        "quantization_level": "Q4_K_M"
+      },
+      "capabilities": [
+        "completion"
+      ]
+    },
+    "runtime": {
+      "version": "0.33.3"
+    },
+    "identity_unchanged_after_run": true
+  },
+  "packages": {
+    "numpy": "2.5.4",
+    "vortex-retrieval": "0.1.0",
+    "sentence-transformers": "5.7.0",
+    "torch": "2.15.0+cpu",
+    "transformers": "5.22.2",
+    "huggingface-hub": "2.4.0",
+    "tokenizers": "0.23.3",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1"
+  },
+  "starting_commit": "84e95f6a4efc59f6a90c3698e43aa7478fd3e95e",
+  "experiment_source": "Initial source revision plus manifest-hashed evaluator files collected before publication",
+  "collection_runner_sha256": "a8c6bc58e1a23493d08b107daf662624946345c0a56f8ca8bd57d7f1cc23b881",
+  "publication_runner_sha256": "4318daabeb9487fd29cbf1517293284f2fea781d82a9a8f4a878676ba8a2d63d",
+  "collector_archive": "runner_snapshot.txt preserves the exact measured collector before the arbitrary-ID reference-check correction",
+  "implementation_hashes": {
+    "eval/run_real_rag.py": "4318daabeb9487fd29cbf1517293284f2fea781d82a9a8f4a878676ba8a2d63d",
+    "eval/prepare_real_rag.py": "6a5a3718caa986dee41c7537302465179062824182359892982a22adeddeb738",
+    "eval/report_real_rag.py": "2fefe8029fa1b65640dacf4d3f0ddd774a68184576625351bff8bf2a9bcc56c2",
+    "eval/real_rag_spec.md": "87920e1cca9466172e0a9ee809213094c8ca303cc6e8e445a8d7dbe9970ed37d",
+    "python/vortex/real_rag.py": "8e3c2cce0fa68d43f53d5733c16ef25c942e487687338bd64cff3d41169e15f5"
+  },
+  "official_scoring_source": {
+    "url": "https://github.com/rajpurkar/SQuAD-explorer/blob/master/evaluate-v2.0.py",
+    "sha256": "710840ce2c2c61716334c056777032f24660b83eb9869a451036e6a24d8103c4"
+  },
+  "dataset_audit": {
+    "development": {
+      "cases": 60,
+      "chunks": 541,
+      "mapped_positive_spans": 52,
+      "exclusions": 0,
+      "verified": true
+    },
+    "test": {
+      "cases": 180,
+      "chunks": 1767,
+      "mapped_positive_spans": 169,
+      "exclusions": 0,
+      "verified": true
+    }
+  },
+  "official_scoring_audit": {
+    "records_compared": 900,
+    "all_match": true,
+    "official_source_sha256": "710840ce2c2c61716334c056777032f24660b83eb9869a451036e6a24d8103c4",
+    "overrides": "Request failures and empty responses score zero by the preregistered protocol"
+  },
+  "human_review": "Pending at the owner's explicit request",
+  "model_execution": "Local CPU; runtime residency reported size_vram zero; no paid API or cloud resource used",
+  "timing_conditions": "Fixed condition order, retained operating-system and model-server prompt caches; stage sums",
+  "hardware_conditions": "Shared Windows desktop with background applications and no CPU affinity or machine isolation",
+  "memory_scope": "Encoder-client and generation-client process counters; model server is a separate process"
+}

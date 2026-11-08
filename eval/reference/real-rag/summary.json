@@ -1,0 +1,623 @@
+{
+  "conditions": {
+    "no_context": {
+      "records": 180,
+      "answerable": 150,
+      "source_unanswerable": 30,
+      "request_failures": 0,
+      "http_attempts": 180,
+      "failed_http_attempts": 0,
+      "retry_attempts": 0,
+      "empty_outputs": 9,
+      "generation_length_stops": 0,
+      "squad_token_f1_answerable": {
+        "mean": 0.028485827214382267,
+        "ci95": [
+          0.012468353748795314,
+          0.051439617521608076
+        ],
+        "n": 150,
+        "articles": 35
+      },
+      "squad_exact_match_answerable": {
+        "mean": 0.006666666666666667,
+        "ci95": [
+          0.0,
+          0.02239226798339129
+        ],
+        "n": 150,
+        "articles": 35
+      },
+      "source_unanswerable_abstention": {
+        "mean": 0.7333333333333333,
+        "ci95": [
+          0.5134961884961885,
+          0.9615384615384616
+        ],
+        "n": 30,
+        "articles": 20
+      },
+      "answerable_abstentions": 94,
+      "citation_mentions": 60,
+      "valid_citation_mentions": 0,
+      "citation_presence": {
+        "answered_records": 55,
+        "answered_with_citations": 49,
+        "meaning": "Citation presence among nonempty responses without the abstention marker"
+      },
+      "citation_id_validity": 0.0,
+      "truncated_context_records": 0,
+      "answerable_reference_text_present_in_context": {
+        "count": 0,
+        "denominator": 150,
+        "meaning": "Exact reference text occurrence in submitted context; lexical diagnostic"
+      },
+      "timings_ms": {
+        "embedding": {
+          "median": 0.0,
+          "p95": 0.0
+        },
+        "retrieval": {
+          "median": 0.0,
+          "p95": 0.0
+        },
+        "context": {
+          "median": 0.008100061677396297,
+          "p95": 0.01552000176161527
+        },
+        "generation": {
+          "median": 3711.431099975016,
+          "p95": 5123.203210043721
+        },
+        "total": {
+          "median": 3711.438150028698,
+          "p95": 5123.217510036193
+        }
+      },
+      "lexical_diagnostics": {
+        "lexical_support": 0.0,
+        "verbatim_sentence_support": 0.0
+      },
+      "lexical_diagnostic_denominators": {
+        "lexical_support": 55,
+        "verbatim_sentence_support": 55
+      }
+    },
+    "oracle": {
+      "records": 180,
+      "answerable": 150,
+      "source_unanswerable": 30,
+      "request_failures": 0,
+      "http_attempts": 180,
+      "failed_http_attempts": 0,
+      "retry_attempts": 0,
+      "empty_outputs": 1,
+      "generation_length_stops": 0,
+      "squad_token_f1_answerable": {
+        "mean": 0.5993624744053451,
+        "ci95": [
+          0.5402593707893941,
+          0.6615205593973014
+        ],
+        "n": 150,
+        "articles": 35
+      },
+      "squad_exact_match_answerable": {
+        "mean": 0.3933333333333333,
+        "ci95": [
+          0.3191489361702128,
+          0.4698269470891211
+        ],
+        "n": 150,
+        "articles": 35
+      },
+      "source_unanswerable_abstention": {
+        "mean": 0.03333333333333333,
+        "ci95": [
+          0.0,
+          0.10714285714285714
+        ],
+        "n": 30,
+        "articles": 20
+      },
+      "answerable_abstentions": 0,
+      "citation_mentions": 89,
+      "valid_citation_mentions": 85,
+      "citation_presence": {
+        "answered_records": 178,
+        "answered_with_citations": 88,
+        "meaning": "Citation presence among nonempty responses without the abstention marker"
+      },
+      "citation_id_validity": 0.9550561797752809,
+      "truncated_context_records": 0,
+      "answerable_reference_text_present_in_context": {
+        "count": 150,
+        "denominator": 150,
+        "meaning": "Exact reference text occurrence in submitted context; lexical diagnostic"
+      },
+      "timings_ms": {
+        "embedding": {
+          "median": 0.0,
+          "p95": 0.0
+        },
+        "retrieval": {
+          "median": 0.0,
+          "p95": 0.0
+        },
+        "context": {
+          "median": 0.04610000178217888,
+          "p95": 0.5582600540947167
+        },
+        "generation": {
+          "median": 5789.086500008125,
+          "p95": 8691.491144942114
+        },
+        "total": {
+          "median": 5789.373850042466,
+          "p95": 8691.972609900398
+        }
+      },
+      "lexical_diagnostics": {
+        "lexical_support": 0.9732194517159036,
+        "verbatim_sentence_support": 0.7921348314606742
+      },
+      "lexical_diagnostic_denominators": {
+        "lexical_support": 178,
+        "verbatim_sentence_support": 178
+      }
+    },
+    "exact": {
+      "records": 180,
+      "answerable": 150,
+      "source_unanswerable": 30,
+      "request_failures": 0,
+      "http_attempts": 180,
+      "failed_http_attempts": 0,
+      "retry_attempts": 0,
+      "empty_outputs": 2,
+      "generation_length_stops": 0,
+      "squad_token_f1_answerable": {
+        "mean": 0.43531827722012595,
+        "ci95": [
+          0.3659983636807559,
+          0.5074618700893843
+        ],
+        "n": 150,
+        "articles": 35
+      },
+      "squad_exact_match_answerable": {
+        "mean": 0.26666666666666666,
+        "ci95": [
+          0.19117647058823528,
+          0.3446064902931099
+        ],
+        "n": 150,
+        "articles": 35
+      },
+      "source_unanswerable_abstention": {
+        "mean": 0.03333333333333333,
+        "ci95": [
+          0.0,
+          0.11544117647058794
+        ],
+        "n": 30,
+        "articles": 20
+      },
+      "answerable_abstentions": 2,
+      "citation_mentions": 8,
+      "valid_citation_mentions": 8,
+      "citation_presence": {
+        "answered_records": 175,
+        "answered_with_citations": 6,
+        "meaning": "Citation presence among nonempty responses without the abstention marker"
+      },
+      "citation_id_validity": 1.0,
+      "truncated_context_records": 95,
+      "answerable_reference_text_present_in_context": {
+        "count": 129,
+        "denominator": 150,
+        "meaning": "Exact reference text occurrence in submitted context; lexical diagnostic"
+      },
+      "timings_ms": {
+        "embedding": {
+          "median": 12.59199995547533,
+          "p95": 27.525424974737664
+        },
+        "retrieval": {
+          "median": 0.4568499862216413,
+          "p95": 0.8609249838627853
+        },
+        "context": {
+          "median": 0.3295500064268708,
+          "p95": 1.3358900148887174
+        },
+        "generation": {
+          "median": 11605.220300029032,
+          "p95": 16601.22290995787
+        },
+        "total": {
+          "median": 11618.695600016508,
+          "p95": 16614.935244823573
+        }
+      },
+      "lexical_diagnostics": {
+        "lexical_support": 0.9666226928594484,
+        "verbatim_sentence_support": 0.7742857142857142
+      },
+      "lexical_diagnostic_denominators": {
+        "lexical_support": 175,
+        "verbatim_sentence_support": 175
+      },
+      "retrieval": {
+        "configuration": {
+          "dtype": "fp32",
+          "nlist": 16,
+          "nprobe": 0,
+          "k": 5,
+          "rerank_n": 0
+        },
+        "ann_neighbor_recall": 1.0,
+        "ann_cases": 180,
+        "labeled_cases": 150,
+        "p95_retrieval_ms": 0.8609249838627853,
+        "snapshot": {
+          "build_seconds": 0.03186809993349016,
+          "bytes": 2767224,
+          "sha256": "f6f71e5e79f821ea5d9c20b2d5ef3da0daee6d6ee1b30de78e3127888840c1e3",
+          "process_memory": {
+            "peak_rss_bytes": 51466240,
+            "current_rss_bytes": 48840704,
+            "method": "GetProcessMemoryInfo; process-wide working set"
+          }
+        },
+        "labeled_metrics": {
+          "recall": 0.8266666666666667,
+          "precision": 0.18266666666666664,
+          "hit": 0.84,
+          "mrr": 0.7164444444444444,
+          "ndcg": 0.7402403644087494
+        }
+      }
+    },
+    "ivf": {
+      "records": 180,
+      "answerable": 150,
+      "source_unanswerable": 30,
+      "request_failures": 0,
+      "http_attempts": 180,
+      "failed_http_attempts": 0,
+      "retry_attempts": 0,
+      "empty_outputs": 2,
+      "generation_length_stops": 0,
+      "squad_token_f1_answerable": {
+        "mean": 0.43291352191733146,
+        "ci95": [
+          0.3650504352696402,
+          0.5013790695001699
+        ],
+        "n": 150,
+        "articles": 35
+      },
+      "squad_exact_match_answerable": {
+        "mean": 0.26666666666666666,
+        "ci95": [
+          0.18796992481203006,
+          0.34437645426883834
+        ],
+        "n": 150,
+        "articles": 35
+      },
+      "source_unanswerable_abstention": {
+        "mean": 0.03333333333333333,
+        "ci95": [
+          0.0,
+          0.11544117647058794
+        ],
+        "n": 30,
+        "articles": 20
+      },
+      "answerable_abstentions": 2,
+      "citation_mentions": 7,
+      "valid_citation_mentions": 7,
+      "citation_presence": {
+        "answered_records": 175,
+        "answered_with_citations": 5,
+        "meaning": "Citation presence among nonempty responses without the abstention marker"
+      },
+      "citation_id_validity": 1.0,
+      "truncated_context_records": 95,
+      "answerable_reference_text_present_in_context": {
+        "count": 129,
+        "denominator": 150,
+        "meaning": "Exact reference text occurrence in submitted context; lexical diagnostic"
+      },
+      "timings_ms": {
+        "embedding": {
+          "median": 12.59199995547533,
+          "p95": 27.525424974737664
+        },
+        "retrieval": {
+          "median": 0.7799000013619661,
+          "p95": 1.8381800036877385
+        },
+        "context": {
+          "median": 0.08189998334273696,
+          "p95": 0.23449003347195663
+        },
+        "generation": {
+          "median": 2452.9484499944374,
+          "p95": 3940.234950027661
+        },
+        "total": {
+          "median": 2471.9801998580806,
+          "p95": 3953.23219501879
+        }
+      },
+      "lexical_diagnostics": {
+        "lexical_support": 0.9605159107526663,
+        "verbatim_sentence_support": 0.74
+      },
+      "lexical_diagnostic_denominators": {
+        "lexical_support": 175,
+        "verbatim_sentence_support": 175
+      },
+      "retrieval": {
+        "configuration": {
+          "dtype": "fp32",
+          "nlist": 16,
+          "nprobe": 16,
+          "k": 5,
+          "rerank_n": 0
+        },
+        "ann_neighbor_recall": 1.0,
+        "ann_cases": 180,
+        "labeled_cases": 150,
+        "p95_retrieval_ms": 1.8381800036877385,
+        "snapshot": {
+          "build_seconds": 0.03186809993349016,
+          "bytes": 2767224,
+          "sha256": "f6f71e5e79f821ea5d9c20b2d5ef3da0daee6d6ee1b30de78e3127888840c1e3",
+          "process_memory": {
+            "peak_rss_bytes": 51466240,
+            "current_rss_bytes": 48840704,
+            "method": "GetProcessMemoryInfo; process-wide working set"
+          }
+        },
+        "labeled_metrics": {
+          "recall": 0.8266666666666667,
+          "precision": 0.18266666666666664,
+          "hit": 0.84,
+          "mrr": 0.7164444444444444,
+          "ndcg": 0.7402403644087494
+        }
+      }
+    },
+    "encoded": {
+      "records": 180,
+      "answerable": 150,
+      "source_unanswerable": 30,
+      "request_failures": 0,
+      "http_attempts": 180,
+      "failed_http_attempts": 0,
+      "retry_attempts": 0,
+      "empty_outputs": 2,
+      "generation_length_stops": 0,
+      "squad_token_f1_answerable": {
+        "mean": 0.43291352191733146,
+        "ci95": [
+          0.3650504352696402,
+          0.5013790695001699
+        ],
+        "n": 150,
+        "articles": 35
+      },
+      "squad_exact_match_answerable": {
+        "mean": 0.26666666666666666,
+        "ci95": [
+          0.18796992481203006,
+          0.34437645426883834
+        ],
+        "n": 150,
+        "articles": 35
+      },
+      "source_unanswerable_abstention": {
+        "mean": 0.03333333333333333,
+        "ci95": [
+          0.0,
+          0.11544117647058794
+        ],
+        "n": 30,
+        "articles": 20
+      },
+      "answerable_abstentions": 2,
+      "citation_mentions": 7,
+      "valid_citation_mentions": 7,
+      "citation_presence": {
+        "answered_records": 175,
+        "answered_with_citations": 5,
+        "meaning": "Citation presence among nonempty responses without the abstention marker"
+      },
+      "citation_id_validity": 1.0,
+      "truncated_context_records": 95,
+      "answerable_reference_text_present_in_context": {
+        "count": 129,
+        "denominator": 150,
+        "meaning": "Exact reference text occurrence in submitted context; lexical diagnostic"
+      },
+      "timings_ms": {
+        "embedding": {
+          "median": 12.59199995547533,
+          "p95": 27.525424974737664
+        },
+        "retrieval": {
+          "median": 0.6036499980837107,
+          "p95": 0.87985506397672
+        },
+        "context": {
+          "median": 0.07139996159821749,
+          "p95": 0.4394999588839705
+        },
+        "generation": {
+          "median": 2448.125000053551,
+          "p95": 3954.1706400224934
+        },
+        "total": {
+          "median": 2466.564600006677,
+          "p95": 3967.0764099981166
+        }
+      },
+      "lexical_diagnostics": {
+        "lexical_support": 0.9605159107526663,
+        "verbatim_sentence_support": 0.74
+      },
+      "lexical_diagnostic_denominators": {
+        "lexical_support": 175,
+        "verbatim_sentence_support": 175
+      },
+      "retrieval": {
+        "configuration": {
+          "dtype": "int8",
+          "nlist": 32,
+          "nprobe": 32,
+          "k": 5,
+          "rerank_n": 20
+        },
+        "ann_neighbor_recall": 1.0,
+        "ann_cases": 180,
+        "labeled_cases": 150,
+        "p95_retrieval_ms": 0.87985506397672,
+        "snapshot": {
+          "build_seconds": 0.03438249998725951,
+          "bytes": 3477528,
+          "sha256": "0c5bca25611c46e1fc1cb827ee0e97ab07f07c97ee0ba4aa96f646ea9c0f08f9",
+          "process_memory": {
+            "peak_rss_bytes": 58519552,
+            "current_rss_bytes": 52805632,
+            "method": "GetProcessMemoryInfo; process-wide working set"
+          }
+        },
+        "labeled_metrics": {
+          "recall": 0.8266666666666667,
+          "precision": 0.18266666666666664,
+          "hit": 0.84,
+          "mrr": 0.7164444444444444,
+          "ndcg": 0.7402403644087494
+        }
+      }
+    }
+  },
+  "paired_answerable_f1_difference_from_exact": {
+    "no_context": {
+      "mean": -0.4068324500057437,
+      "ci95": [
+        -0.47910211863462604,
+        -0.3333937251886825
+      ],
+      "n": 150,
+      "articles": 35
+    },
+    "oracle": {
+      "mean": 0.16404419718521912,
+      "ci95": [
+        0.08880732838963853,
+        0.23986201861011427
+      ],
+      "n": 150,
+      "articles": 35
+    },
+    "exact": {
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "n": 150,
+      "articles": 35
+    },
+    "ivf": {
+      "mean": -0.002404755302794519,
+      "ci95": [
+        -0.034277619211433505,
+        0.026329176578049417
+      ],
+      "n": 150,
+      "articles": 35
+    },
+    "encoded": {
+      "mean": -0.002404755302794519,
+      "ci95": [
+        -0.034277619211433505,
+        0.026329176578049417
+      ],
+      "n": 150,
+      "articles": 35
+    }
+  },
+  "identical_prompt_comparison_with_exact": {
+    "ivf": {
+      "identical_prompt_pairs": 180,
+      "different_raw_answers": 27,
+      "different_normalized_answers": 21
+    },
+    "encoded": {
+      "identical_prompt_pairs": 180,
+      "different_raw_answers": 27,
+      "different_normalized_answers": 21
+    }
+  },
+  "selection": {
+    "configurations": {
+      "exact": {
+        "dtype": "fp32",
+        "nlist": 16,
+        "nprobe": 0,
+        "k": 5,
+        "rerank_n": 0
+      },
+      "ivf": {
+        "dtype": "fp32",
+        "nlist": 16,
+        "nprobe": 16,
+        "k": 5,
+        "rerank_n": 0
+      },
+      "encoded": {
+        "dtype": "int8",
+        "nlist": 32,
+        "nprobe": 32,
+        "k": 5,
+        "rerank_n": 20
+      }
+    },
+    "selection_gates": {
+      "ivf": {
+        "passed": true,
+        "development_labeled_recall": 0.88,
+        "development_ann_neighbor_recall": 1.0
+      },
+      "encoded": {
+        "passed": true,
+        "development_labeled_recall": 0.88,
+        "development_ann_neighbor_recall": 1.0
+      }
+    },
+    "development_dataset_sha256": "36d93dfeeaf8690e45cc320ac2bac8d54ab80ba43362bd376bc3fd4d04e088d2"
+  },
+  "human_review_status": "pending",
+  "semantic_correctness": null,
+  "citation_correctness": null,
+  "unsupported_claim_rate": null,
+  "limitations": [
+    "Public SQuAD development subset and known source corpus; pretraining exposure is possible.",
+    "Unanswerable labels apply to original paragraphs; corpus-wide answer absence is unverified.",
+    "Exact match and token F1 do not establish semantic correctness or entailment.",
+    "One local machine and one generation per question and condition.",
+    "Identical prompts can produce different outputs despite requested temperature zero and seed 42.",
+    "Per-stage timings were collected in separate stages; total is their sum.",
+    "CI and semantic review statuses must be reported separately."
+  ],
+  "record_sha256": "8a552c5c677f852da98b8efd6b61e99a0a2429b41ff0208890245b1114581829",
+  "manifest_sha256": "221093bf57855096561a56a39ad329fae14751bd8d7b45e6871f0c690cd3fc13",
+  "selection_sha256": "c4c14e34aaa09b7a374c3e8636caeb88f0843a9fd2669ffd57efbdb60b21d0e8",
+  "generator_sha256": "a593adce56f2368db54876b6eae244c19ee6ee5c3677481726d29c4a0bf2e6b4"
+}

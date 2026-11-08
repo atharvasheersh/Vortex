@@ -1,0 +1,38 @@
+{
+  "configurations": {
+    "exact": {
+      "dtype": "fp32",
+      "nlist": 16,
+      "nprobe": 0,
+      "k": 5,
+      "rerank_n": 0
+    },
+    "ivf": {
+      "dtype": "fp32",
+      "nlist": 16,
+      "nprobe": 16,
+      "k": 5,
+      "rerank_n": 0
+    },
+    "encoded": {
+      "dtype": "int8",
+      "nlist": 32,
+      "nprobe": 32,
+      "k": 5,
+      "rerank_n": 20
+    }
+  },
+  "selection_gates": {
+    "ivf": {
+      "passed": true,
+      "development_labeled_recall": 0.88,
+      "development_ann_neighbor_recall": 1.0
+    },
+    "encoded": {
+      "passed": true,
+      "development_labeled_recall": 0.88,
+      "development_ann_neighbor_recall": 1.0
+    }
+  },
+  "development_dataset_sha256": "36d93dfeeaf8690e45cc320ac2bac8d54ab80ba43362bd376bc3fd4d04e088d2"
+}

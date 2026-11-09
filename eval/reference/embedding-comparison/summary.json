@@ -1,0 +1,4647 @@
+{
+  "schema_version": 1,
+  "models": {
+    "minilm": {
+      "identity": {
+        "id": "sentence-transformers/all-MiniLM-L6-v2",
+        "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "backend": "local",
+        "dimensions": 384,
+        "license": "apache-2.0",
+        "max_tokens": 256,
+        "dtype": "float32",
+        "batch_size": 4
+      },
+      "status": "completed",
+      "datasets": {
+        "squad": {
+          "embedding": {
+            "status": "completed",
+            "corpus_items": 2188,
+            "queries": 180,
+            "query_timing_observations": 540,
+            "corpus_seconds": 60.78198870026972,
+            "documents_per_second": 35.99750595179672,
+            "query_p50_ms": 12.288199970498681,
+            "query_p95_ms": 14.276669971877709,
+            "dimensions": 384,
+            "dtype": "float32",
+            "load_seconds": 20.183312300010584,
+            "truncated_inputs": 0,
+            "embedding_sha256": "6e67130495222e76aec09cda44530f217618bfdf1e14416e0b453ce9386ff56c",
+            "process_memory": {
+              "peak_rss_bytes": 590323712,
+              "current_rss_bytes": 573804544,
+              "method": "GetProcessMemoryInfo; process-wide working set"
+            }
+          },
+          "retrieval": {
+            "exact@5": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.85,
+                  "ci95": [
+                    0.7929878687562857,
+                    0.9045888882915815
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.86,
+                  "ci95": [
+                    0.8050240035726248,
+                    0.9130507246376811
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.7002222222222222,
+                  "ci95": [
+                    0.6315572916666667,
+                    0.7675378787878787
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.7337767503281001,
+                  "ci95": [
+                    0.6695407051745399,
+                    0.7951352314344269
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 2.0446499693207443,
+              "retrieval_p95_ms": 3.059495013440028,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.027252400061115623,
+                "bytes": 3378408,
+                "sha256": "9a0755e9b4b5187f7ee00a99005cdfed90d81fb83c0fda539ddf5cc5dc2731d1",
+                "process_memory": {
+                  "peak_rss_bytes": 69578752,
+                  "current_rss_bytes": 55996416,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 69578752,
+                "current_rss_bytes": 68280320,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 5.0,
+                "max_effective_chunk_k": 5,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "exact@10": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9133333333333333,
+                  "ci95": [
+                    0.8622730500537387,
+                    0.9583333333333334
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.92,
+                  "ci95": [
+                    0.8724796515778952,
+                    0.9637702985856469
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.7086746031746032,
+                  "ci95": [
+                    0.6420844561034778,
+                    0.7735888928076426
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.7554858092090618,
+                  "ci95": [
+                    0.694276313582009,
+                    0.8135187639271945
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 2.051000017672777,
+              "retrieval_p95_ms": 2.8871349699329567,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.027252400061115623,
+                "bytes": 3378408,
+                "sha256": "9a0755e9b4b5187f7ee00a99005cdfed90d81fb83c0fda539ddf5cc5dc2731d1",
+                "process_memory": {
+                  "peak_rss_bytes": 69578752,
+                  "current_rss_bytes": 55996416,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 69578752,
+                "current_rss_bytes": 67784704,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 10.0,
+                "max_effective_chunk_k": 10,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@5": {
+              "configuration": {
+                "dtype": "int8",
+                "nlist": 32,
+                "nprobe": 32,
+                "rerank_multiplier": 4
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.85,
+                  "ci95": [
+                    0.7929878687562857,
+                    0.9045888882915815
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.86,
+                  "ci95": [
+                    0.8050240035726248,
+                    0.9130507246376811
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.7002222222222222,
+                  "ci95": [
+                    0.6315572916666667,
+                    0.7675378787878787
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.7337767503281001,
+                  "ci95": [
+                    0.6695407051745399,
+                    0.7951352314344269
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 1.545950013678521,
+              "retrieval_p95_ms": 2.4372099316678937,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.04418289999011904,
+                "bytes": 4294264,
+                "sha256": "09cdc119da9dd489228321406e3eb430dc6fcc15c8a98b74d6dc48db7be6d175",
+                "process_memory": {
+                  "peak_rss_bytes": 56156160,
+                  "current_rss_bytes": 51929088,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 69210112,
+                "current_rss_bytes": 69210112,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 5.0,
+                "max_effective_chunk_k": 5,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 20.0
+              }
+            },
+            "selected@10": {
+              "configuration": {
+                "dtype": "int8",
+                "nlist": 32,
+                "nprobe": 32,
+                "rerank_multiplier": 4
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9133333333333333,
+                  "ci95": [
+                    0.8622730500537387,
+                    0.9583333333333334
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.92,
+                  "ci95": [
+                    0.8724796515778952,
+                    0.9637702985856469
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.7086746031746032,
+                  "ci95": [
+                    0.6420844561034778,
+                    0.7735888928076426
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.7554858092090618,
+                  "ci95": [
+                    0.694276313582009,
+                    0.8135187639271945
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 0.9377999813295901,
+              "retrieval_p95_ms": 2.048369991825892,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.04418289999011904,
+                "bytes": 4294264,
+                "sha256": "09cdc119da9dd489228321406e3eb430dc6fcc15c8a98b74d6dc48db7be6d175",
+                "process_memory": {
+                  "peak_rss_bytes": 56156160,
+                  "current_rss_bytes": 51929088,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 67166208,
+                "current_rss_bytes": 67166208,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 10.0,
+                "max_effective_chunk_k": 10,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 40.0
+              }
+            }
+          },
+          "encoding_timing_diagnostics": {
+            "retained_all_elapsed_observations": true,
+            "batches": 547,
+            "median_batch_seconds": 0.10877349996007979,
+            "median_batch_seconds_per_item": 0.027193374990019947,
+            "p95_batch_seconds_per_item": 0.03043854999123141,
+            "batches_over_60_seconds": 0,
+            "largest_elapsed_batches": [
+              {
+                "seconds": 0.1870021999347955,
+                "ids": [
+                  89,
+                  90,
+                  91,
+                  92
+                ],
+                "sha256": "b685275c729443ba85f0b10824ca788a8c35f4b817cc2b8fdb6ce3ca7188ee40"
+              },
+              {
+                "seconds": 0.17120980005711317,
+                "ids": [
+                  65,
+                  66,
+                  67,
+                  68
+                ],
+                "sha256": "e17e4fa5cdca0187bb8136aa31e6500fdf6ddca2761b0786b6ae09b0af064332"
+              },
+              {
+                "seconds": 0.17059650004375726,
+                "ids": [
+                  81,
+                  82,
+                  83,
+                  84
+                ],
+                "sha256": "c2ad0e3ad80629f7ea6721f9ec756d15217c4935c686602616a873bcfcbaf784"
+              }
+            ],
+            "interpretation": "Post hoc timing diagnostic; no outliers removed and no quality selection changed"
+          }
+        },
+        "scifact": {
+          "embedding": {
+            "status": "completed",
+            "corpus_items": 3328,
+            "queries": 150,
+            "query_timing_observations": 450,
+            "corpus_seconds": 115.02652920084074,
+            "documents_per_second": 28.93245604402428,
+            "query_p50_ms": 13.65815004101023,
+            "query_p95_ms": 19.430204958189268,
+            "dimensions": 384,
+            "dtype": "float32",
+            "load_seconds": 20.183312300010584,
+            "truncated_inputs": 0,
+            "embedding_sha256": "590df3061cfb8672447f4821cef36b8284c9694d4e187d451c59550b3e1f4433",
+            "process_memory": {
+              "peak_rss_bytes": 611966976,
+              "current_rss_bytes": 587972608,
+              "method": "GetProcessMemoryInfo; process-wide working set"
+            }
+          },
+          "retrieval": {
+            "exact@5": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.8606666666666666,
+                  "ci95": [
+                    0.7973851909184727,
+                    0.9195979270086413
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.8666666666666667,
+                  "ci95": [
+                    0.8026294837412001,
+                    0.9251700680272109
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.7771111111111111,
+                  "ci95": [
+                    0.7090684466426356,
+                    0.8410759771868643
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.794769775761006,
+                  "ci95": [
+                    0.7302526044399887,
+                    0.8548675009681297
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 2.273449965287,
+              "retrieval_p95_ms": 3.3415300655178726,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.02624670008663088,
+                "bytes": 5138568,
+                "sha256": "72cefc63accbc86dbffcb034989a9e3da0ae633bc37f7f6f28c93d56877e195a",
+                "process_memory": {
+                  "peak_rss_bytes": 79355904,
+                  "current_rss_bytes": 64344064,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 79925248,
+                "current_rss_bytes": 78999552,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 12.666666666666666,
+                "max_effective_chunk_k": 40,
+                "mean_search_calls": 2.22,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "exact@10": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.902,
+                  "ci95": [
+                    0.8435884353741496,
+                    0.9510273654916512
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.9066666666666666,
+                  "ci95": [
+                    0.8486842105263158,
+                    0.9539548933608532
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.7824867724867725,
+                  "ci95": [
+                    0.7164744700622864,
+                    0.8451248427611786
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.8084584100373872,
+                  "ci95": [
+                    0.7501138031744499,
+                    0.8646887472062242
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 5.3536000195890665,
+              "retrieval_p95_ms": 9.042045014211903,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.02624670008663088,
+                "bytes": 5138568,
+                "sha256": "72cefc63accbc86dbffcb034989a9e3da0ae633bc37f7f6f28c93d56877e195a",
+                "process_memory": {
+                  "peak_rss_bytes": 79355904,
+                  "current_rss_bytes": 64344064,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 79671296,
+                "current_rss_bytes": 78589952,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 27.066666666666666,
+                "max_effective_chunk_k": 80,
+                "mean_search_calls": 2.3466666666666667,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@5": {
+              "configuration": {
+                "dtype": "int8",
+                "nlist": 16,
+                "nprobe": 8,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.8673333333333333,
+                  "ci95": [
+                    0.8038604004449388,
+                    0.9245157284768211
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.8733333333333333,
+                  "ci95": [
+                    0.8079207581639644,
+                    0.929498407643312
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.7784444444444444,
+                  "ci95": [
+                    0.7114486754966888,
+                    0.842371266427718
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.7973487944759031,
+                  "ci95": [
+                    0.7330585352556799,
+                    0.8561476631109047
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 0.9853333333333334,
+              "retrieval_p50_ms": 2.480700029991567,
+              "retrieval_p95_ms": 4.070140013936906,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.2330634999088943,
+                "bytes": 6481160,
+                "sha256": "c1bb481ea62975d0e9e346217dde263baa41df0c38a27b14214871b765a6f4c7",
+                "process_memory": {
+                  "peak_rss_bytes": 71766016,
+                  "current_rss_bytes": 65282048,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 79355904,
+                "current_rss_bytes": 70881280,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 12.633333333333333,
+                "max_effective_chunk_k": 40,
+                "mean_search_calls": 2.22,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@10": {
+              "configuration": {
+                "dtype": "int8",
+                "nlist": 16,
+                "nprobe": 8,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.902,
+                  "ci95": [
+                    0.8435884353741496,
+                    0.9510273654916512
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.9066666666666666,
+                  "ci95": [
+                    0.8486842105263158,
+                    0.9539548933608532
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.7830793650793649,
+                  "ci95": [
+                    0.7170020178093608,
+                    0.845245756550337
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.8090305621145242,
+                  "ci95": [
+                    0.7509646990261054,
+                    0.8646995942041706
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 0.9713333333333333,
+              "retrieval_p50_ms": 2.6293499977327883,
+              "retrieval_p95_ms": 4.203514981782063,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.2330634999088943,
+                "bytes": 6481160,
+                "sha256": "c1bb481ea62975d0e9e346217dde263baa41df0c38a27b14214871b765a6f4c7",
+                "process_memory": {
+                  "peak_rss_bytes": 71766016,
+                  "current_rss_bytes": 65282048,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 79355904,
+                "current_rss_bytes": 71618560,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 26.8,
+                "max_effective_chunk_k": 80,
+                "mean_search_calls": 2.3333333333333335,
+                "mean_rerank_n": 0.0
+              }
+            }
+          },
+          "encoding_timing_diagnostics": {
+            "retained_all_elapsed_observations": true,
+            "batches": 832,
+            "median_batch_seconds": 0.1312834499985911,
+            "median_batch_seconds_per_item": 0.032820862499647774,
+            "p95_batch_seconds_per_item": 0.04803872501361184,
+            "batches_over_60_seconds": 0,
+            "largest_elapsed_batches": [
+              {
+                "seconds": 0.2674449000041932,
+                "ids": [
+                  1365,
+                  1366,
+                  1367,
+                  1368
+                ],
+                "sha256": "adf4717be247ff7bf3b6434caa3a5dc672cd82766483cecfe88b5ebbc44c718d"
+              },
+              {
+                "seconds": 0.25362089998088777,
+                "ids": [
+                  3177,
+                  3178,
+                  3179,
+                  3180
+                ],
+                "sha256": "7d4878323865b933ee61b1528c1dd9d14ff199761b9c6fc002fc545b12f35106"
+              },
+              {
+                "seconds": 0.25336939992848784,
+                "ids": [
+                  3213,
+                  3214,
+                  3215,
+                  3216
+                ],
+                "sha256": "50f1ee08f965d8cff0931ebcf0eb01b85b9cae5831f6251a3a8e9054ba8b57fe"
+              }
+            ],
+            "interpretation": "Post hoc timing diagnostic; no outliers removed and no quality selection changed"
+          }
+        }
+      },
+      "encoder": {
+        "status": "completed",
+        "process_memory": {
+          "peak_rss_bytes": 611966976,
+          "current_rss_bytes": 587972608,
+          "method": "GetProcessMemoryInfo; process-wide working set"
+        },
+        "load_seconds": 20.183312300010584
+      }
+    },
+    "qwen": {
+      "identity": {
+        "id": "Qwen/Qwen3-Embedding-0.6B",
+        "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+        "backend": "local",
+        "dimensions": 1024,
+        "license": "apache-2.0",
+        "max_tokens": 32768,
+        "dtype": "float32",
+        "batch_size": 4
+      },
+      "status": "completed",
+      "datasets": {
+        "squad": {
+          "embedding": {
+            "status": "completed",
+            "corpus_items": 2188,
+            "queries": 180,
+            "query_timing_observations": 540,
+            "corpus_seconds": 32295.26306929998,
+            "corpus_seconds_definition": "Sum of original batch encode times, including the origin time for reused batches",
+            "new_encoding_seconds": 32295.26306929998,
+            "reused_document_batches": 0,
+            "documents_per_second": 0.06774987388413388,
+            "query_p50_ms": 462.97674998641014,
+            "query_p95_ms": 741.000774956774,
+            "dimensions": 1024,
+            "dtype": "float32",
+            "load_seconds": 34.126488400041126,
+            "truncated_inputs": 0,
+            "embedding_sha256": "e8da47aa2f0f51a661d58b823331cf961f176253b6842bf302dd58c138c69b33",
+            "process_memory": {
+              "peak_rss_bytes": 3007070208,
+              "current_rss_bytes": 2036776960,
+              "method": "GetProcessMemoryInfo; process-wide working set"
+            }
+          },
+          "retrieval": {
+            "exact@5": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.93,
+                  "ci95": [
+                    0.896875,
+                    0.9624168106076
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.9466666666666667,
+                  "ci95": [
+                    0.9151515151515152,
+                    0.9774436090225563
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.8510000000000001,
+                  "ci95": [
+                    0.8096536231884057,
+                    0.8926420289855073
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.8641170993737797,
+                  "ci95": [
+                    0.8274609738792097,
+                    0.9002360606708438
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 4.756300011649728,
+              "retrieval_p95_ms": 6.187955063069237,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.018792799906805158,
+                "bytes": 8979688,
+                "sha256": "fde44304842a0f7d382c5d41006eadd06a341098b0ad1e1e064b8014d7ed4b5b",
+                "process_memory": {
+                  "peak_rss_bytes": 99434496,
+                  "current_rss_bytes": 71340032,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 99434496,
+                "current_rss_bytes": 97456128,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 5.0,
+                "max_effective_chunk_k": 5,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "exact@10": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9733333333333334,
+                  "ci95": [
+                    0.9477078794480754,
+                    0.9935483870967742
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.9866666666666667,
+                  "ci95": [
+                    0.9668818984547461,
+                    1.0
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.8559523809523809,
+                  "ci95": [
+                    0.8173711868163588,
+                    0.8959635502523394
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.8782773272217083,
+                  "ci95": [
+                    0.8457676016583503,
+                    0.9095671253276463
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 4.69980004709214,
+              "retrieval_p95_ms": 6.078064930625258,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.018792799906805158,
+                "bytes": 8979688,
+                "sha256": "fde44304842a0f7d382c5d41006eadd06a341098b0ad1e1e064b8014d7ed4b5b",
+                "process_memory": {
+                  "peak_rss_bytes": 99434496,
+                  "current_rss_bytes": 71340032,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 99434496,
+                "current_rss_bytes": 97153024,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 10.0,
+                "max_effective_chunk_k": 10,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@5": {
+              "configuration": {
+                "dtype": "int8",
+                "nlist": 16,
+                "nprobe": 4,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.89,
+                  "ci95": [
+                    0.8441965522016062,
+                    0.9326258183306055
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.9066666666666666,
+                  "ci95": [
+                    0.8609191250250853,
+                    0.9466754966887416
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.806,
+                  "ci95": [
+                    0.7576091589694435,
+                    0.855226948051948
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.8203216097609356,
+                  "ci95": [
+                    0.77467582335727,
+                    0.8639922554745885
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 0.9311111111111111,
+              "retrieval_p50_ms": 0.5793499876745045,
+              "retrieval_p95_ms": 0.8555899956263601,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.061888700001873076,
+                "bytes": 11312120,
+                "sha256": "320154310bbe9045f97e5c614aa5adc11637d2cc06abe5e8b5c9cbc261661fbb",
+                "process_memory": {
+                  "peak_rss_bytes": 85897216,
+                  "current_rss_bytes": 74584064,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 99434496,
+                "current_rss_bytes": 84615168,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 5.0,
+                "max_effective_chunk_k": 5,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@10": {
+              "configuration": {
+                "dtype": "int8",
+                "nlist": 16,
+                "nprobe": 4,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9266666666666666,
+                  "ci95": [
+                    0.8851340859493033,
+                    0.963245320855615
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.94,
+                  "ci95": [
+                    0.8999832214765101,
+                    0.9748466981132076
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.810563492063492,
+                  "ci95": [
+                    0.7640733162668741,
+                    0.8578850108225109
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.8330073082409232,
+                  "ci95": [
+                    0.7898111137372471,
+                    0.87415668626881
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 0.925,
+              "retrieval_p50_ms": 0.5845000268891454,
+              "retrieval_p95_ms": 0.860744918463751,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.061888700001873076,
+                "bytes": 11312120,
+                "sha256": "320154310bbe9045f97e5c614aa5adc11637d2cc06abe5e8b5c9cbc261661fbb",
+                "process_memory": {
+                  "peak_rss_bytes": 85897216,
+                  "current_rss_bytes": 74584064,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 99303424,
+                "current_rss_bytes": 84770816,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 10.0,
+                "max_effective_chunk_k": 10,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            }
+          },
+          "encoding_timing_diagnostics": {
+            "retained_all_elapsed_observations": true,
+            "batches": 547,
+            "median_batch_seconds": 6.324570799944922,
+            "median_batch_seconds_per_item": 1.5811426999862306,
+            "p95_batch_seconds_per_item": 2.733569649979472,
+            "batches_over_60_seconds": 3,
+            "largest_elapsed_batches": [
+              {
+                "seconds": 18483.94884820003,
+                "ids": [
+                  237,
+                  238,
+                  239,
+                  240
+                ],
+                "sha256": "21b92e0aeaa99f7f5956eba6ed24ab0c8def27e56b6117f806a7bbde29d7119e"
+              },
+              {
+                "seconds": 6954.92991950002,
+                "ids": [
+                  241,
+                  242,
+                  243,
+                  244
+                ],
+                "sha256": "dad2903449ff5c58e6e8d8992412bd117bcac7ac4c2ccd73c2bc900486e00b44"
+              },
+              {
+                "seconds": 3090.0027914000675,
+                "ids": [
+                  97,
+                  98,
+                  99,
+                  100
+                ],
+                "sha256": "e6e8efb9dabd190ec203a486014954675dec60397f10a9f4e96a45ba789a1bcd"
+              }
+            ],
+            "interpretation": "Post hoc timing diagnostic; no outliers removed and no quality selection changed"
+          }
+        },
+        "scifact": {
+          "embedding": {
+            "status": "completed",
+            "corpus_items": 3328,
+            "queries": 150,
+            "query_timing_observations": 450,
+            "corpus_seconds": 4505.910505096428,
+            "corpus_seconds_definition": "Sum of original batch encode times, including the origin time for reused batches",
+            "new_encoding_seconds": 0.0,
+            "reused_document_batches": 832,
+            "documents_per_second": 0.738585463744975,
+            "query_p50_ms": 413.4188500465825,
+            "query_p95_ms": 680.8587849722243,
+            "dimensions": 1024,
+            "dtype": "float32",
+            "load_seconds": 34.126488400041126,
+            "truncated_inputs": 0,
+            "embedding_sha256": "1c24f9c0b9496d38ce7cfc02faacbaab59e2cffeb0c9ca2e998fca8a7d0ae4f1",
+            "process_memory": {
+              "peak_rss_bytes": 3007070208,
+              "current_rss_bytes": 2120327168,
+              "method": "GetProcessMemoryInfo; process-wide working set"
+            }
+          },
+          "retrieval": {
+            "exact@5": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.8886666666666667,
+                  "ci95": [
+                    0.8311207084349947,
+                    0.9394767749911692
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.8933333333333333,
+                  "ci95": [
+                    0.8356164383561644,
+                    0.9455782312925171
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.7937777777777778,
+                  "ci95": [
+                    0.7292176729779252,
+                    0.854507788745887
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.815073706231329,
+                  "ci95": [
+                    0.7559208007860555,
+                    0.8713493819362252
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 16.71519997762516,
+              "retrieval_p95_ms": 26.264374988386407,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.054133999976329505,
+                "bytes": 13658248,
+                "sha256": "3619020cf7e5d77df55ed9a6f229426f72dd6a8a88ae47bc5a13981eb2e37cd0",
+                "process_memory": {
+                  "peak_rss_bytes": 123940864,
+                  "current_rss_bytes": 83124224,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 117424128,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 14.2,
+                "max_effective_chunk_k": 40,
+                "mean_search_calls": 2.3866666666666667,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "exact@10": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9133333333333333,
+                  "ci95": [
+                    0.8627450980392157,
+                    0.9591836734693877
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.9133333333333333,
+                  "ci95": [
+                    0.8627450980392157,
+                    0.9591836734693877
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.7963888888888889,
+                  "ci95": [
+                    0.7321087719298245,
+                    0.8569723408550058
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.8237400770961909,
+                  "ci95": [
+                    0.7683262878974602,
+                    0.8774779291243122
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 16.78864995483309,
+              "retrieval_p95_ms": 25.158440065570176,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.054133999976329505,
+                "bytes": 13658248,
+                "sha256": "3619020cf7e5d77df55ed9a6f229426f72dd6a8a88ae47bc5a13981eb2e37cd0",
+                "process_memory": {
+                  "peak_rss_bytes": 123940864,
+                  "current_rss_bytes": 83124224,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124002304,
+                "current_rss_bytes": 117899264,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 28.4,
+                "max_effective_chunk_k": 80,
+                "mean_search_calls": 2.4133333333333336,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@5": {
+              "configuration": {
+                "dtype": "int8",
+                "nlist": 16,
+                "nprobe": 8,
+                "rerank_multiplier": 4
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.8886666666666667,
+                  "ci95": [
+                    0.8311207084349947,
+                    0.9394767749911692
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.8933333333333333,
+                  "ci95": [
+                    0.8356164383561644,
+                    0.9455782312925171
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.7943333333333333,
+                  "ci95": [
+                    0.7297320594904629,
+                    0.8549904358450506
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.8155358625108398,
+                  "ci95": [
+                    0.7563706702531829,
+                    0.8719121222493682
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 0.9746666666666666,
+              "retrieval_p50_ms": 5.633199994917959,
+              "retrieval_p95_ms": 8.77988498541526,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.21126610005740076,
+                "bytes": 17171720,
+                "sha256": "71e3b6d5a7055233fa899847803480def08aa673faea3024c52b87b3f1ea569a",
+                "process_memory": {
+                  "peak_rss_bytes": 101752832,
+                  "current_rss_bytes": 84578304,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 123940864,
+                "current_rss_bytes": 119861248,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 14.233333333333333,
+                "max_effective_chunk_k": 40,
+                "mean_search_calls": 2.3866666666666667,
+                "mean_rerank_n": 56.93333333333333
+              }
+            },
+            "selected@10": {
+              "configuration": {
+                "dtype": "int8",
+                "nlist": 16,
+                "nprobe": 8,
+                "rerank_multiplier": 4
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9066666666666666,
+                  "ci95": [
+                    0.8533333333333334,
+                    0.9533333333333334
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.9066666666666666,
+                  "ci95": [
+                    0.8533333333333334,
+                    0.9533333333333334
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.7958333333333333,
+                  "ci95": [
+                    0.731900947788993,
+                    0.8564231061971719
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.8218275187949815,
+                  "ci95": [
+                    0.7650789203223765,
+                    0.875933179268601
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 0.9740000000000002,
+              "retrieval_p50_ms": 6.170050008222461,
+              "retrieval_p95_ms": 9.461994987213984,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.21126610005740076,
+                "bytes": 17171720,
+                "sha256": "71e3b6d5a7055233fa899847803480def08aa673faea3024c52b87b3f1ea569a",
+                "process_memory": {
+                  "peak_rss_bytes": 101752832,
+                  "current_rss_bytes": 84578304,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 122134528,
+                "current_rss_bytes": 120631296,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 28.4,
+                "max_effective_chunk_k": 80,
+                "mean_search_calls": 2.4133333333333336,
+                "mean_rerank_n": 113.6
+              }
+            }
+          },
+          "encoding_timing_diagnostics": {
+            "retained_all_elapsed_observations": true,
+            "batches": 832,
+            "median_batch_seconds": 5.293728399963584,
+            "median_batch_seconds_per_item": 1.323432099990896,
+            "p95_batch_seconds_per_item": 1.7143348749959841,
+            "batches_over_60_seconds": 0,
+            "largest_elapsed_batches": [
+              {
+                "seconds": 11.591279400046915,
+                "ids": [
+                  689,
+                  690,
+                  691,
+                  692
+                ],
+                "sha256": "7a896a4ee5d09da9eccfec474faa06d08ccb56988f4deb441505ce1a518434ec"
+              },
+              {
+                "seconds": 9.291047499980778,
+                "ids": [
+                  1125,
+                  1126,
+                  1127,
+                  1128
+                ],
+                "sha256": "4d13bfdfde36013f8145d4f99937e65b3d0cdf856db9632ead0ccb6a78536a18"
+              },
+              {
+                "seconds": 8.852874399977736,
+                "ids": [
+                  9,
+                  10,
+                  11,
+                  12
+                ],
+                "sha256": "40817eb37a3db1fe5ec90ddf94aa607739b0632942b080eb4daa5df7a6fbae14"
+              }
+            ],
+            "interpretation": "Post hoc timing diagnostic; no outliers removed and no quality selection changed"
+          }
+        }
+      },
+      "encoder": {
+        "status": "completed",
+        "process_memory": {
+          "peak_rss_bytes": 3007070208,
+          "current_rss_bytes": 2120327168,
+          "method": "GetProcessMemoryInfo; process-wide working set"
+        },
+        "load_seconds": 34.126488400041126
+      }
+    },
+    "jina": {
+      "identity": {
+        "id": "jinaai/jina-embeddings-v5-text-nano",
+        "revision": "8a7f00aac812071b69403df470f1038ec85f8925",
+        "backend": "local",
+        "dimensions": 768,
+        "license": "cc-by-nc-4.0",
+        "max_tokens": 8192,
+        "dtype": "float32",
+        "batch_size": 4,
+        "reviewed_code": {
+          "configuration_eurobert.py": "8737378a5cea9e6c7be0e077138d6c725fb5909ad122c979adcdcc1a005a51b3",
+          "configuration_jina_embeddings_v5.py": "8472183a99ba9767b1352309c7553b529738e9dcdc9fe703f3a130bb17d347cd",
+          "custom_st.py": "620865d4f54a9c45cf64d9ad15dc47825cd0c35686f7118a7d25f908e9fe563a",
+          "modeling_eurobert.py": "f2430184a068bdfb5171650e8bbbff817aa5e7b2dd2066a52dc84d1f1d967f01",
+          "modeling_jina_embeddings_v5.py": "6d250e1abe0216b304b9ca99e49d9aac04e143671d310c112ad3e37b6186cf18"
+        }
+      },
+      "status": "completed",
+      "datasets": {
+        "squad": {
+          "embedding": {
+            "status": "completed",
+            "corpus_items": 2188,
+            "queries": 180,
+            "query_timing_observations": 540,
+            "corpus_seconds": 622.4725851999829,
+            "corpus_seconds_definition": "Sum of original batch encode times, including the origin time for reused batches",
+            "new_encoding_seconds": 622.4725851999829,
+            "reused_document_batches": 0,
+            "documents_per_second": 3.5150142384134995,
+            "query_p50_ms": 90.21190000930801,
+            "query_p95_ms": 113.00084500107914,
+            "dimensions": 768,
+            "dtype": "float32",
+            "load_seconds": 61.93718719994649,
+            "truncated_inputs": 0,
+            "embedding_sha256": "3eac8c71453555cac119900c5b1467ea31ef50b571ee8f90946b99a42646693a",
+            "process_memory": {
+              "peak_rss_bytes": 1604280320,
+              "current_rss_bytes": 1472712704,
+              "method": "GetProcessMemoryInfo; process-wide working set"
+            }
+          },
+          "retrieval": {
+            "exact@5": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9633333333333334,
+                  "ci95": [
+                    0.9335211946050096,
+                    0.9888080431177446
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.9733333333333334,
+                  "ci95": [
+                    0.9480500713159673,
+                    0.9936708860759493
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.8545555555555556,
+                  "ci95": [
+                    0.8003927322677323,
+                    0.9095630170316301
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.8782135358390741,
+                  "ci95": [
+                    0.8344327567887947,
+                    0.9230365073436992
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 2.5198000366799533,
+              "retrieval_p95_ms": 3.5695000435225657,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.03507109999191016,
+                "bytes": 6739176,
+                "sha256": "1b90f6618268741b5130af285e9d6c677185777e96f712560e5f6411aef570b5",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 68902912,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 87728128,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 5.0,
+                "max_effective_chunk_k": 5,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "exact@10": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9733333333333334,
+                  "ci95": [
+                    0.9466635220125786,
+                    0.9962976480129765
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.98,
+                  "ci95": [
+                    0.9578292041405058,
+                    1.0
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.8555079365079366,
+                  "ci95": [
+                    0.8014500946073793,
+                    0.9099087732919254
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.8817252674187447,
+                  "ci95": [
+                    0.8375496891706715,
+                    0.9268740379771135
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 2.52320000436157,
+              "retrieval_p95_ms": 3.559594985563308,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.03507109999191016,
+                "bytes": 6739176,
+                "sha256": "1b90f6618268741b5130af285e9d6c677185777e96f712560e5f6411aef570b5",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 68902912,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 87969792,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 10.0,
+                "max_effective_chunk_k": 10,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@5": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 16,
+                "nprobe": 4,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9366666666666666,
+                  "ci95": [
+                    0.8987341772151899,
+                    0.969699050949051
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.9466666666666667,
+                  "ci95": [
+                    0.9096915849673203,
+                    0.9780357142857142
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.8278888888888889,
+                  "ci95": [
+                    0.7687086372531579,
+                    0.8834404342723005
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.8515468691724074,
+                  "ci95": [
+                    0.8021612966728094,
+                    0.8959885718957638
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 0.9522222222222223,
+              "retrieval_p50_ms": 0.9345500147901475,
+              "retrieval_p95_ms": 1.422459998866543,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.10101159999612719,
+                "bytes": 6805960,
+                "sha256": "74a005b7df90e746bbe29c79dc28eea93060e544656ec6bbc77fff3684b0da2c",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 69292032,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 87625728,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 5.0,
+                "max_effective_chunk_k": 5,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@10": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 16,
+                "nprobe": 4,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9466666666666667,
+                  "ci95": [
+                    0.9100719424460432,
+                    0.9782642243692968
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.9533333333333334,
+                  "ci95": [
+                    0.9185147392290249,
+                    0.9821428571428571
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.8288412698412698,
+                  "ci95": [
+                    0.7691794174902665,
+                    0.8839523141547199
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.8550586007520781,
+                  "ci95": [
+                    0.8054022033183652,
+                    0.8991942953073264
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 0.9461111111111111,
+              "retrieval_p50_ms": 0.96954993205145,
+              "retrieval_p95_ms": 1.4365849958267058,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.10101159999612719,
+                "bytes": 6805960,
+                "sha256": "74a005b7df90e746bbe29c79dc28eea93060e544656ec6bbc77fff3684b0da2c",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 69292032,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 87384064,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 10.0,
+                "max_effective_chunk_k": 10,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            }
+          },
+          "encoding_timing_diagnostics": {
+            "retained_all_elapsed_observations": true,
+            "batches": 547,
+            "median_batch_seconds": 1.1176931000081822,
+            "median_batch_seconds_per_item": 0.27942327500204556,
+            "p95_batch_seconds_per_item": 0.33538884998415597,
+            "batches_over_60_seconds": 0,
+            "largest_elapsed_batches": [
+              {
+                "seconds": 1.841599200037308,
+                "ids": [
+                  1577,
+                  1578,
+                  1579,
+                  1580
+                ],
+                "sha256": "95448a1bf58fa40e3bb48b950b3109f4cb0869014c9ea108e99e142be66b3440"
+              },
+              {
+                "seconds": 1.6849050000309944,
+                "ids": [
+                  1193,
+                  1194,
+                  1195,
+                  1196
+                ],
+                "sha256": "fdb2b098f5ab6e9422924f35d4b0d2957287064fd50a36e2553db309f0122c1e"
+              },
+              {
+                "seconds": 1.6398369000526145,
+                "ids": [
+                  1189,
+                  1190,
+                  1191,
+                  1192
+                ],
+                "sha256": "44f98596027ffa0930167b9880bc0a163f7e5a8f606f3088cbd8d945012cc5c1"
+              }
+            ],
+            "interpretation": "Post hoc timing diagnostic; no outliers removed and no quality selection changed"
+          }
+        },
+        "scifact": {
+          "embedding": {
+            "status": "completed",
+            "corpus_items": 3328,
+            "queries": 150,
+            "query_timing_observations": 450,
+            "corpus_seconds": 1091.1236997009255,
+            "corpus_seconds_definition": "Sum of original batch encode times, including the origin time for reused batches",
+            "new_encoding_seconds": 0.0,
+            "reused_document_batches": 832,
+            "documents_per_second": 3.050066643142475,
+            "query_p50_ms": 321.57050003297627,
+            "query_p95_ms": 628.1706150155504,
+            "dimensions": 768,
+            "dtype": "float32",
+            "load_seconds": 61.93718719994649,
+            "truncated_inputs": 0,
+            "embedding_sha256": "fa1ba09319bca2d1eb531b4fdb0d2faa5ee9681bf29ac68f1c9e196f3ffd8fa9",
+            "process_memory": {
+              "peak_rss_bytes": 1604280320,
+              "current_rss_bytes": 883699712,
+              "method": "GetProcessMemoryInfo; process-wide working set"
+            }
+          },
+          "retrieval": {
+            "exact@5": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.89,
+                  "ci95": [
+                    0.8333333333333334,
+                    0.9429530201342282
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.8933333333333333,
+                  "ci95": [
+                    0.8355263157894737,
+                    0.9459459459459459
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.8227777777777778,
+                  "ci95": [
+                    0.7560169956140351,
+                    0.8850792997851823
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.8379936562263128,
+                  "ci95": [
+                    0.777082481492319,
+                    0.8960484579499776
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 12.79649999924004,
+              "retrieval_p95_ms": 20.636489964090288,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.04800509999040514,
+                "bytes": 10250376,
+                "sha256": "c4acfb75c6f871d4646dd7f848fe2c58efd9a197c0274d0e521fd5bdd84b2701",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 74338304,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 104001536,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 14.1,
+                "max_effective_chunk_k": 40,
+                "mean_search_calls": 2.3733333333333335,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "exact@10": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.94,
+                  "ci95": [
+                    0.8954248366013072,
+                    0.9797297297297297
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.94,
+                  "ci95": [
+                    0.8954248366013072,
+                    0.9797297297297297
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.8295079365079364,
+                  "ci95": [
+                    0.7678106525114866,
+                    0.8881117091175926
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.8549314837729108,
+                  "ci95": [
+                    0.7993959206265867,
+                    0.9053439627491737
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 14.172499999403954,
+              "retrieval_p95_ms": 21.61864500376396,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.04800509999040514,
+                "bytes": 10250376,
+                "sha256": "c4acfb75c6f871d4646dd7f848fe2c58efd9a197c0274d0e521fd5bdd84b2701",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 74338304,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 103665664,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 29.866666666666667,
+                "max_effective_chunk_k": 80,
+                "mean_search_calls": 2.473333333333333,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@5": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 32,
+                "nprobe": 8,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.8833333333333333,
+                  "ci95": [
+                    0.828929205682919,
+                    0.9362416107382551
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.8866666666666667,
+                  "ci95": [
+                    0.832258064516129,
+                    0.9391993923453654
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.819111111111111,
+                  "ci95": [
+                    0.7537820272596047,
+                    0.8810832748332749
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.8334952995302441,
+                  "ci95": [
+                    0.7721317544379706,
+                    0.8921813146399072
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 0.9413333333333332,
+              "retrieval_p50_ms": 2.793649968225509,
+              "retrieval_p95_ms": 4.319699999177828,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.25990900001488626,
+                "bytes": 10375560,
+                "sha256": "09303f00a094e6fc4084f623bb720034a4e09beb5cb2d746ebb3900f8b01acb6",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 76861440,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 104464384,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 13.9,
+                "max_effective_chunk_k": 40,
+                "mean_search_calls": 2.3466666666666667,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@10": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 32,
+                "nprobe": 8,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.92,
+                  "ci95": [
+                    0.8701298701298701,
+                    0.9662162162162162
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.92,
+                  "ci95": [
+                    0.8701298701298701,
+                    0.9662162162162162
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.8242222222222222,
+                  "ci95": [
+                    0.7611841411281368,
+                    0.8842607821637426
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.8462838060125005,
+                  "ci95": [
+                    0.7909809667388557,
+                    0.8995806048454605
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 0.9226666666666667,
+              "retrieval_p50_ms": 2.923100022599101,
+              "retrieval_p95_ms": 4.587055003503337,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.25990900001488626,
+                "bytes": 10375560,
+                "sha256": "09303f00a094e6fc4084f623bb720034a4e09beb5cb2d746ebb3900f8b01acb6",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 76861440,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 104361984,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 29.333333333333332,
+                "max_effective_chunk_k": 80,
+                "mean_search_calls": 2.4466666666666668,
+                "mean_rerank_n": 0.0
+              }
+            }
+          },
+          "encoding_timing_diagnostics": {
+            "retained_all_elapsed_observations": true,
+            "batches": 832,
+            "median_batch_seconds": 1.271303849935066,
+            "median_batch_seconds_per_item": 0.3178259624837665,
+            "p95_batch_seconds_per_item": 0.4364404499938246,
+            "batches_over_60_seconds": 0,
+            "largest_elapsed_batches": [
+              {
+                "seconds": 3.0152557999826968,
+                "ids": [
+                  3305,
+                  3306,
+                  3307,
+                  3308
+                ],
+                "sha256": "dd190998776ff100a0b600cb8320400d007d478118e0bc87e4f436d696ce394a"
+              },
+              {
+                "seconds": 2.9515860999235883,
+                "ids": [
+                  3085,
+                  3086,
+                  3087,
+                  3088
+                ],
+                "sha256": "5d1675263622ae9ed24baa7f55fe9bb5ab18bd5e4c2f41722bde0f2ffa8f24e7"
+              },
+              {
+                "seconds": 2.77480250003282,
+                "ids": [
+                  3321,
+                  3322,
+                  3323,
+                  3324
+                ],
+                "sha256": "0414269035e13cdb1ab109729cbfb8ee6c0ee9ca00e27befa0620a7a8caf2047"
+              }
+            ],
+            "interpretation": "Post hoc timing diagnostic; no outliers removed and no quality selection changed"
+          }
+        }
+      },
+      "encoder": {
+        "status": "completed",
+        "process_memory": {
+          "peak_rss_bytes": 1604280320,
+          "current_rss_bytes": 883703808,
+          "method": "GetProcessMemoryInfo; process-wide working set"
+        },
+        "load_seconds": 61.93718719994649
+      }
+    },
+    "embeddinggemma": {
+      "identity": {
+        "id": "google/embeddinggemma-2",
+        "revision": "f9972ac22e696a105c482202646979e33e4b5a1e",
+        "backend": "local",
+        "dimensions": 768,
+        "license": "apache-2.0",
+        "max_tokens": 8192,
+        "dtype": "float32",
+        "batch_size": 4
+      },
+      "status": "completed",
+      "datasets": {
+        "squad": {
+          "embedding": {
+            "status": "completed",
+            "corpus_items": 2188,
+            "queries": 180,
+            "query_timing_observations": 540,
+            "corpus_seconds": 968.5508660001215,
+            "corpus_seconds_definition": "Sum of original batch encode times, including the origin time for reused batches",
+            "new_encoding_seconds": 968.5508660001215,
+            "reused_document_batches": 0,
+            "documents_per_second": 2.2590450092062855,
+            "query_p50_ms": 124.29475004319102,
+            "query_p95_ms": 170.17577996011812,
+            "dimensions": 768,
+            "dtype": "float32",
+            "load_seconds": 98.50137549999636,
+            "truncated_inputs": 0,
+            "embedding_sha256": "3315599e375d512818589c0cc5e7f1a77b46771bae5ce41b449ba3bd7a6930d8",
+            "process_memory": {
+              "peak_rss_bytes": 1948512256,
+              "current_rss_bytes": 1040277504,
+              "method": "GetProcessMemoryInfo; process-wide working set"
+            }
+          },
+          "retrieval": {
+            "exact@5": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9033333333333333,
+                  "ci95": [
+                    0.8419175021795989,
+                    0.9562086660461471
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.9133333333333333,
+                  "ci95": [
+                    0.8506258914495909,
+                    0.965523145961266
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.787,
+                  "ci95": [
+                    0.7163321156488073,
+                    0.8543301504629629
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.8116164763031648,
+                  "ci95": [
+                    0.747129957633111,
+                    0.8703354044923449
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 2.550050034187734,
+              "retrieval_p95_ms": 3.595410013804212,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.036282199900597334,
+                "bytes": 6739176,
+                "sha256": "f75f66823727ebc8ee0f4b435d5a8c8b6ae576b2fe1113fa748d739763e208f4",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 67141632,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 88178688,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 5.0,
+                "max_effective_chunk_k": 5,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "exact@10": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9666666666666667,
+                  "ci95": [
+                    0.9276315789473685,
+                    1.0
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.9733333333333334,
+                  "ci95": [
+                    0.9399939759036144,
+                    1.0
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.7952380952380952,
+                  "ci95": [
+                    0.7287779797547761,
+                    0.8587227707749767
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.8335228473491955,
+                  "ci95": [
+                    0.7743273489568738,
+                    0.8865091940378196
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 2.543300040997565,
+              "retrieval_p95_ms": 3.6030050658155224,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.036282199900597334,
+                "bytes": 6739176,
+                "sha256": "f75f66823727ebc8ee0f4b435d5a8c8b6ae576b2fe1113fa748d739763e208f4",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 67141632,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 88424448,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 10.0,
+                "max_effective_chunk_k": 10,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@5": {
+              "configuration": {
+                "dtype": "int8",
+                "nlist": 32,
+                "nprobe": 8,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.88,
+                  "ci95": [
+                    0.8171641791044776,
+                    0.933982772764561
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.8866666666666667,
+                  "ci95": [
+                    0.8223571557317952,
+                    0.9419447890818857
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.761,
+                  "ci95": [
+                    0.6878081896551724,
+                    0.8305975985221674
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.7865318269441178,
+                  "ci95": [
+                    0.7204343344616687,
+                    0.8473972535555817
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 0.9622222222222222,
+              "retrieval_p50_ms": 0.9035499533638358,
+              "retrieval_p95_ms": 1.3849500566720956,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.16455240000505,
+                "bytes": 8544376,
+                "sha256": "e6c21da049193fd370c49c24031f59e45283a75be13ae79d91682bca7d3c9de1",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 69197824,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 78364672,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 5.0,
+                "max_effective_chunk_k": 5,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@10": {
+              "configuration": {
+                "dtype": "int8",
+                "nlist": 32,
+                "nprobe": 8,
+                "rerank_multiplier": 0
+              },
+              "cases": 180,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9266666666666666,
+                  "ci95": [
+                    0.8698630136986302,
+                    0.9708082090341691
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "hit": {
+                  "mean": 0.9333333333333333,
+                  "ci95": [
+                    0.8807947019867549,
+                    0.9736927546138072
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "mrr": {
+                  "mean": 0.7672936507936509,
+                  "ci95": [
+                    0.6962252604166667,
+                    0.8341118239637074
+                  ],
+                  "n": 150,
+                  "groups": 35
+                },
+                "ndcg": {
+                  "mean": 0.8030417192289243,
+                  "ci95": [
+                    0.7382976404830974,
+                    0.8608910333957384
+                  ],
+                  "n": 150,
+                  "groups": 35
+                }
+              },
+              "ann_neighbor_recall": 0.9577777777777776,
+              "retrieval_p50_ms": 0.9068500366993248,
+              "retrieval_p95_ms": 1.3150249957107005,
+              "timing_observations": 540,
+              "snapshot": {
+                "seconds": 0.16455240000505,
+                "bytes": 8544376,
+                "sha256": "e6c21da049193fd370c49c24031f59e45283a75be13ae79d91682bca7d3c9de1",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 69197824,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 77946880,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 10.0,
+                "max_effective_chunk_k": 10,
+                "mean_search_calls": 1.0,
+                "mean_rerank_n": 0.0
+              }
+            }
+          },
+          "encoding_timing_diagnostics": {
+            "retained_all_elapsed_observations": true,
+            "batches": 547,
+            "median_batch_seconds": 1.6167847000760958,
+            "median_batch_seconds_per_item": 0.40419617501902394,
+            "p95_batch_seconds_per_item": 0.6850198750034906,
+            "batches_over_60_seconds": 0,
+            "largest_elapsed_batches": [
+              {
+                "seconds": 3.9127296999795362,
+                "ids": [
+                  1841,
+                  1842,
+                  1843,
+                  1844
+                ],
+                "sha256": "e0ac0872fbd55ce458492aa66a0c369d293b832ea8c1b19d5c16653694e0ab08"
+              },
+              {
+                "seconds": 3.848571900045499,
+                "ids": [
+                  2005,
+                  2006,
+                  2007,
+                  2008
+                ],
+                "sha256": "369af71d91d5a05a7fc67eda47096d49cd52a42540c111d84d041aa6f7caba90"
+              },
+              {
+                "seconds": 3.6681918998947367,
+                "ids": [
+                  1845,
+                  1846,
+                  1847,
+                  1848
+                ],
+                "sha256": "60cab7708760728b8c3e998d2283ae67258f4c27aafcda0914775b7f8cd86381"
+              }
+            ],
+            "interpretation": "Post hoc timing diagnostic; no outliers removed and no quality selection changed"
+          }
+        },
+        "scifact": {
+          "embedding": {
+            "status": "completed",
+            "corpus_items": 3328,
+            "queries": 150,
+            "query_timing_observations": 450,
+            "corpus_seconds": 1349.9462692985544,
+            "corpus_seconds_definition": "Sum of original batch encode times, including the origin time for reused batches",
+            "new_encoding_seconds": 0.0,
+            "reused_document_batches": 832,
+            "documents_per_second": 2.4652833047416487,
+            "query_p50_ms": 121.90384999848902,
+            "query_p95_ms": 160.3955049999058,
+            "dimensions": 768,
+            "dtype": "float32",
+            "load_seconds": 98.50137549999636,
+            "truncated_inputs": 0,
+            "embedding_sha256": "3407c7bdf29ca20df05f9a273d3ae3b611bc62b2a8128c88999a9825a87d034b",
+            "process_memory": {
+              "peak_rss_bytes": 1948512256,
+              "current_rss_bytes": 911138816,
+              "method": "GetProcessMemoryInfo; process-wide working set"
+            }
+          },
+          "retrieval": {
+            "exact@5": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.932,
+                  "ci95": [
+                    0.881285091543156,
+                    0.9729755717255718
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.9333333333333333,
+                  "ci95": [
+                    0.8827484787018256,
+                    0.9736885104919161
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.851111111111111,
+                  "ci95": [
+                    0.7902771131524602,
+                    0.9066677852348993
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.8700710986641859,
+                  "ci95": [
+                    0.8146295079938233,
+                    0.919513114693565
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 12.404799985233694,
+              "retrieval_p95_ms": 25.69723502383564,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.049034400028176606,
+                "bytes": 10250376,
+                "sha256": "4d851cef116970f16df673d29659844981d8a6fa95e1a6e82afae9167bb4f84c",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 74432512,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 104103936,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 12.133333333333333,
+                "max_effective_chunk_k": 40,
+                "mean_search_calls": 2.1733333333333333,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "exact@10": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 0,
+                "nprobe": 0,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9533333333333334,
+                  "ci95": [
+                    0.9084967320261438,
+                    0.9866666666666667
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.9533333333333334,
+                  "ci95": [
+                    0.9084967320261438,
+                    0.9866666666666667
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.8537037037037036,
+                  "ci95": [
+                    0.7949874298640746,
+                    0.9072234340044741
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.877264955205089,
+                  "ci95": [
+                    0.8268560773836616,
+                    0.9234861488387751
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 1.0,
+              "retrieval_p50_ms": 12.261849944479764,
+              "retrieval_p95_ms": 20.07598490454256,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.049034400028176606,
+                "bytes": 10250376,
+                "sha256": "4d851cef116970f16df673d29659844981d8a6fa95e1a6e82afae9167bb4f84c",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 74432512,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 103878656,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 24.133333333333333,
+                "max_effective_chunk_k": 80,
+                "mean_search_calls": 2.2,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@5": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 32,
+                "nprobe": 8,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.912,
+                  "ci95": [
+                    0.852,
+                    0.9612903225806452
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.9133333333333333,
+                  "ci95": [
+                    0.8552631578947368,
+                    0.9623272654796702
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.8377777777777777,
+                  "ci95": [
+                    0.7737103338852098,
+                    0.8989192660409765
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.854992035283233,
+                  "ci95": [
+                    0.7958744194459739,
+                    0.9114610493441909
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 0.9413333333333332,
+              "retrieval_p50_ms": 2.8506500530056655,
+              "retrieval_p95_ms": 6.206530024064701,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.22652280004695058,
+                "bytes": 10375560,
+                "sha256": "7e6e6f7af24e609826750135353522459f7f674649b7d236df09b1a1011a9f31",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 76791808,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 104132608,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 12.033333333333333,
+                "max_effective_chunk_k": 40,
+                "mean_search_calls": 2.1666666666666665,
+                "mean_rerank_n": 0.0
+              }
+            },
+            "selected@10": {
+              "configuration": {
+                "dtype": "fp32",
+                "nlist": 32,
+                "nprobe": 8,
+                "rerank_multiplier": 0
+              },
+              "cases": 150,
+              "positive_cases": 150,
+              "failures": 0,
+              "labeled": {
+                "recall": {
+                  "mean": 0.9266666666666666,
+                  "ci95": [
+                    0.875,
+                    0.967948717948718
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "hit": {
+                  "mean": 0.9266666666666666,
+                  "ci95": [
+                    0.875,
+                    0.967948717948718
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "mrr": {
+                  "mean": 0.8396296296296295,
+                  "ci95": [
+                    0.7778028625385383,
+                    0.8995774838597861
+                  ],
+                  "n": 150,
+                  "groups": 136
+                },
+                "ndcg": {
+                  "mean": 0.8601790251863762,
+                  "ci95": [
+                    0.8045101396081454,
+                    0.9123484541815502
+                  ],
+                  "n": 150,
+                  "groups": 136
+                }
+              },
+              "ann_neighbor_recall": 0.9280000000000002,
+              "retrieval_p50_ms": 2.7666500536724925,
+              "retrieval_p95_ms": 4.279844969278199,
+              "timing_observations": 450,
+              "snapshot": {
+                "seconds": 0.22652280004695058,
+                "bytes": 10375560,
+                "sha256": "7e6e6f7af24e609826750135353522459f7f674649b7d236df09b1a1011a9f31",
+                "process_memory": {
+                  "peak_rss_bytes": 124407808,
+                  "current_rss_bytes": 76791808,
+                  "method": "GetProcessMemoryInfo; process-wide working set"
+                }
+              },
+              "retrieval_client_memory": {
+                "peak_rss_bytes": 124407808,
+                "current_rss_bytes": 103919616,
+                "method": "GetProcessMemoryInfo; process-wide working set"
+              },
+              "overfetch": {
+                "mean_effective_chunk_k": 24.133333333333333,
+                "max_effective_chunk_k": 80,
+                "mean_search_calls": 2.2,
+                "mean_rerank_n": 0.0
+              }
+            }
+          },
+          "encoding_timing_diagnostics": {
+            "retained_all_elapsed_observations": true,
+            "batches": 832,
+            "median_batch_seconds": 1.594796449993737,
+            "median_batch_seconds_per_item": 0.39869911249843426,
+            "p95_batch_seconds_per_item": 0.5152985000167973,
+            "batches_over_60_seconds": 0,
+            "largest_elapsed_batches": [
+              {
+                "seconds": 2.9568621000507846,
+                "ids": [
+                  1517,
+                  1518,
+                  1519,
+                  1520
+                ],
+                "sha256": "8f0ef43453954176a865f2c73f960310f5aa998c58d76d73a5d4ee6a0d49aa0e"
+              },
+              {
+                "seconds": 2.851331799989566,
+                "ids": [
+                  837,
+                  838,
+                  839,
+                  840
+                ],
+                "sha256": "7095db144221c54bd3eebbc525741593d22f216beade60f197914db6de28473d"
+              },
+              {
+                "seconds": 2.568500200053677,
+                "ids": [
+                  1125,
+                  1126,
+                  1127,
+                  1128
+                ],
+                "sha256": "744921752aaa020a70c5f6aafc487dcf917cfe3c073609603734a2cffb1a6a5e"
+              }
+            ],
+            "interpretation": "Post hoc timing diagnostic; no outliers removed and no quality selection changed"
+          }
+        }
+      },
+      "encoder": {
+        "status": "completed",
+        "process_memory": {
+          "peak_rss_bytes": 1948512256,
+          "current_rss_bytes": 911138816,
+          "method": "GetProcessMemoryInfo; process-wide working set"
+        },
+        "load_seconds": 98.50137549999636
+      }
+    },
+    "voyage": {
+      "identity": {
+        "id": "voyage-4-large",
+        "backend": "voyage",
+        "dimensions": 1024,
+        "revision": null,
+        "max_tokens": 32000,
+        "license": "Provider terms",
+        "environment": "VOYAGE_API_KEY",
+        "status": "pending_owner_deferred"
+      },
+      "status": "pending_owner_deferred",
+      "requests": 0,
+      "failures": 0,
+      "actual_cost_usd": 0,
+      "required_access": "VOYAGE_API_KEY",
+      "provider_returned_version": null
+    },
+    "gemini": {
+      "identity": {
+        "id": "gemini-embedding-2",
+        "backend": "gemini",
+        "dimensions": 3072,
+        "revision": null,
+        "max_tokens": 8192,
+        "license": "Provider terms",
+        "environment": "GEMINI_API_KEY",
+        "status": "pending_owner_deferred"
+      },
+      "status": "pending_owner_deferred",
+      "requests": 0,
+      "failures": 0,
+      "actual_cost_usd": 0,
+      "required_access": "GEMINI_API_KEY",
+      "provider_returned_version": null
+    }
+  },
+  "paired_exact_differences": {
+    "squad": {
+      "qwen": {
+        "recall": {
+          "mean": 0.06,
+          "ci95": [
+            0.017599520735524257,
+            0.10625179597701148
+          ],
+          "n": 150,
+          "groups": 35
+        },
+        "ndcg": {
+          "mean": 0.12279151801264641,
+          "ci95": [
+            0.07616317766825131,
+            0.1705987782839191
+          ],
+          "n": 150,
+          "groups": 35
+        }
+      },
+      "jina": {
+        "recall": {
+          "mean": 0.06,
+          "ci95": [
+            0.02596570096570097,
+            0.09859589636584938
+          ],
+          "n": 150,
+          "groups": 35
+        },
+        "ndcg": {
+          "mean": 0.12623945820968296,
+          "ci95": [
+            0.0778372723272481,
+            0.17729979900186146
+          ],
+          "n": 150,
+          "groups": 35
+        }
+      },
+      "embeddinggemma": {
+        "recall": {
+          "mean": 0.05333333333333334,
+          "ci95": [
+            0.01257279291870487,
+            0.09933774834437085
+          ],
+          "n": 150,
+          "groups": 35
+        },
+        "ndcg": {
+          "mean": 0.07803703814013364,
+          "ci95": [
+            0.03100011849932159,
+            0.12765285711291846
+          ],
+          "n": 150,
+          "groups": 35
+        }
+      }
+    },
+    "scifact": {
+      "qwen": {
+        "recall": {
+          "mean": 0.011333333333333332,
+          "ci95": [
+            -0.03918918918918919,
+            0.0646826530612244
+          ],
+          "n": 150,
+          "groups": 136
+        },
+        "ndcg": {
+          "mean": 0.015281667058803855,
+          "ci95": [
+            -0.02594624840176577,
+            0.05726534069997412
+          ],
+          "n": 150,
+          "groups": 136
+        }
+      },
+      "jina": {
+        "recall": {
+          "mean": 0.038,
+          "ci95": [
+            -0.006711409395973154,
+            0.08993785323207346
+          ],
+          "n": 150,
+          "groups": 136
+        },
+        "ndcg": {
+          "mean": 0.04647307373552366,
+          "ci95": [
+            0.006962420085175823,
+            0.08706874366285522
+          ],
+          "n": 150,
+          "groups": 136
+        }
+      },
+      "embeddinggemma": {
+        "recall": {
+          "mean": 0.051333333333333335,
+          "ci95": [
+            -0.007312326425977352,
+            0.11400234899328858
+          ],
+          "n": 150,
+          "groups": 136
+        },
+        "ndcg": {
+          "mean": 0.06880654516770186,
+          "ci95": [
+            0.016900314362118612,
+            0.12312905273889121
+          ],
+          "n": 150,
+          "groups": 136
+        }
+      }
+    }
+  },
+  "selection": {
+    "selections": {
+      "minilm": {
+        "squad": {
+          "config": {
+            "dtype": "int8",
+            "nlist": 32,
+            "nprobe": 32,
+            "rerank_multiplier": 4
+          },
+          "qualified": 10,
+          "evaluated": 40,
+          "exact_development_ndcg10": 0.7640935042268733,
+          "full_list_probing": true
+        },
+        "scifact": {
+          "config": {
+            "dtype": "int8",
+            "nlist": 16,
+            "nprobe": 8,
+            "rerank_multiplier": 0
+          },
+          "qualified": 15,
+          "evaluated": 40,
+          "exact_development_ndcg10": 0.7889786236679367,
+          "full_list_probing": false
+        }
+      },
+      "qwen": {
+        "squad": {
+          "config": {
+            "dtype": "int8",
+            "nlist": 16,
+            "nprobe": 4,
+            "rerank_multiplier": 0
+          },
+          "qualified": 25,
+          "evaluated": 40,
+          "exact_development_ndcg10": 0.871425134250618,
+          "full_list_probing": false
+        },
+        "scifact": {
+          "config": {
+            "dtype": "int8",
+            "nlist": 16,
+            "nprobe": 8,
+            "rerank_multiplier": 4
+          },
+          "qualified": 15,
+          "evaluated": 40,
+          "exact_development_ndcg10": 0.8797894433940509,
+          "full_list_probing": false
+        }
+      },
+      "jina": {
+        "squad": {
+          "config": {
+            "dtype": "fp32",
+            "nlist": 16,
+            "nprobe": 4,
+            "rerank_multiplier": 0
+          },
+          "qualified": 25,
+          "evaluated": 40,
+          "exact_development_ndcg10": 0.8943475357587312,
+          "full_list_probing": false
+        },
+        "scifact": {
+          "config": {
+            "dtype": "fp32",
+            "nlist": 32,
+            "nprobe": 8,
+            "rerank_multiplier": 0
+          },
+          "qualified": 19,
+          "evaluated": 40,
+          "exact_development_ndcg10": 0.8895055417399174,
+          "full_list_probing": false
+        }
+      },
+      "embeddinggemma": {
+        "squad": {
+          "config": {
+            "dtype": "int8",
+            "nlist": 32,
+            "nprobe": 8,
+            "rerank_multiplier": 0
+          },
+          "qualified": 20,
+          "evaluated": 40,
+          "exact_development_ndcg10": 0.8643225693181751,
+          "full_list_probing": false
+        },
+        "scifact": {
+          "config": {
+            "dtype": "fp32",
+            "nlist": 32,
+            "nprobe": 8,
+            "rerank_multiplier": 0
+          },
+          "qualified": 19,
+          "evaluated": 40,
+          "exact_development_ndcg10": 0.9910130108543929,
+          "full_list_probing": false
+        }
+      }
+    },
+    "candidates": [
+      {
+        "model": "minilm",
+        "development_ndcg10": 0.776536063947405,
+        "query_p95_ms": 22.56783496704883,
+        "encoder_peak_rss_bytes": 611966976,
+        "resource_eligible": true
+      },
+      {
+        "model": "qwen",
+        "development_ndcg10": 0.8756072888223344,
+        "query_p95_ms": 560.034609993454,
+        "encoder_peak_rss_bytes": 3007070208,
+        "resource_eligible": true
+      },
+      {
+        "model": "jina",
+        "development_ndcg10": 0.8919265387493243,
+        "query_p95_ms": 271.4113350142721,
+        "encoder_peak_rss_bytes": 1604280320,
+        "resource_eligible": true
+      },
+      {
+        "model": "embeddinggemma",
+        "development_ndcg10": 0.927667790086284,
+        "query_p95_ms": 333.11253000865656,
+        "encoder_peak_rss_bytes": 1948512256,
+        "resource_eligible": true
+      }
+    ],
+    "rag_models": [
+      "minilm",
+      "embeddinggemma",
+      "jina"
+    ],
+    "frozen_before_test": true
+  },
+  "data": {
+    "dataset_hashes": {
+      "squad-development.json": "da53d5bf0e96c585589c1fe969a2d59c94769531a230b9e7b2a350580f8da61d",
+      "squad-test.json": "7402c0c5a416c5ef36fd9b5df3f9c36e50127d4f669a0cb9c9c0d8794aafdfd1",
+      "scifact-development.json": "5a09965633241cb6c4d82f6631a7fbc15abcc9b9ec949b44ff5ffa5e0594f99b",
+      "scifact-test.json": "d93a4ef1f997ad5f823731b46ffd7e2a52ee6c4175d395904ed170f25f39510c"
+    },
+    "counts": {
+      "squad-development.json": {
+        "chunks": 662,
+        "cases": 60,
+        "positive_cases": 50
+      },
+      "squad-test.json": {
+        "chunks": 2188,
+        "cases": 180,
+        "positive_cases": 150
+      },
+      "scifact-development.json": {
+        "chunks": 3328,
+        "cases": 50,
+        "positive_cases": 50
+      },
+      "scifact-test.json": {
+        "chunks": 3328,
+        "cases": 150,
+        "positive_cases": 150
+      }
+    },
+    "excluded_previous_query_ids": [
+      "56de15104396321400ee25b7",
+      "56de49a8cffd8e1900b4b7a9",
+      "56e16182e3433e1400422e28",
+      "56e1a38de3433e1400423060",
+      "56e1b169cd28a01900c67a75",
+      "56e1ee4de3433e1400423210",
+      "56e1f10ee3433e1400423225",
+      "5705e33f52bb891400689650",
+      "5705e63175f01819005e7724",
+      "5706602375f01819005e7b8a",
+      "57069fe575f01819005e7c69",
+      "5706fa4c90286e26004fc78a",
+      "5707074190286e26004fc812",
+      "570708619e06ca38007e92c7",
+      "57070b889e06ca38007e9301",
+      "570712049e06ca38007e938d",
+      "5707135a90286e26004fc8c3",
+      "57093dae9928a814004714e4",
+      "57094ca7efce8f15003a7dd9",
+      "57094fef9928a81400471522",
+      "570961aa200fba1400367f16",
+      "5709c638200fba14003682e5",
+      "570a01b44103511400d594f0",
+      "570a059c6d058f1900182c73",
+      "570a07104103511400d5950d",
+      "570a826e6d058f1900182eec",
+      "570a946c6d058f1900182fc5",
+      "570aa1e34103511400d598a3",
+      "570ab4204103511400d59946",
+      "570ab7096d058f19001830b0",
+      "570b92316b8089140040f995",
+      "570ba229ec8fbc190045ba9a",
+      "570ba2b3ec8fbc190045baa2",
+      "570baa0f6b8089140040f9ce",
+      "570bc6466b8089140040fa30",
+      "570bd2fcec8fbc190045bb35",
+      "570bda82ec8fbc190045bb87",
+      "570be0da6b8089140040fac0",
+      "570be1b6ec8fbc190045bbb9",
+      "570d3468b3d812140066d547",
+      "570d4329fed7b91900d45dd8",
+      "570d4c3bfed7b91900d45e31",
+      "570d529fb3d812140066d6bd",
+      "570db6fb16d0071400510d2c",
+      "570e25b30dc6ce1900204dfb",
+      "570e28710dc6ce1900204e06",
+      "570e38fd0b85d914000d7d98",
+      "57107a3ea58dae1900cd69de",
+      "57107d73b654c5140001f91e",
+      "571090abb654c5140001f997",
+      "57111380a58dae1900cd6bd6",
+      "571135b8a58dae1900cd6d0e",
+      "57113639a58dae1900cd6d1b",
+      "571136b8a58dae1900cd6d23",
+      "57114e8d50c2381900b54a5b",
+      "571153422419e3140095557e",
+      "57115bf350c2381900b54a96",
+      "57115f652419e314009555bc",
+      "5711623e50c2381900b54aba",
+      "571163172419e314009555e9",
+      "5711651050c2381900b54acc",
+      "571a52cb4faf5e1900b8a969",
+      "571c83f3dd7acb1400e4c0db",
+      "571c8539dd7acb1400e4c0e4",
+      "571c91c8dd7acb1400e4c10a",
+      "571ce7f25efbb31900334e3e",
+      "5725c28a271a42140099d14f",
+      "5725c69738643c19005accbb",
+      "5725ca4389a1e219009abeb4",
+      "5725cfd0271a42140099d225",
+      "5725ec8289a1e219009ac0b2",
+      "5725f2c838643c19005aceed",
+      "5725f6e138643c19005acf1a",
+      "5725f7cd38643c19005acf24",
+      "572634a789a1e219009ac56f",
+      "57263677ec44d21400f3dc49",
+      "57264684708984140094c126",
+      "572647935951b619008f6eca",
+      "57264845f1498d1400e8db0c",
+      "57264865dd62a815002e8064",
+      "572648ed5951b619008f6f06",
+      "57264a0ef1498d1400e8db43",
+      "57264a74708984140094c18f",
+      "57265700dd62a815002e8212",
+      "57265746dd62a815002e8218",
+      "5726581fdd62a815002e823b",
+      "572669a9dd62a815002e8418",
+      "572673f5708984140094c69d",
+      "57267947f1498d1400e8e0ed",
+      "57268220f1498d1400e8e216",
+      "572683f95951b619008f7526",
+      "572686ac5951b619008f75ad",
+      "57268bf9dd62a815002e890b",
+      "57269424dd62a815002e8a20",
+      "572695285951b619008f774b",
+      "5726c29a5951b619008f7d7d",
+      "5726d4895951b619008f7f60",
+      "5726d8bd708984140094d35b",
+      "5726db5add62a815002e92d7",
+      "5726dcbf708984140094d3fe",
+      "5726e060708984140094d478",
+      "5726e1f45951b619008f8155",
+      "5726e3c4dd62a815002e9407",
+      "5726e8e4708984140094d582",
+      "5726e93cdd62a815002e94ca",
+      "5726ed805951b619008f8291",
+      "5726f0e35951b619008f82f7",
+      "5726f48df1498d1400e8f0db",
+      "5726f9e05951b619008f83e6",
+      "57274712708984140094dbad",
+      "57274beff1498d1400e8f5e7",
+      "57274d9bf1498d1400e8f5f9",
+      "57274eca5951b619008f8801",
+      "572750e8dd62a815002e9af3",
+      "572751b4708984140094dc1b",
+      "57275409708984140094dc37",
+      "5727aeac3acd2414000de98a",
+      "5727c55bff5b5019007d94d0",
+      "5727ec062ca10214002d99b8",
+      "5727f05b4b864d1900164069",
+      "5727f7523acd2414000df110",
+      "5728170d3acd2414000df445",
+      "57281edd3acd2414000df4eb",
+      "572821274b864d1900164511",
+      "572827fc3acd2414000df5be",
+      "57283f014b864d19001647e8",
+      "57284618ff5b5019007da0a9",
+      "5728510f4b864d1900164937",
+      "572863c72ca10214002da2d4",
+      "57286951ff5b5019007da20f",
+      "572869b84b864d19001649b1",
+      "57286bb84b864d19001649c8",
+      "572881704b864d1900164a52",
+      "5728d63c4b864d1900164f1b",
+      "5728e5224b864d1900165035",
+      "5728ec6a4b864d19001650ab",
+      "5728eff82ca10214002daade",
+      "5728f03bff5b5019007da9a2",
+      "5728f0992ca10214002daae5",
+      "5728f4a76aef0514001548be",
+      "5728facd4b864d1900165174",
+      "5728fbf83f37b31900477f05",
+      "5728fc671d04691400778f07",
+      "572900303f37b31900477f54",
+      "57293c246aef051400154bb9",
+      "57293d116aef051400154bca",
+      "57293e221d046914007791d7",
+      "572941273f37b319004781af",
+      "57295082af94a219006aa295",
+      "572954a83f37b31900478262",
+      "57297781af94a219006aa4a7",
+      "572987e46aef051400154fa6",
+      "57299a6f6aef051400155018",
+      "5729edd56aef051400155112",
+      "5729fb003f37b31900478629",
+      "572a064a3f37b3190047865d",
+      "572a0bebaf94a219006aa772",
+      "572a12381d0469140077972b",
+      "572a1a5c6aef051400155286",
+      "572f60f4947a6a140053c8ee",
+      "572f6a0ba23a5019007fc5eb",
+      "572fadcbb2c2fd140056832c",
+      "572faf74b2c2fd1400568347",
+      "572fb059947a6a140053cb81",
+      "572fbb04a23a5019007fc8f8",
+      "572fbfa504bcaa1900d76c76",
+      "572fc043a23a5019007fc961",
+      "572fc8a904bcaa1900d76d1f",
+      "572fd6aa04bcaa1900d76da3",
+      "572fdb17b2c2fd1400568521",
+      "572feddda23a5019007fcb5f",
+      "572ff35f947a6a140053ce68",
+      "572ffa79a23a5019007fcbec",
+      "572ffd75b2c2fd14005686e9",
+      "5730035e04bcaa1900d77002",
+      "573004bf947a6a140053cf57",
+      "573007fab2c2fd140056876e",
+      "57300bf504bcaa1900d77088",
+      "57300f8504bcaa1900d770d5",
+      "57306797396df919000960f0",
+      "573085ea8ab72b1400f9c54d",
+      "5730b6592461fd1900a9cfcf",
+      "5731070b05b4da19006bcce4",
+      "57332b66d058e614000b575b",
+      "573330444776f41900660758",
+      "57335fcad058e614000b5974",
+      "573362b94776f41900660978",
+      "57339ad74776f41900660e8a",
+      "57339c16d058e614000b5ec5",
+      "5733a32bd058e614000b5f36",
+      "5733dab4d058e614000b6409",
+      "5733ef47d058e614000b662d",
+      "57373a9fc3c5551400e51e7d",
+      "573755afc3c5551400e51eb5",
+      "573766251c45671900574471",
+      "57376828c3c5551400e51ebd",
+      "57378e311c456719005744b3",
+      "57379ed81c456719005744d5",
+      "5737a25ac3c5551400e51f53",
+      "5737a5931c456719005744eb",
+      "5a0c7fb2f5590b0018dab446",
+      "5a0c99fcf5590b0018dab4a8",
+      "5a1c60f0b4fb5d0018714611",
+      "5a2350d582b03a001a4aa774",
+      "5a25fa34c93d92001a400370",
+      "5a275c96d1a287001a6d0a29",
+      "5a2ec77ba83784001a7d2466",
+      "5a38baa2a4b263001a8c18dd",
+      "5a38c6bca4b263001a8c1915",
+      "5a38d6e6a4b263001a8c1952",
+      "5a3e582e378766001a0025a1",
+      "5a58db973e1742001a15ce4e",
+      "5a592c9d3e1742001a15cfd7",
+      "5a6659d3846392001a1e1b0f",
+      "5a668172f038b7001ab0befa",
+      "5a836273e60761001a2eb640",
+      "5a8ca068fd22b3001a8d8c20",
+      "5a8ca483fd22b3001a8d8c94",
+      "5a8caa9ffd22b3001a8d8cfc",
+      "5a8cafbafd22b3001a8d8d35",
+      "5aced3b832bba1001ae4b61e",
+      "5acf8c4b77cf76001a6851bc",
+      "5acff73377cf76001a68668c",
+      "5ad01a6277cf76001a686a0c",
+      "5ad02ee077cf76001a686d58",
+      "5ad0d23a645df0001a2d051c",
+      "5ad0d6d5645df0001a2d065e",
+      "5ad14d8e645df0001a2d16b6",
+      "5ad242e5d7d075001a4289a4",
+      "5ad24e85d7d075001a428c52",
+      "5ad25553d7d075001a428d36",
+      "5ad25f29d7d075001a428f60",
+      "5ad420c6604f3c001a400715",
+      "5ad421a7604f3c001a400778",
+      "5ad4bdbd5b96ef001a109edc",
+      "5ad4d0ca5b96ef001a10a198",
+      "5ad4d55f5b96ef001a10a278",
+      "5ad4df065b96ef001a10a4f7",
+      "5ad50de85b96ef001a10ab12",
+      "5ad56d3e5b96ef001a10ae87"
+    ],
+    "squad_source": "https://rajpurkar.github.io/SQuAD-explorer/",
+    "squad_license": "CC-BY-SA-4.0",
+    "scifact_source": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip",
+    "scifact_license": "CC-BY-SA-4.0",
+    "scifact_attribution": "Wadden et al. 2020; BEIR by Thakur et al. 2021",
+    "source_hashes": {
+      "train-v2.0.json": "68dcfbb971bd3e96d5b46c7177b16c1a4e7d4bdef19fb204502738552dede002",
+      "dev-v2.0.json": "80a5225e94905956a6446d296ca1093975c4d3b3260f1d6c8f68bc2ab77182d8",
+      "scifact.zip": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165"
+    },
+    "chunking": {
+      "tokenizer": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "window": 128,
+      "overlap": 24
+    },
+    "squad_development_articles": [
+      "Jehovah%27s_Witnesses",
+      "Queen_Victoria",
+      "FC_Barcelona",
+      "Antibiotics",
+      "Gregorian_calendar",
+      "Central_Intelligence_Agency",
+      "Cork_(city)",
+      "George_VI",
+      "Endangered_Species_Act",
+      "Financial_crisis_of_2007%E2%80%9308"
+    ],
+    "scope": "Fresh QA subset and label-informed 1000-document scientific corpus with document-level judgments"
+  },
+  "manifest": {
+    "schema_version": 1,
+    "created_utc": "2026-11-09T05:30:14.509498+00:00",
+    "git_commit": "01b2f35afc25e96d00f54e802fe00a84a80146f7",
+    "working_tree_dirty": true,
+    "source_sha256": "22a97e1ba6b11d482c478d548ebc21fc00ad5351e7740fdf61dcd47c544cc220",
+    "dataset_sha256": null,
+    "configuration": {
+      "sources": {
+        "eval/embedding_comparison_spec.md": "270d9eb5898f2eccaced66d2ff1c76659480574db33f61adc16d759fb6b3340b",
+        "eval/embedding_models.json": "ea218e57c10ff147fde09757e150d8052ad0d9825d1982a44cccbe7d1169fdd2",
+        "python/vortex/embedding_models.py": "93a9f27ee86d70c34718cc24aaca036dee7186a55d6cdb9f1390305444b835b7",
+        "python/vortex/embedding_study.py": "e1a9852a7f07b25d8487d883ab180ac0dc03675e198abdfc69b0a9404053048d",
+        "eval/run_embedding_study.py": "d4d93cfddec3a710733685ff32ec85776748a69ac195fa810ad901ba7090556d",
+        "eval/prepare_embedding_study.py": "9e69fb6da3468b0d78b8011a00d49f6a2ba66c082fcc18a4458410b152da0445",
+        "python/vortex/real_rag.py": "8e3c2cce0fa68d43f53d5733c16ef25c942e487687338bd64cff3d41169e15f5",
+        "python/vortex/metrics.py": "dcaa90d96b6974113c3e0097cd7307407356a784d20e29ae1856f99493202f82"
+      },
+      "data": {
+        "squad-development": "da53d5bf0e96c585589c1fe969a2d59c94769531a230b9e7b2a350580f8da61d",
+        "squad-test": "7402c0c5a416c5ef36fd9b5df3f9c36e50127d4f669a0cb9c9c0d8794aafdfd1",
+        "scifact-development": "5a09965633241cb6c4d82f6631a7fbc15abcc9b9ec949b44ff5ffa5e0594f99b",
+        "scifact-test": "d93a4ef1f997ad5f823731b46ffd7e2a52ee6c4175d395904ed170f25f39510c"
+      },
+      "api_budget_usd": 0
+    },
+    "hardware": {
+      "platform": "Windows-11-10.0.26300-SP0",
+      "machine": "AMD64",
+      "processor": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]"
+    },
+    "packages": {
+      "torch": "2.15.0+cpu",
+      "transformers": "5.22.2",
+      "sentence-transformers": "6.2.0",
+      "peft": "0.21.2",
+      "numpy": "2.5.4",
+      "torchvision": "0.29.2+cpu"
+    },
+    "process_memory": {
+      "peak_rss_bytes": 45641728,
+      "current_rss_bytes": 44646400,
+      "method": "GetProcessMemoryInfo; process-wide working set"
+    },
+    "credential_available": {
+      "voyage": false,
+      "gemini": false
+    },
+    "api_status": "pending_owner_deferred",
+    "actual_api_charges_usd": 0,
+    "thread_policy": {
+      "encoder": 4,
+      "retrieval": 1,
+      "numpy_blas": 1
+    },
+    "background_load": "Shared Windows desktop; applications left running"
+  },
+  "contract": {
+    "sources": {
+      "eval/embedding_comparison_spec.md": "270d9eb5898f2eccaced66d2ff1c76659480574db33f61adc16d759fb6b3340b",
+      "eval/embedding_models.json": "ea218e57c10ff147fde09757e150d8052ad0d9825d1982a44cccbe7d1169fdd2",
+      "python/vortex/embedding_models.py": "93a9f27ee86d70c34718cc24aaca036dee7186a55d6cdb9f1390305444b835b7",
+      "python/vortex/embedding_study.py": "e1a9852a7f07b25d8487d883ab180ac0dc03675e198abdfc69b0a9404053048d",
+      "eval/run_embedding_study.py": "d4d93cfddec3a710733685ff32ec85776748a69ac195fa810ad901ba7090556d",
+      "eval/prepare_embedding_study.py": "9e69fb6da3468b0d78b8011a00d49f6a2ba66c082fcc18a4458410b152da0445",
+      "python/vortex/real_rag.py": "8e3c2cce0fa68d43f53d5733c16ef25c942e487687338bd64cff3d41169e15f5",
+      "python/vortex/metrics.py": "dcaa90d96b6974113c3e0097cd7307407356a784d20e29ae1856f99493202f82"
+    },
+    "data": {
+      "squad-development": "da53d5bf0e96c585589c1fe969a2d59c94769531a230b9e7b2a350580f8da61d",
+      "squad-test": "7402c0c5a416c5ef36fd9b5df3f9c36e50127d4f669a0cb9c9c0d8794aafdfd1",
+      "scifact-development": "5a09965633241cb6c4d82f6631a7fbc15abcc9b9ec949b44ff5ffa5e0594f99b",
+      "scifact-test": "d93a4ef1f997ad5f823731b46ffd7e2a52ee6c4175d395904ed170f25f39510c"
+    },
+    "api_budget_usd": 0
+  },
+  "cost_forecast": {
+    "voyage": {
+      "rough_tokens_at_four_bytes": 1738832.0,
+      "conservative_token_reservation": 6955328,
+      "list_price_usd_per_million": 0.12,
+      "rough_cost_usd": 0.20865983999999999,
+      "two_attempt_reserved_cost_usd": 1.6692787199999999,
+      "actual_charges_usd": 0,
+      "status": "pending_owner_deferred",
+      "provider_version": null
+    },
+    "gemini": {
+      "rough_tokens_at_four_bytes": 1784949.5,
+      "conservative_token_reservation": 7139798,
+      "list_price_usd_per_million": 0.2,
+      "rough_cost_usd": 0.3569899,
+      "two_attempt_reserved_cost_usd": 2.8559192,
+      "actual_charges_usd": 0,
+      "status": "pending_owner_deferred",
+      "provider_version": null
+    }
+  },
+  "human_review_status": "pending",
+  "analysis_sources_sha256": {
+    "eval/report_embedding_study.py": "631726a08dd64aad4b72c85ae3970e22f1971fff9c74bf412f92d627552e0e1e",
+    "eval/validate_embedding_study.py": "7139e98522932f64927692e2ff83c7550a70d9bedcca50004f3a435b72b0b09a",
+    "eval/generate_embedding_rag.py": "eedb5bdd5f415dcd57bb40211b49341ecbb0c7a93de74262266af22927ce01e4",
+    "eval/run_embedding_timing_audit.py": "70997bbce4bf41d3833f76fe99241f1e935bc83e866f2c4a8f7e41233202e6db",
+    "eval/embedding_timing_audit_spec.md": "1bd14eaf1b87213d5ccf2d6abdc89d154d1ea99a66d4f6ebaeccb697093bd3d2"
+  },
+  "pre_score_cache_import": {
+    "previous_contract": {
+      "sources": {
+        "eval/embedding_comparison_spec.md": "b5436bbfd5fb5de3e99339becad180747c38ff34cf29e494e2c281b4cf100e59",
+        "eval/embedding_models.json": "ea218e57c10ff147fde09757e150d8052ad0d9825d1982a44cccbe7d1169fdd2",
+        "python/vortex/embedding_models.py": "93a9f27ee86d70c34718cc24aaca036dee7186a55d6cdb9f1390305444b835b7",
+        "python/vortex/embedding_study.py": "01583a59b89c149e2747791944da015f822b74a0f395295fa662074bec4cb2d3",
+        "eval/run_embedding_study.py": "1e043be2d54c3ec78d2fea213af35ca46463a63b33d2914b9e3e6c8a746f8f5b",
+        "eval/prepare_embedding_study.py": "9e69fb6da3468b0d78b8011a00d49f6a2ba66c082fcc18a4458410b152da0445",
+        "python/vortex/real_rag.py": "8e3c2cce0fa68d43f53d5733c16ef25c942e487687338bd64cff3d41169e15f5",
+        "python/vortex/metrics.py": "dcaa90d96b6974113c3e0097cd7307407356a784d20e29ae1856f99493202f82"
+      },
+      "data": {
+        "squad-development": "da53d5bf0e96c585589c1fe969a2d59c94769531a230b9e7b2a350580f8da61d",
+        "squad-test": "7402c0c5a416c5ef36fd9b5df3f9c36e50127d4f669a0cb9c9c0d8794aafdfd1",
+        "scifact-development": "5a09965633241cb6c4d82f6631a7fbc15abcc9b9ec949b44ff5ffa5e0594f99b",
+        "scifact-test": "d93a4ef1f997ad5f823731b46ffd7e2a52ee6c4175d395904ed170f25f39510c"
+      },
+      "api_budget_usd": 0
+    },
+    "previous_contract_sha256": "06963b22a50deac5bd89fab0f1c61c69ae833ada6ada80def1ba5769a419bc66",
+    "changed_sources": [
+      "eval/embedding_comparison_spec.md",
+      "python/vortex/embedding_study.py",
+      "eval/run_embedding_study.py"
+    ],
+    "verified_vector_batches": 4199,
+    "comparative_results_observed": false,
+    "previous_import": {
+      "previous_contract": {
+        "sources": {
+          "eval/embedding_comparison_spec.md": "b31edff0b54211e4b11bad40ec911a7b7df562bae9d5bffba2cfe6668f5631c1",
+          "eval/embedding_models.json": "ea218e57c10ff147fde09757e150d8052ad0d9825d1982a44cccbe7d1169fdd2",
+          "python/vortex/embedding_models.py": "93a9f27ee86d70c34718cc24aaca036dee7186a55d6cdb9f1390305444b835b7",
+          "python/vortex/embedding_study.py": "01583a59b89c149e2747791944da015f822b74a0f395295fa662074bec4cb2d3",
+          "eval/run_embedding_study.py": "7e0a655007d296767630d4c674c2e3455eb19070fe9b4dbe8bd3d1c3a5400f67",
+          "eval/prepare_embedding_study.py": "9e69fb6da3468b0d78b8011a00d49f6a2ba66c082fcc18a4458410b152da0445",
+          "python/vortex/real_rag.py": "8e3c2cce0fa68d43f53d5733c16ef25c942e487687338bd64cff3d41169e15f5",
+          "python/vortex/metrics.py": "dcaa90d96b6974113c3e0097cd7307407356a784d20e29ae1856f99493202f82"
+        },
+        "data": {
+          "squad-development": "da53d5bf0e96c585589c1fe969a2d59c94769531a230b9e7b2a350580f8da61d",
+          "squad-test": "7402c0c5a416c5ef36fd9b5df3f9c36e50127d4f669a0cb9c9c0d8794aafdfd1",
+          "scifact-development": "5a09965633241cb6c4d82f6631a7fbc15abcc9b9ec949b44ff5ffa5e0594f99b",
+          "scifact-test": "d93a4ef1f997ad5f823731b46ffd7e2a52ee6c4175d395904ed170f25f39510c"
+        },
+        "api_budget_usd": 0
+      },
+      "previous_contract_sha256": "58bbba7cce3b000abe2925a4b9de4df8dda23159cf57b2223582b8c8cba6120f",
+      "changed_sources": [
+        "eval/embedding_comparison_spec.md",
+        "eval/run_embedding_study.py"
+      ],
+      "verified_vector_batches": 3729,
+      "comparative_results_observed": false,
+      "reason": "Reuse identical scientific corpus batches; safe optional dependency reporting. Encoding semantics, model registry and prepared data unchanged."
+    },
+    "reason": "Atomic checkpoint metadata and exact rank-order validation. Model registry, vector arithmetic and prepared data unchanged."
+  },
+  "cost_forecast_scope": "Conservative original request-volume upper estimate counts shared scientific corpus twice; no API calls executed.",
+  "tradeoffs": {
+    "squad": {
+      "descriptive_highest_ndcg10": "jina",
+      "observed_pareto_models": [
+        "minilm",
+        "jina"
+      ],
+      "objectives": "Maximize exact nDCG@10; minimize query p95, encoder peak RSS and FP32 snapshot bytes",
+      "scope": "Point estimates only; sampling intervals and uncontrolled runtime load can change dominance"
+    },
+    "scifact": {
+      "descriptive_highest_ndcg10": "embeddinggemma",
+      "observed_pareto_models": [
+        "minilm",
+        "jina",
+        "embeddinggemma"
+      ],
+      "objectives": "Maximize exact nDCG@10; minimize query p95, encoder peak RSS and FP32 snapshot bytes",
+      "scope": "Point estimates only; sampling intervals and uncontrolled runtime load can change dominance"
+    }
+  },
+  "rag": {
+    "status": "completed",
+    "conditions": {
+      "no_context": {
+        "records": 60,
+        "positive_cases": 50,
+        "paragraph_negative_cases": 10,
+        "f1": {
+          "mean": 0.030803030303030304,
+          "ci95": [
+            0.002296934865900383,
+            0.08092863984674328
+          ],
+          "n": 50,
+          "groups": 27
+        },
+        "exact_match": {
+          "mean": 0.02,
+          "ci95": [
+            0.0,
+            0.06521739130434782
+          ],
+          "n": 50,
+          "groups": 27
+        },
+        "negative_abstention": {
+          "mean": 0.8,
+          "ci95": [
+            0.5833333333333334,
+            1.0
+          ],
+          "n": 10,
+          "groups": 9
+        },
+        "request_failures": 0,
+        "attempts": 60,
+        "raw_empty_responses": 0,
+        "citation_only_responses": 3,
+        "empty_scored_answers": 41,
+        "explicit_abstentions": 38,
+        "substantive_answers": 19,
+        "answers_with_citations": 17,
+        "citation_mentions": 20,
+        "valid_id_mentions": 0,
+        "truncated_contexts": 0,
+        "positives_with_annotated_gold_requested": 0,
+        "positives_with_annotated_answer_span_submitted": 0,
+        "positives_losing_annotated_span_to_context_budget": 0,
+        "reference_text_in_context_positives": 0,
+        "generation_p50_ms": 4305.8460500324145,
+        "generation_p95_ms": 5637.944000004791,
+        "lexical_diagnostics": {
+          "lexical_support": {
+            "mean": 0.0,
+            "n": 19
+          },
+          "verbatim_sentence_support": {
+            "mean": 0.0,
+            "n": 19
+          }
+        }
+      },
+      "oracle": {
+        "records": 60,
+        "positive_cases": 50,
+        "paragraph_negative_cases": 10,
+        "f1": {
+          "mean": 0.6069157981681201,
+          "ci95": [
+            0.482710593995003,
+            0.7290114499325371
+          ],
+          "n": 50,
+          "groups": 27
+        },
+        "exact_match": {
+          "mean": 0.4,
+          "ci95": [
+            0.23333333333333334,
+            0.5777777777777777
+          ],
+          "n": 50,
+          "groups": 27
+        },
+        "negative_abstention": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "n": 10,
+          "groups": 9
+        },
+        "request_failures": 0,
+        "attempts": 60,
+        "raw_empty_responses": 0,
+        "citation_only_responses": 0,
+        "empty_scored_answers": 0,
+        "explicit_abstentions": 0,
+        "substantive_answers": 60,
+        "answers_with_citations": 26,
+        "citation_mentions": 26,
+        "valid_id_mentions": 25,
+        "truncated_contexts": 0,
+        "positives_with_annotated_gold_requested": 50,
+        "positives_with_annotated_answer_span_submitted": 50,
+        "positives_losing_annotated_span_to_context_budget": 0,
+        "reference_text_in_context_positives": 50,
+        "generation_p50_ms": 6418.030850007199,
+        "generation_p95_ms": 9178.347314934945,
+        "lexical_diagnostics": {
+          "lexical_support": {
+            "mean": 0.965870240870241,
+            "n": 60
+          },
+          "verbatim_sentence_support": {
+            "mean": 0.7166666666666667,
+            "n": 60
+          }
+        }
+      },
+      "minilm": {
+        "records": 60,
+        "positive_cases": 50,
+        "paragraph_negative_cases": 10,
+        "f1": {
+          "mean": 0.41295287185905033,
+          "ci95": [
+            0.30427461282586815,
+            0.5255063739476586
+          ],
+          "n": 50,
+          "groups": 27
+        },
+        "exact_match": {
+          "mean": 0.28,
+          "ci95": [
+            0.17307692307692307,
+            0.40425531914893614
+          ],
+          "n": 50,
+          "groups": 27
+        },
+        "negative_abstention": {
+          "mean": 0.1,
+          "ci95": [
+            0.0,
+            0.25
+          ],
+          "n": 10,
+          "groups": 9
+        },
+        "request_failures": 0,
+        "attempts": 60,
+        "raw_empty_responses": 0,
+        "citation_only_responses": 1,
+        "empty_scored_answers": 3,
+        "explicit_abstentions": 2,
+        "substantive_answers": 57,
+        "answers_with_citations": 2,
+        "citation_mentions": 7,
+        "valid_id_mentions": 7,
+        "truncated_contexts": 7,
+        "positives_with_annotated_gold_requested": 41,
+        "positives_with_annotated_answer_span_submitted": 41,
+        "positives_losing_annotated_span_to_context_budget": 0,
+        "reference_text_in_context_positives": 41,
+        "generation_p50_ms": 13868.919100030325,
+        "generation_p95_ms": 20325.33034493099,
+        "lexical_diagnostics": {
+          "lexical_support": {
+            "mean": 0.9579510645300119,
+            "n": 57
+          },
+          "verbatim_sentence_support": {
+            "mean": 0.7192982456140351,
+            "n": 57
+          }
+        }
+      },
+      "embeddinggemma": {
+        "records": 60,
+        "positive_cases": 50,
+        "paragraph_negative_cases": 10,
+        "f1": {
+          "mean": 0.3803167463616904,
+          "ci95": [
+            0.25351903711495943,
+            0.49696401162292925
+          ],
+          "n": 50,
+          "groups": 27
+        },
+        "exact_match": {
+          "mean": 0.22,
+          "ci95": [
+            0.10765957446808512,
+            0.3333333333333333
+          ],
+          "n": 50,
+          "groups": 27
+        },
+        "negative_abstention": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "n": 10,
+          "groups": 9
+        },
+        "request_failures": 0,
+        "attempts": 60,
+        "raw_empty_responses": 0,
+        "citation_only_responses": 0,
+        "empty_scored_answers": 0,
+        "explicit_abstentions": 0,
+        "substantive_answers": 60,
+        "answers_with_citations": 1,
+        "citation_mentions": 1,
+        "valid_id_mentions": 1,
+        "truncated_contexts": 10,
+        "positives_with_annotated_gold_requested": 46,
+        "positives_with_annotated_answer_span_submitted": 46,
+        "positives_losing_annotated_span_to_context_budget": 0,
+        "reference_text_in_context_positives": 47,
+        "generation_p50_ms": 14916.735949984286,
+        "generation_p95_ms": 20031.08756497968,
+        "lexical_diagnostics": {
+          "lexical_support": {
+            "mean": 0.9425275867922926,
+            "n": 60
+          },
+          "verbatim_sentence_support": {
+            "mean": 0.6,
+            "n": 60
+          }
+        }
+      },
+      "jina": {
+        "records": 60,
+        "positive_cases": 50,
+        "paragraph_negative_cases": 10,
+        "f1": {
+          "mean": 0.43836172419801117,
+          "ci95": [
+            0.3441845963449292,
+            0.5365383843506055
+          ],
+          "n": 50,
+          "groups": 27
+        },
+        "exact_match": {
+          "mean": 0.26,
+          "ci95": [
+            0.14634146341463414,
+            0.3774072869225762
+          ],
+          "n": 50,
+          "groups": 27
+        },
+        "negative_abstention": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "n": 10,
+          "groups": 9
+        },
+        "request_failures": 0,
+        "attempts": 60,
+        "raw_empty_responses": 0,
+        "citation_only_responses": 0,
+        "empty_scored_answers": 0,
+        "explicit_abstentions": 0,
+        "substantive_answers": 60,
+        "answers_with_citations": 0,
+        "citation_mentions": 0,
+        "valid_id_mentions": 0,
+        "truncated_contexts": 17,
+        "positives_with_annotated_gold_requested": 49,
+        "positives_with_annotated_answer_span_submitted": 49,
+        "positives_losing_annotated_span_to_context_budget": 0,
+        "reference_text_in_context_positives": 50,
+        "generation_p50_ms": 15102.301949984394,
+        "generation_p95_ms": 19851.966265012743,
+        "lexical_diagnostics": {
+          "lexical_support": {
+            "mean": 0.9732053825803827,
+            "n": 60
+          },
+          "verbatim_sentence_support": {
+            "mean": 0.6833333333333333,
+            "n": 60
+          }
+        }
+      }
+    },
+    "paired_f1_difference_from_minilm": {
+      "no_context": {
+        "mean": -0.38214984155602005,
+        "ci95": [
+          -0.5072015096276157,
+          -0.2642113264833012
+        ],
+        "n": 50,
+        "groups": 27
+      },
+      "oracle": {
+        "mean": 0.1939629263090698,
+        "ci95": [
+          0.07957978249352081,
+          0.3130312960405938
+        ],
+        "n": 50,
+        "groups": 27
+      },
+      "minilm": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 50,
+        "groups": 27
+      },
+      "embeddinggemma": {
+        "mean": -0.032636125497359975,
+        "ci95": [
+          -0.16246624192158052,
+          0.09348029612346659
+        ],
+        "n": 50,
+        "groups": 27
+      },
+      "jina": {
+        "mean": 0.025408852338960824,
+        "ci95": [
+          -0.07790784146902036,
+          0.12664245734834667
+        ],
+        "n": 50,
+        "groups": 27
+      }
+    },
+    "total_requests": 350,
+    "http_generation_attempts": 350,
+    "total_request_failures": 0,
+    "generator_runtime_memory": {
+      "maximum_observed_combined_rss_bytes": 3981557760,
+      "maximum_individual_lifetime_peak_rss_bytes": 3963568128,
+      "boundary": "Model-runtime process samples after requests; lifetime peaks are individual process peaks, not a sum of simultaneous peaks; Python client/encoders separate"
+    },
+    "generator_running_model": [
+      {
+        "name": "gemma3:1b",
+        "model": "gemma3:1b",
+        "size": 880541695,
+        "digest": "8648f39daa8fbf5b18c7b4e6a8fb4990c692751d49917417b8842ca5758e7ffc",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma3",
+          "families": [
+            "gemma3"
+          ],
+          "parameter_size": "999.89M",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-11-09T15:25:34.8004379+05:30",
+        "size_vram": 0,
+        "context_length": 4096
+      }
+    ],
+    "repeat_questions": 5,
+    "identical_prompt_pairs": 75,
+    "different_raw_answers": 9,
+    "different_normalized_answers": 7,
+    "human_review_status": "pending",
+    "human_review_samples": 30,
+    "semantic_correctness": null,
+    "citation_correctness": null,
+    "unsupported_claim_rate": null,
+    "automated_semantic_judge": null,
+    "official_scoring_validation": {
+      "positive_records": 280,
+      "sha256": "710840ce2c2c61716334c056777032f24660b83eb9869a451036e6a24d8103c4",
+      "mismatches": 0
+    },
+    "generator": {
+      "model": {
+        "name": "gemma3:1b",
+        "model": "gemma3:1b",
+        "modified_at": "2026-02-19T22:24:27.3945894+05:30",
+        "size": 815319791,
+        "digest": "8648f39daa8fbf5b18c7b4e6a8fb4990c692751d49917417b8842ca5758e7ffc",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma3",
+          "families": [
+            "gemma3"
+          ],
+          "parameter_size": "999.89M",
+          "quantization_level": "Q4_K_M"
+        },
+        "capabilities": [
+          "completion"
+        ]
+      },
+      "version": {
+        "version": "0.33.3"
+      }
+    }
+  },
+  "supplemental_timing_audit": {
+    "status": "completed",
+    "models": {
+      "minilm": {
+        "status": "completed",
+        "model": {
+          "id": "sentence-transformers/all-MiniLM-L6-v2",
+          "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+          "backend": "local",
+          "dimensions": 384,
+          "license": "apache-2.0",
+          "max_tokens": 256,
+          "dtype": "float32",
+          "batch_size": 4
+        },
+        "domains": {
+          "squad": {
+            "document_sample": 16,
+            "query_sample": 10,
+            "rounds": 3,
+            "documents_per_second": 37.08518196643988,
+            "document_process_cpu_seconds": 5.078125,
+            "query_p50_ms": 10.792400047648698,
+            "query_p95_ms": 11.73659999622032,
+            "power_changed_calls": 0,
+            "low_cpu_ratio_calls": 0
+          },
+          "scifact": {
+            "document_sample": 16,
+            "query_sample": 10,
+            "rounds": 3,
+            "documents_per_second": 32.333152185270215,
+            "document_process_cpu_seconds": 5.96875,
+            "query_p50_ms": 11.31574995815754,
+            "query_p95_ms": 12.856160028604789,
+            "power_changed_calls": 0,
+            "low_cpu_ratio_calls": 0
+          }
+        },
+        "parameter_dtypes": {
+          "torch.float32": 22713216
+        },
+        "parameter_count": 22713216,
+        "parameter_devices": {
+          "cpu": 22713216
+        },
+        "inference_threads": 4,
+        "output_dtypes": [
+          "float32"
+        ],
+        "batch_order_checks": {
+          "squad": {
+            "items": 4,
+            "max_absolute_difference": 8.754432201385498e-08,
+            "absolute_tolerance": 0.0001,
+            "passed": true
+          },
+          "scifact": {
+            "items": 4,
+            "max_absolute_difference": 7.636845111846924e-08,
+            "absolute_tolerance": 0.0001,
+            "passed": true
+          }
+        },
+        "matches_requested_fp32": true,
+        "initialization_seconds": 15.816259699990042,
+        "process_memory": {
+          "peak_rss_bytes": 583524352,
+          "current_rss_bytes": 583524352,
+          "method": "GetProcessMemoryInfo; process-wide working set"
+        },
+        "calls": 84,
+        "power_states": [
+          {
+            "ac_line_status": 1,
+            "available": true,
+            "battery_saver": 0
+          }
+        ],
+        "failed_attempts": 0,
+        "records_sha256": "6ea3b3996d6c94070031b4db937b748cdceaee0e396c899138c3f7a02daa82f1",
+        "contract_sha256": "3c410b0dad1c0644742b90573b5fcc12fc40b32a53e481bab6a7ddabec3133f1"
+      },
+      "qwen": {
+        "status": "completed",
+        "model": {
+          "id": "Qwen/Qwen3-Embedding-0.6B",
+          "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+          "backend": "local",
+          "dimensions": 1024,
+          "license": "apache-2.0",
+          "max_tokens": 32768,
+          "dtype": "float32",
+          "batch_size": 4
+        },
+        "domains": {
+          "squad": {
+            "document_sample": 16,
+            "query_sample": 10,
+            "rounds": 3,
+            "documents_per_second": 0.5651511370080534,
+            "document_process_cpu_seconds": 334.453125,
+            "query_p50_ms": 446.62760000210255,
+            "query_p95_ms": 607.8445900115183,
+            "power_changed_calls": 0,
+            "low_cpu_ratio_calls": 0
+          },
+          "scifact": {
+            "document_sample": 16,
+            "query_sample": 10,
+            "rounds": 3,
+            "documents_per_second": 0.5535643180696498,
+            "document_process_cpu_seconds": 342.9375,
+            "query_p50_ms": 519.45490000071,
+            "query_p95_ms": 563.2406149990857,
+            "power_changed_calls": 0,
+            "low_cpu_ratio_calls": 0
+          }
+        },
+        "parameter_dtypes": {
+          "torch.float32": 595776512
+        },
+        "parameter_count": 595776512,
+        "parameter_devices": {
+          "cpu": 595776512
+        },
+        "inference_threads": 4,
+        "output_dtypes": [
+          "float32"
+        ],
+        "batch_order_checks": {
+          "squad": {
+            "items": 4,
+            "max_absolute_difference": 1.6670674085617065e-07,
+            "absolute_tolerance": 0.0001,
+            "passed": true
+          },
+          "scifact": {
+            "items": 4,
+            "max_absolute_difference": 1.341104507446289e-07,
+            "absolute_tolerance": 0.0001,
+            "passed": true
+          }
+        },
+        "matches_requested_fp32": true,
+        "initialization_seconds": 17.106494500068948,
+        "process_memory": {
+          "peak_rss_bytes": 2983620608,
+          "current_rss_bytes": 2940399616,
+          "method": "GetProcessMemoryInfo; process-wide working set"
+        },
+        "calls": 84,
+        "power_states": [
+          {
+            "ac_line_status": 0,
+            "available": true,
+            "battery_saver": 0
+          }
+        ],
+        "failed_attempts": 0,
+        "records_sha256": "ee9bceffd4f38e74d7996e20e95a2c844bdd5b6d59786ef1c570a22df9277ea4",
+        "contract_sha256": "3c410b0dad1c0644742b90573b5fcc12fc40b32a53e481bab6a7ddabec3133f1"
+      },
+      "jina": {
+        "status": "completed",
+        "model": {
+          "id": "jinaai/jina-embeddings-v5-text-nano",
+          "revision": "8a7f00aac812071b69403df470f1038ec85f8925",
+          "backend": "local",
+          "dimensions": 768,
+          "license": "cc-by-nc-4.0",
+          "max_tokens": 8192,
+          "dtype": "float32",
+          "batch_size": 4,
+          "reviewed_code": {
+            "configuration_eurobert.py": "8737378a5cea9e6c7be0e077138d6c725fb5909ad122c979adcdcc1a005a51b3",
+            "configuration_jina_embeddings_v5.py": "8472183a99ba9767b1352309c7553b529738e9dcdc9fe703f3a130bb17d347cd",
+            "custom_st.py": "620865d4f54a9c45cf64d9ad15dc47825cd0c35686f7118a7d25f908e9fe563a",
+            "modeling_eurobert.py": "f2430184a068bdfb5171650e8bbbff817aa5e7b2dd2066a52dc84d1f1d967f01",
+            "modeling_jina_embeddings_v5.py": "6d250e1abe0216b304b9ca99e49d9aac04e143671d310c112ad3e37b6186cf18"
+          }
+        },
+        "domains": {
+          "squad": {
+            "document_sample": 16,
+            "query_sample": 10,
+            "rounds": 3,
+            "documents_per_second": 2.4315465691134843,
+            "document_process_cpu_seconds": 78.53125,
+            "query_p50_ms": 108.69954997906461,
+            "query_p95_ms": 121.96651504491456,
+            "power_changed_calls": 0,
+            "low_cpu_ratio_calls": 0
+          },
+          "scifact": {
+            "document_sample": 16,
+            "query_sample": 10,
+            "rounds": 3,
+            "documents_per_second": 2.3222924149343376,
+            "document_process_cpu_seconds": 81.953125,
+            "query_p50_ms": 119.72874996718019,
+            "query_p95_ms": 146.30297994008285,
+            "power_changed_calls": 0,
+            "low_cpu_ratio_calls": 0
+          }
+        },
+        "parameter_dtypes": {
+          "torch.float32": 238897920
+        },
+        "parameter_count": 238897920,
+        "parameter_devices": {
+          "cpu": 238897920
+        },
+        "inference_threads": 4,
+        "output_dtypes": [
+          "float32"
+        ],
+        "batch_order_checks": {
+          "squad": {
+            "items": 4,
+            "max_absolute_difference": 1.1920928955078125e-07,
+            "absolute_tolerance": 0.0001,
+            "passed": true
+          },
+          "scifact": {
+            "items": 4,
+            "max_absolute_difference": 1.341104507446289e-07,
+            "absolute_tolerance": 0.0001,
+            "passed": true
+          }
+        },
+        "matches_requested_fp32": true,
+        "initialization_seconds": 16.520687900017947,
+        "process_memory": {
+          "peak_rss_bytes": 1611354112,
+          "current_rss_bytes": 1472065536,
+          "method": "GetProcessMemoryInfo; process-wide working set"
+        },
+        "calls": 84,
+        "power_states": [
+          {
+            "ac_line_status": 0,
+            "available": true,
+            "battery_saver": 0
+          }
+        ],
+        "failed_attempts": 0,
+        "records_sha256": "754ef4599020fec57b4d8b537d2fea4d5b8f2215cebacffee9c85ec9fc431620",
+        "contract_sha256": "3c410b0dad1c0644742b90573b5fcc12fc40b32a53e481bab6a7ddabec3133f1"
+      },
+      "embeddinggemma": {
+        "status": "completed",
+        "model": {
+          "id": "google/embeddinggemma-2",
+          "revision": "f9972ac22e696a105c482202646979e33e4b5a1e",
+          "backend": "local",
+          "dimensions": 768,
+          "license": "apache-2.0",
+          "max_tokens": 8192,
+          "dtype": "float32",
+          "batch_size": 4
+        },
+        "domains": {
+          "squad": {
+            "document_sample": 16,
+            "query_sample": 10,
+            "rounds": 3,
+            "documents_per_second": 1.474844499155987,
+            "document_process_cpu_seconds": 128.609375,
+            "query_p50_ms": 147.05129998037592,
+            "query_p95_ms": 172.28997495840304,
+            "power_changed_calls": 0,
+            "low_cpu_ratio_calls": 0
+          },
+          "scifact": {
+            "document_sample": 16,
+            "query_sample": 10,
+            "rounds": 3,
+            "documents_per_second": 1.5081801333871014,
+            "document_process_cpu_seconds": 125.78125,
+            "query_p50_ms": 166.41619999427348,
+            "query_p95_ms": 214.71314008231272,
+            "power_changed_calls": 0,
+            "low_cpu_ratio_calls": 0
+          }
+        },
+        "parameter_dtypes": {
+          "torch.float32": 271002624
+        },
+        "parameter_count": 271002624,
+        "parameter_devices": {
+          "cpu": 271002624
+        },
+        "inference_threads": 4,
+        "output_dtypes": [
+          "float32"
+        ],
+        "batch_order_checks": {
+          "squad": {
+            "items": 4,
+            "max_absolute_difference": 1.210719347000122e-07,
+            "absolute_tolerance": 0.0001,
+            "passed": true
+          },
+          "scifact": {
+            "items": 4,
+            "max_absolute_difference": 1.043081283569336e-07,
+            "absolute_tolerance": 0.0001,
+            "passed": true
+          }
+        },
+        "matches_requested_fp32": true,
+        "initialization_seconds": 68.09527310007252,
+        "process_memory": {
+          "peak_rss_bytes": 1952120832,
+          "current_rss_bytes": 1800388608,
+          "method": "GetProcessMemoryInfo; process-wide working set"
+        },
+        "calls": 84,
+        "power_states": [
+          {
+            "ac_line_status": 0,
+            "available": true,
+            "battery_saver": 0
+          }
+        ],
+        "failed_attempts": 0,
+        "records_sha256": "086bbfcbed281dfc979abf97d4ea57b91ebde57cbb6f0ab5b6135c61eaf505c6",
+        "contract_sha256": "3c410b0dad1c0644742b90573b5fcc12fc40b32a53e481bab6a7ddabec3133f1"
+      }
+    },
+    "purpose": "Separate small timing diagnostic following observed sleep/standby interruptions; primary metrics and selection retained",
+    "contract": {
+      "primary_contract_sha256": "d8603c5a1d69646451222a137032555f2417a985813444a4d7cfc9168b8b6b73",
+      "spec_sha256": "1bd14eaf1b87213d5ccf2d6abdc89d154d1ea99a66d4f6ebaeccb697093bd3d2",
+      "runner_sha256": "70997bbce4bf41d3833f76fe99241f1e935bc83e866f2c4a8f7e41233202e6db",
+      "encoder_sha256": "93a9f27ee86d70c34718cc24aaca036dee7186a55d6cdb9f1390305444b835b7",
+      "registry_sha256": "ea218e57c10ff147fde09757e150d8052ad0d9825d1982a44cccbe7d1169fdd2",
+      "datasets": {
+        "squad": "da53d5bf0e96c585589c1fe969a2d59c94769531a230b9e7b2a350580f8da61d",
+        "scifact": "5a09965633241cb6c4d82f6631a7fbc15abcc9b9ec949b44ff5ffa5e0594f99b"
+      },
+      "sample_ids": {
+        "squad": {
+          "document": [
+            225,
+            106,
+            274,
+            535,
+            212,
+            634,
+            85,
+            42,
+            282,
+            479,
+            135,
+            273,
+            362,
+            262,
+            25,
+            275
+          ],
+          "query": [
+            "5ad3eb39604f3c001a3ff70d",
+            "572ec920cb0c0d14000f155d",
+            "57329eb1cc179a14009dab75",
+            "5ad3c2c6604f3c001a3fef9a",
+            "5ad3bf70604f3c001a3fef65",
+            "57332ba74776f41900660732",
+            "5a5d501c5e8782001a9d5eaf",
+            "5724d4c80ba9f01400d97b89",
+            "57281f423acd2414000df500",
+            "572563c469ff041400e58c5b"
+          ]
+        },
+        "scifact": {
+          "document": [
+            2511,
+            2329,
+            619,
+            2464,
+            84,
+            1319,
+            3130,
+            2292,
+            2453,
+            2094,
+            448,
+            3265,
+            32,
+            710,
+            2156,
+            690
+          ],
+          "query": [
+            "368",
+            "594",
+            "1330",
+            "93",
+            "633",
+            "1401",
+            "826",
+            "1074",
+            "134",
+            "259"
+          ]
+        }
+      }
+    }
+  },
+  "private_weight_archive_manifest_sha256": "6f6efe05d8c24f1fb34371e15067665e4fddff3468f9fe8560109032fdda5d3a",
+  "timing_interruption_evidence": {
+    "private_event_log_sha256": "43cf88d1bd1c9b1de6d1311c884fd7fb54b3f798c0f7b79d0e5facf03ac65689",
+    "kernel_power_event_counts": {
+      "42": 2,
+      "107": 2,
+      "506": 8,
+      "507": 8,
+      "105": 3
+    },
+    "interpretation": "Windows sleep/standby events occurred during collection; precise per-batch CPU/sleep split was not recorded. Raw elapsed observations remain in primary results."
+  }
+}

@@ -201,6 +201,59 @@ See the [recorded results and provenance](eval/reference/real-rag/),
 [reproduction and scoring method](docs/real_rag.md), and
 [frozen experiment specification](eval/real_rag_spec.md).
 
+## CPU embedding comparison
+
+Four pinned local encoders completed held-out retrieval on a fresh SQuAD subset
+and a scientific evidence workload. Each domain has 150 positive test queries;
+SQuAD also has 30 separately scored paragraph-negative questions. SciFact uses a
+label-informed, shared 1,000-document corpus, so these are restricted-corpus
+results rather than standard full-BEIR scores. Native vector dimensions differ.
+
+| Encoder | Dimensions | SQuAD Recall@10 | SQuAD nDCG@10 | SciFact Recall@10 | SciFact nDCG@10 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| MiniLM L6 v2 | 384 | 91.33% | 75.55% | 90.20% | 80.85% |
+| Qwen3 Embedding 0.6B | 1024 | 97.33% | 87.83% | 91.33% | 82.37% |
+| Jina v5 text nano | 768 | 97.33% | 88.17% | 94.00% | 85.49% |
+| EmbeddingGemma 2 | 768 | 96.67% | 83.35% | 95.33% | 87.73% |
+
+These are exact FP32 cosine results, independently checked against normalized
+float64 NumPy scores. Jina has the highest SQuAD mean and EmbeddingGemma the
+highest restricted SciFact mean. Source-group bootstrap intervals and paired
+differences are in the evidence; descriptive leaders do not establish a universal
+ranking. Jina's weights have a noncommercial license.
+
+Development-only selection chose EmbeddingGemma 2 and Jina nano as the RAG
+challengers alongside MiniLM. Voyage 4 large and Gemini embedding 2 remain
+pending by owner decision, with zero API calls or charges. Human semantic and
+citation review remains pending.
+
+On the common 50-positive-question RAG subset, answer token F1 was 41.30% for
+MiniLM, 43.84% for Jina and 38.03% for EmbeddingGemma, versus 60.69% with source
+oracle evidence and 3.08% without context. Both challengers' paired F1-difference
+intervals include zero; an answer-quality improvement is not established.
+All 350 main/repeated requests and the separate 30-request smoke run completed.
+Seven of 75 identical-prompt pairs produced different normalized answers.
+
+Only three of eight selected ANN settings retained both development quality
+gates on held-out Recall@10 and neighbor recall. Five missed at least one gate;
+settings were preserved rather than retuned on test. The quality findings above
+and the RAG experiment use exact retrieval. Substantive retrieved answers also
+rarely included citations, so semantic correctness and attribution remain open.
+
+Primary timing observations retain system sleep and Modern Standby interruptions,
+including three extreme Qwen SQuAD batches. Full-corpus elapsed throughput must
+not be treated as steady CPU speed. A separate sampled timing audit records
+elapsed and process CPU time, power state, actual parameter precision, devices
+and threads without changing primary vectors or quality selections.
+The supplemental larger-model runs recorded battery power, while MiniLM recorded
+AC power; these timings are not a controlled comparison at matched power.
+
+See the [methodology and reproduction commands](docs/embedding_comparison.md),
+[frozen specification](eval/embedding_comparison_spec.md), and
+[aggregate results and checksums](eval/reference/embedding-comparison/).
+The earlier real-RAG experiment above uses different questions and chunking;
+its answer scores are not a controlled comparison with this study.
+
 ## Limitations
 
 - Original FP32 vectors are retained for reranking. FP16/INT8 reduce the encoded search payload but increase total snapshot size in this release.
@@ -213,7 +266,7 @@ See the [recorded results and provenance](eval/reference/real-rag/),
 
 ## Verification status
 
-Local Windows GCC Release and Debug tests pass, including 63,666 native assertions. The expanded Python suite has 73 passing tests, including scaling evidence checks and ten real-data scoring, recovery and stable-ID regressions. The original release also passed a separate fresh-checkout check of the native suite, installed package, quick start and offline evaluation.
+Local Windows GCC Release and Debug tests pass, including 63,666 native assertions. The expanded Python suite has 92 passing tests, including 19 new embedding-study regressions alongside the existing scaling and real-RAG checks. Public comparison checksums, dataset separation, vector archives and official answer scoring also pass validation. The original release passed a separate fresh-checkout check of the native suite, installed package, quick start and offline evaluation.
 
 The [first hosted CI run](https://github.com/atharvasheersh/Vortex/actions/runs/42356271644) could not start any job because of an account restriction. Windows/MSVC, Linux, and Linux sanitizer execution remain unverified. The local MinGW installation also lacks its sanitizer runtime; no sanitizer pass is claimed.
 

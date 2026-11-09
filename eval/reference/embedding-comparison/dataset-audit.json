@@ -1,0 +1,17 @@
+{
+  "squad": {
+    "query_id_overlap": 0,
+    "positive_group_overlap": 0,
+    "exact_chunk_text_overlap": 0,
+    "old_query_id_overlap": 0,
+    "old_question_text_overlap": 0
+  },
+  "scifact": {
+    "query_id_overlap": 0,
+    "positive_group_overlap": 0,
+    "exact_chunk_text_overlap": 3328,
+    "positive_document_overlap": 0,
+    "unique_corpus_documents": 1000,
+    "shared_corpus": true
+  }
+}

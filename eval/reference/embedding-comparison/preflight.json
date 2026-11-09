@@ -1,0 +1,161 @@
+{
+  "verified_local_date": "2026-11-09",
+  "timezone": "Asia/Kolkata",
+  "available_local_models": [
+    {
+      "id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "gated": false,
+      "license": "apache-2.0",
+      "parameters": {
+        "parameters": {
+          "I64": 512,
+          "F32": 22713216
+        },
+        "total": 22713728
+      }
+    },
+    {
+      "id": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "gated": false,
+      "license": "apache-2.0",
+      "parameters": {
+        "parameters": {
+          "BF16": 595776512
+        },
+        "total": 595776512
+      }
+    },
+    {
+      "id": "jinaai/jina-embeddings-v5-text-nano",
+      "revision": "8a7f00aac812071b69403df470f1038ec85f8925",
+      "gated": false,
+      "license": "cc-by-nc-4.0",
+      "parameters": {
+        "parameters": {
+          "BF16": 211766016
+        },
+        "total": 211766016
+      }
+    },
+    {
+      "id": "google/embeddinggemma-2",
+      "revision": "f9972ac22e696a105c482202646979e33e4b5a1e",
+      "gated": false,
+      "license": "apache-2.0",
+      "parameters": {
+        "parameters": {
+          "BF16": 744371512
+        },
+        "total": 744371512
+      }
+    }
+  ],
+  "custom_code_review": {
+    "id": "jinaai/jina-embeddings-v5-text-nano",
+    "revision": "8a7f00aac812071b69403df470f1038ec85f8925",
+    "hashes": {
+      "configuration_eurobert.py": "8737378a5cea9e6c7be0e077138d6c725fb5909ad122c979adcdcc1a005a51b3",
+      "configuration_jina_embeddings_v5.py": "8472183a99ba9767b1352309c7553b529738e9dcdc9fe703f3a130bb17d347cd",
+      "custom_st.py": "620865d4f54a9c45cf64d9ad15dc47825cd0c35686f7118a7d25f908e9fe563a",
+      "modeling_eurobert.py": "f2430184a068bdfb5171650e8bbbff817aa5e7b2dd2066a52dc84d1f1d967f01",
+      "modeling_jina_embeddings_v5.py": "6d250e1abe0216b304b9ca99e49d9aac04e143671d310c112ad3e37b6186cf18"
+    },
+    "inspection": "Reviewed model, configuration and retrieval-adapter loading plus AST/import/call scan. Load an immutable local snapshot because nested model/adapter loaders omit revision arguments.",
+    "network_behavior": "All nested model and adapter paths resolve inside the pinned local snapshot."
+  },
+  "neutral_resource_pilots": {
+    "minilm": {
+      "status": "completed",
+      "load_seconds": 65.40159079991281,
+      "encode_seconds": 0.11351360008120537,
+      "document_shape": [
+        2,
+        384
+      ],
+      "query_shape": [
+        2,
+        384
+      ],
+      "dtype": "float32",
+      "process_memory": {
+        "peak_rss_bytes": 541392896,
+        "current_rss_bytes": 541392896,
+        "method": "GetProcessMemoryInfo; process-wide working set"
+      }
+    },
+    "qwen": {
+      "status": "completed",
+      "load_seconds": 16.752628799993545,
+      "encode_seconds": 0.9956761000212282,
+      "document_shape": [
+        2,
+        1024
+      ],
+      "query_shape": [
+        2,
+        1024
+      ],
+      "dtype": "float32",
+      "process_memory": {
+        "peak_rss_bytes": 2927595520,
+        "current_rss_bytes": 2927177728,
+        "method": "GetProcessMemoryInfo; process-wide working set"
+      }
+    },
+    "jina": {
+      "status": "completed",
+      "load_seconds": 14.705856499960646,
+      "encode_seconds": 0.2905350000364706,
+      "document_shape": [
+        2,
+        768
+      ],
+      "query_shape": [
+        2,
+        768
+      ],
+      "dtype": "float32",
+      "process_memory": {
+        "peak_rss_bytes": 1595899904,
+        "current_rss_bytes": 1457680384,
+        "method": "GetProcessMemoryInfo; process-wide working set"
+      }
+    },
+    "embeddinggemma": {
+      "status": "completed",
+      "load_seconds": 19.41695450001862,
+      "encode_seconds": 0.3630243999650702,
+      "document_shape": [
+        2,
+        768
+      ],
+      "query_shape": [
+        2,
+        768
+      ],
+      "dtype": "float32",
+      "process_memory": {
+        "peak_rss_bytes": 1946869760,
+        "current_rss_bytes": 1785012224,
+        "method": "GetProcessMemoryInfo; process-wide working set"
+      }
+    }
+  },
+  "pilot_scope": "Neutral weather/plants text, not relevance cases. Qwen FP32 and Gemma final pilots briefly overlapped; use full study timings for comparisons.",
+  "hardware": {
+    "cpu": "Intel Core i7-1255U",
+    "physical_cores": 10,
+    "logical_processors": 12,
+    "physical_ram_gib": 15.640934,
+    "platform": "Windows x64"
+  },
+  "approval": {
+    "local_models": true,
+    "continue_available_ram": true,
+    "api_spending_cap_usd": 0,
+    "voyage": "pending_owner_deferred",
+    "gemini": "pending_owner_deferred"
+  }
+}

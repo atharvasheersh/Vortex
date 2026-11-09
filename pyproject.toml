@@ -10,9 +10,10 @@ requires-python = ">=3.10"
 dependencies = ["numpy>=1.26"]
 
 [project.optional-dependencies]
-test = ["pytest>=8"]
+test = ["pytest>=8", "threadpoolctl>=3"]
 benchmark = ["faiss-cpu>=1.9", "matplotlib>=3.9"]
 embeddings = ["sentence-transformers>=3"]
+embedding-study = ["sentence-transformers[image]>=6.1", "peft>=0.15.2", "threadpoolctl>=3", "psutil>=5.9"]
 
 [tool.scikit-build]
 wheel.packages = ["python/vortex"]

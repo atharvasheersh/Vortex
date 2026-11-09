@@ -1,0 +1,69 @@
+{
+  "minilm": {
+    "id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "backend": "local",
+    "dimensions": 384,
+    "license": "apache-2.0",
+    "max_tokens": 256,
+    "dtype": "float32",
+    "batch_size": 4
+  },
+  "qwen": {
+    "id": "Qwen/Qwen3-Embedding-0.6B",
+    "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "backend": "local",
+    "dimensions": 1024,
+    "license": "apache-2.0",
+    "max_tokens": 32768,
+    "dtype": "float32",
+    "batch_size": 4
+  },
+  "jina": {
+    "id": "jinaai/jina-embeddings-v5-text-nano",
+    "revision": "8a7f00aac812071b69403df470f1038ec85f8925",
+    "backend": "local",
+    "dimensions": 768,
+    "license": "cc-by-nc-4.0",
+    "max_tokens": 8192,
+    "dtype": "float32",
+    "batch_size": 4,
+    "reviewed_code": {
+      "configuration_eurobert.py": "8737378a5cea9e6c7be0e077138d6c725fb5909ad122c979adcdcc1a005a51b3",
+      "configuration_jina_embeddings_v5.py": "8472183a99ba9767b1352309c7553b529738e9dcdc9fe703f3a130bb17d347cd",
+      "custom_st.py": "620865d4f54a9c45cf64d9ad15dc47825cd0c35686f7118a7d25f908e9fe563a",
+      "modeling_eurobert.py": "f2430184a068bdfb5171650e8bbbff817aa5e7b2dd2066a52dc84d1f1d967f01",
+      "modeling_jina_embeddings_v5.py": "6d250e1abe0216b304b9ca99e49d9aac04e143671d310c112ad3e37b6186cf18"
+    }
+  },
+  "embeddinggemma": {
+    "id": "google/embeddinggemma-2",
+    "revision": "f9972ac22e696a105c482202646979e33e4b5a1e",
+    "backend": "local",
+    "dimensions": 768,
+    "license": "apache-2.0",
+    "max_tokens": 8192,
+    "dtype": "float32",
+    "batch_size": 4
+  },
+  "voyage": {
+    "id": "voyage-4-large",
+    "backend": "voyage",
+    "dimensions": 1024,
+    "revision": null,
+    "max_tokens": 32000,
+    "license": "Provider terms",
+    "environment": "VOYAGE_API_KEY",
+    "status": "pending_owner_deferred"
+  },
+  "gemini": {
+    "id": "gemini-embedding-2",
+    "backend": "gemini",
+    "dimensions": 3072,
+    "revision": null,
+    "max_tokens": 8192,
+    "license": "Provider terms",
+    "environment": "GEMINI_API_KEY",
+    "status": "pending_owner_deferred"
+  }
+}

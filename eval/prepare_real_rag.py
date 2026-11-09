@@ -17,7 +17,18 @@ def stable(value):
     return hashlib.sha256(value.encode()).hexdigest()
 
 
-def prepare_split(articles, tokenizer, answerable_count, unanswerable_count):
+def prepare_split(
+    articles,
+    tokenizer,
+    answerable_count,
+    unanswerable_count,
+    *,
+    chunk_tokens=160,
+    overlap_tokens=32,
+    excluded_query_ids=(),
+):
+    if chunk_tokens <= overlap_tokens or overlap_tokens < 0:
+        raise ValueError("chunk window must exceed its nonnegative overlap")
     chunks, candidates, exclusions = [], [], []
     for article in articles:
         for paragraph in article["paragraphs"]:
@@ -27,8 +38,8 @@ def prepare_split(articles, tokenizer, answerable_count, unanswerable_count):
                 text, add_special_tokens=False, return_offsets_mapping=True
             )["offset_mapping"]
             source_chunks = []
-            for start in range(0, len(offsets), 128):
-                window = offsets[start : start + 160]
+            for start in range(0, len(offsets), chunk_tokens - overlap_tokens):
+                window = offsets[start : start + chunk_tokens]
                 if not window:
                     continue
                 begin, end = window[0][0], window[-1][1]
@@ -44,9 +55,14 @@ def prepare_split(articles, tokenizer, answerable_count, unanswerable_count):
                     }
                 )
                 source_chunks.append(chunks[-1])
-                if start + 160 >= len(offsets):
+                if start + chunk_tokens >= len(offsets):
                     break
             for qa in paragraph["qas"]:
+                if qa["id"] in excluded_query_ids:
+                    exclusions.append(
+                        {"query_id": qa["id"], "reason": "previously_inspected_query"}
+                    )
+                    continue
                 reason = None
                 answers = qa["answers"]
                 if len(tokenizer.encode(qa["question"], add_special_tokens=True)) > 256:

@@ -1,0 +1,30 @@
+{
+  "runs": [
+    {
+      "status": "passed",
+      "size": 1000000,
+      "records": 480,
+      "snapshot_hash_checked": false,
+      "resident_peak_excess_bytes": 0,
+      "resident_accounting_allowance_bytes": 65536,
+      "timing_gaps": []
+    },
+    {
+      "status": "passed",
+      "size": 10000000,
+      "records": 480,
+      "snapshot_hash_checked": false,
+      "resident_peak_excess_bytes": 16384,
+      "resident_accounting_allowance_bytes": 65536,
+      "timing_gaps": [
+        {
+          "nprobe": 32,
+          "repeat": 2,
+          "query_id": 19,
+          "wall_ms": 3832124.6494,
+          "process_cpu_seconds": 35.796875
+        }
+      ]
+    }
+  ]
+}

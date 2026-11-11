@@ -1,0 +1,30 @@
+[
+  {
+    "vectors": 1000000,
+    "construction_seconds": 2.7335918000899255,
+    "open_seconds": 0.12430609995499253,
+    "snapshot_bytes": 272008584,
+    "exact_median_round_p95_ms": 233.14232,
+    "ivf_median_round_p95_ms": 1151.607725,
+    "ivf_recall_at_k": 0.985,
+    "nprobe": 28,
+    "peak_working_set_bytes": 400736256,
+    "elapsed_seconds": 298.92677849996835,
+    "timing_gap_count": 0,
+    "resident_peak_excess_bytes": 0
+  },
+  {
+    "vectors": 10000000,
+    "construction_seconds": 36.145267700077966,
+    "open_seconds": 0.9424441000446677,
+    "snapshot_bytes": 2720008584,
+    "exact_median_round_p95_ms": 4003.069795,
+    "ivf_median_round_p95_ms": 23053.436579999998,
+    "ivf_recall_at_k": 0.9800000000000001,
+    "nprobe": 24,
+    "peak_working_set_bytes": 1610629120,
+    "elapsed_seconds": 10755.190954200109,
+    "timing_gap_count": 1,
+    "resident_peak_excess_bytes": 16384
+  }
+]

@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "status": "resource_limited",
+  "size": 10000000,
+  "dimension": 64,
+  "k": 10,
+  "nlist": 32,
+  "query_count": 20,
+  "repeats": 3,
+  "chunk_rows": 4096,
+  "cache_budget": 8388608,
+  "power_at_start": {
+    "available": true,
+    "ac_line_status": 1,
+    "battery_saver": 0
+  },
+  "quality_target": 0.95,
+  "sources_sha256": {
+    "benchmarks/run_capacity.py": "ac4e93363f75332f7df3313f7e207980e6f410fdaf9f6acfeade032c6d0443b6",
+    "benchmarks/streaming_snapshot.py": "7ea787d78de7a8d721d5365486f468a0f696f3a0232e485cfdf91d5589da1d79",
+    "benchmarks/run_scaling.py": "9714c9ff09cc9fbd27249efd7c24bb75ffefc3755704ea32bc83dd987cc485c5",
+    "benchmarks/capacity_10m_spec.md": "61ee603a80bd495f54a36a40ffaed45567a8c17529914f6a7294e411a52188ca",
+    "benchmarks/validate_capacity.py": "2efd1fae73dc75bc5d07432e7229a1d73dc933450433d0dbfd0128dc21011ae9",
+    "benchmarks/validate_scaling.py": "b5e770060cbeb712a7236bce0af3156abf55471c591db7f48789d75da1695ee5"
+  },
+  "native_module_sha256": "f2b3531bf79006f0c00a112853448b4e611cc4f493b438472a212205f8dc8acf",
+  "native_module_version": "0.1.0",
+  "numpy_version": "2.5.4",
+  "boundary": "one full mapped FP32 L2 snapshot; streamed construction, not mutable-builder capacity",
+  "timing_boundary": "native mapped query wall time including bindings; validation/checkpoint IO excluded; OS cache not flushed",
+  "estimated_resident_headroom_bytes": 1831497728,
+  "memory_stages": {
+    "start": {
+      "peak_rss_bytes": 37515264,
+      "current_rss_bytes": 36167680,
+      "method": "GetProcessMemoryInfo; process-wide working set",
+      "system_available_bytes": 3882102784
+    },
+    "snapshot_built": {
+      "peak_rss_bytes": 49848320,
+      "current_rss_bytes": 47742976,
+      "method": "GetProcessMemoryInfo; process-wide working set",
+      "system_available_bytes": 3577065472
+    },
+    "references_complete": {
+      "peak_rss_bytes": 65540096,
+      "current_rss_bytes": 58064896,
+      "method": "GetProcessMemoryInfo; process-wide working set",
+      "system_available_bytes": 3565125632
+    },
+    "native_index_open": {
+      "peak_rss_bytes": 798818304,
+      "current_rss_bytes": 797564928,
+      "method": "GetProcessMemoryInfo; process-wide working set",
+      "system_available_bytes": 2832830464
+    },
+    "probe_1": {
+      "peak_rss_bytes": 3365765120,
+      "current_rss_bytes": 3365699584,
+      "method": "GetProcessMemoryInfo; process-wide working set",
+      "system_available_bytes": 995336192
+    },
+    "final": {
+      "peak_rss_bytes": 3367542784,
+      "current_rss_bytes": 3366465536,
+      "method": "GetProcessMemoryInfo; process-wide working set",
+      "system_available_bytes": 439603200
+    }
+  },
+  "construction": {
+    "snapshot": "results\\capacity-10m-20261111-v1\\collection.vtx",
+    "snapshot_bytes": 2720008584,
+    "corpus_sha256": "ae7e942179329570fd28b18a99c9fc2ae17dbb9d27534528566fd7cd3fb4f5ce",
+    "stages_seconds": {
+      "generate_and_write_vectors": 14.489057400031015,
+      "sample_and_native_training": 0.45025100000202656,
+      "assign_all_rows_native": 18.328554899897426,
+      "postings_and_finalize": 3.667669099988416
+    },
+    "training_sample_count": 10000,
+    "training_sample_ids_sha256": "7535427ccbe182c057a048730615c6dabff60c79cbacd0affb4c40857121a41e",
+    "training_sample_seed": 4201,
+    "list_sizes": [
+      296776,
+      327105,
+      320569,
+      315888,
+      315279,
+      302550,
+      308502,
+      300464,
+      328226,
+      337701,
+      327511,
+      326154,
+      283013,
+      330268,
+      312646,
+      298003,
+      305150,
+      321470,
+      298456,
+      317029,
+      319989,
+      339655,
+      297205,
+      296316,
+      325328,
+      310489,
+      302231,
+      301784,
+      317900,
+      310401,
+      304643,
+      301299
+    ],
+    "construction": "bounded Python snapshot writer; native sample IVF and native centroid assignment; one full FP32 L2 collection"
+  },
+  "snapshot_sha256": "8652d6f5041c79fe024ece9525fb663f67f5af51ce28461df45840356ae2a738",
+  "queries_sha256": "3b4487174f324eedc26da818f577901c16c85260f155a226ad841ab4fd6e1b6f",
+  "reference_sha256": "29b25dc291c30ba950d1dfdf5da1381991bb0cc89ae6f8f5396473a70da9b5a2",
+  "reference_seconds": 19.04027869994752,
+  "open_seconds": 1.1615852999966592,
+  "opened_vector_count": 10000000,
+  "self_lookup_ids": [
+    0,
+    5000000,
+    9999999
+  ],
+  "exact": {
+    "p50_ms": 1618.1981999999998,
+    "p95_ms": 1958.7949899999999,
+    "p99_ms": 2028.035786,
+    "qps_excluding_loop_overhead": 0.6009215980004791,
+    "nprobe": 0,
+    "rounds": [
+      {
+        "p50_ms": 1560.6826,
+        "p95_ms": 1687.33718,
+        "p99_ms": 1715.0631959999998,
+        "qps_excluding_loop_overhead": 0.6393483168639286
+      },
+      {
+        "p50_ms": 1632.6752999999999,
+        "p95_ms": 1763.4260100000001,
+        "p99_ms": 1814.2473619999998,
+        "qps_excluding_loop_overhead": 0.6170064614829367
+      },
+      {
+        "p50_ms": 1816.67765,
+        "p95_ms": 2020.59293,
+        "p99_ms": 2036.3056259999998,
+        "qps_excluding_loop_overhead": 0.5532471074111223
+      }
+    ],
+    "median_round_p95_ms": 1763.4260100000001,
+    "query_count": 20,
+    "repeats": 3,
+    "recall_at_k": 1.0,
+    "mean_scanned": 10000000.0,
+    "reference_boundary_tie_differences": 0
+  },
+  "ivf": [
+    {
+      "p50_ms": 459.11114999999995,
+      "p95_ms": 617.81655,
+      "p99_ms": 649.69932,
+      "qps_excluding_loop_overhead": 2.1743578020641867,
+      "nprobe": 1,
+      "rounds": [
+        {
+          "p50_ms": 497.09574999999995,
+          "p95_ms": 630.67258,
+          "p99_ms": 660.8761959999999,
+          "qps_excluding_loop_overhead": 2.044148998592869
+        },
+        {
+          "p50_ms": 423.62735,
+          "p95_ms": 470.35715,
+          "p99_ms": 476.94255,
+          "qps_excluding_loop_overhead": 2.3487983659127916
+        },
+        {
+          "p50_ms": 477.56179999999995,
+          "p95_ms": 618.21653,
+          "p99_ms": 632.991386,
+          "qps_excluding_loop_overhead": 2.1516158484408683
+        }
+      ],
+      "median_round_p95_ms": 618.21653,
+      "query_count": 20,
+      "repeats": 3,
+      "recall_at_k": 0.14500000000000002,
+      "mean_scanned": 318808.5,
+      "reference_boundary_tie_differences": 0
+    }
+  ],
+  "error_type": "MemoryError",
+  "error": "available physical memory below 384 MiB; preserving partial evidence",
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\admin\\Desktop\\Vortex\\benchmarks\\run_capacity.py\", line 355, in run\n    value, _ = measure(\n               ^^^^^^^^\n  File \"C:\\Users\\admin\\Desktop\\Vortex\\benchmarks\\run_capacity.py\", line 125, in measure\n    check_resources()\n  File \"C:\\Users\\admin\\Desktop\\Vortex\\benchmarks\\run_capacity.py\", line 44, in check_resources\n    raise MemoryError(\nMemoryError: available physical memory below 384 MiB; preserving partial evidence\n",
+  "elapsed_seconds": 225.05025330011267,
+  "power_at_end": {
+    "available": true,
+    "ac_line_status": 1,
+    "battery_saver": 0
+  },
+  "manifest": {
+    "schema_version": 1,
+    "created_utc": "2026-11-11T07:50:45.639183+00:00",
+    "git_commit": "eebd9ebcd57563a01319dacb58833edae621a355",
+    "working_tree_dirty": true,
+    "source_sha256": "d82d6fc0f422a1a6732d6b0145c681d937c9b69c3634070ca8ca57b7cc574b0d",
+    "dataset_sha256": null,
+    "configuration": {
+      "size": 10000000,
+      "dimension": 64,
+      "nlist": 32,
+      "queries": 20,
+      "repeats": 3,
+      "k": 10,
+      "chunk_rows": 4096,
+      "output": "results/capacity-10m-20261111-v1"
+    },
+    "hardware": {
+      "platform": "Windows-11-10.0.26300-SP0",
+      "machine": "AMD64",
+      "processor": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]"
+    },
+    "packages": {
+      "numpy": "2.5.4",
+      "pybind11": "3.1.0",
+      "faiss-cpu": "1.15.1",
+      "sentence-transformers": "6.2.0",
+      "vortex-retrieval": "0.1.0"
+    },
+    "process_memory": {
+      "peak_rss_bytes": 3367542784,
+      "current_rss_bytes": 3366465536,
+      "method": "GetProcessMemoryInfo; process-wide working set"
+    }
+  },
+  "measurements_sha256": "a502c6fb1ceb0316f16de84c287ae6022c7389530c0271575beb7cb62a7bb2cd"
+}

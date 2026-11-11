@@ -1,3 +1,5 @@
 * text=auto eol=lf
 *.png binary
 *.docx binary
+# Preserve byte-level hashes and frozen source snapshots in capacity evidence.
+benchmarks/reference/capacity/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

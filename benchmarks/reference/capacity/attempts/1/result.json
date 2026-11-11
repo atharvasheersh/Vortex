@@ -1,0 +1,21 @@
+{
+  "status": "resource_limited",
+  "size": 10000000,
+  "dimension": 64,
+  "k": 10,
+  "nlist": 32,
+  "query_count": 100,
+  "repeats": 3,
+  "seed": 42,
+  "query_seed": 2026,
+  "iterations": 8,
+  "threads_for_single_query": 1,
+  "batch_threads": 4,
+  "quality_target": 0.95,
+  "cache_budget": 8388608,
+  "snapshot_path": "10000000/collection.vtx",
+  "stages_seconds": {},
+  "estimated_headroom_bytes": 11654217728,
+  "available_bytes": 4072943616,
+  "reason": "Insufficient currently available memory for the benchmark's duplicate buffers"
+}

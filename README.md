@@ -289,7 +289,7 @@ its answer scores are not a controlled comparison with this study.
 
 Local Windows GCC Release and Debug tests pass, including 63,666 native assertions. The expanded Python suite has 101 passing tests, including nine capacity regressions and the existing embedding-study, scaling and real-RAG checks. Public comparison checksums, dataset separation, vector archives and official answer scoring also pass validation. The original release passed a separate fresh-checkout check of the native suite, installed package, quick start and offline evaluation.
 
-The [first hosted CI run](https://github.com/atharvasheersh/Vortex/actions/runs/42356271644) could not start any job because of an account restriction. Windows/MSVC, Linux, and Linux sanitizer execution remain unverified. The local MinGW installation also lacks its sanitizer runtime; no sanitizer pass is claimed.
+[Hosted CI run 43010051379](https://github.com/atharvasheersh/Vortex/actions/runs/43010051379) passed on 11 November 2026 for code revision `2523b30`: Windows/MSVC native tests and all 101 Python tests, Linux native tests and 100 Python tests with one Windows-only skip, and the Linux sanitizer build/test job. Quick start, fixture evaluation and public RAG/embedding evidence validation also passed on both platforms. The earlier account-blocked run is historical. Local MinGW still lacks its sanitizer runtime; the sanitizer evidence comes from Linux CI.
 
 ## Development layout
 

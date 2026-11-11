@@ -1,5 +1,9 @@
 # Vortex local scalability results
 
+This page preserves the historical in-memory 1k-to-1m experiment. A separate
+[10m single-collection mapped experiment](capacity_10m.md) uses streamed
+construction and a resident-memory policy; its timings are kept separate.
+
 All four requested corpus sizes were attempted in isolated local processes, without a cloud service. The unchanged installed engine was exercised with synthetic 64-dimensional FP32 vectors. This is a fixed-configuration scale experiment, not a claim about all embedding dimensions or production workloads.
 
 ## Configuration and method

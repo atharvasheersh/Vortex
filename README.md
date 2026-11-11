@@ -43,7 +43,7 @@ The fictional 12-query fixture achieves relevant-chunk Recall@3 of 1.000 with ex
 
 Full measurements, run identity, limitations and reproduction commands are in [the benchmark report](docs/benchmark_results.md). Raw exported evidence is in [benchmarks/reference](benchmarks/reference/).
 
-## Scalability through one million vectors
+## Historical in-memory scalability through one million vectors
 
 All four sizes passed locally with synthetic **64D FP32** vectors, top-10 retrieval, 32 IVF lists, 100 queries and three randomized-order rounds. Latency below is the median of the three round p95 values. The IVF operating point uses the smallest tested nprobe reaching mean Recall@10 of at least 0.95 on the measured queries.
 
@@ -75,6 +75,27 @@ python benchmarks/report_scaling.py --input-dir results/scaling-new --output-dir
 ```
 
 `--sizes` selects a subset, and existing result files are never overwritten. The runner isolates each size in a child process and reports nonzero status if any size fails or cannot meet its memory-headroom check. It requires no cloud service.
+
+## One mapped collection at ten million vectors
+
+One **10,000,000-vector, 64D FP32** collection completed locally using a new streaming snapshot writer and the unchanged native query engine. A fresh 1m control used the same construction protocol, twenty independent queries, three timing rounds, 32 IVF lists, an 8 MiB application cache and a requested 1536 MiB Windows process working-set limit. Latency is median round p95; these mapped results belong to a separate experiment from the historical in-memory curve.
+
+| Vectors | Construction s | Exact p95 ms | Selected IVF p95 ms | Recall@10 | nprobe | Observed peak MiB |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1,000,000 | 2.734 | 233.142 | 1151.608 | 0.985 | 28 | 382.172 |
+| 10,000,000 | 36.145 | 4003.070 | 23053.437 | 0.980 | 24 | 1536.016 |
+
+The 10m snapshot is **2.72 GB**. Every exact query scanned all ten million vectors; FAISS checked all twenty queries over the complete corpus, three also used direct float64 NumPy, and all-list IVF matched exact IDs and scores. Both sizes completed all 480 measurements. High-recall IVF remains slower than exact in this fixed configuration. The process limit covers resident pages; commit and the total OS file cache are additional resource measures. Windows peak accounting exceeded the requested maximum by 16 KiB, retained in the reported peak.
+
+One final all-list sample recorded 3832.125 seconds wall time versus 35.797 seconds CPU. Its cause is unconfirmed; the sample is retained and that condition's latency is flagged as interrupted. The exact and selected-IVF conditions contain no flagged wall/CPU gaps. The earlier duplicate-buffer and unrestricted-mapped resource stops are also preserved.
+
+See [method, results and limitations](docs/capacity_10m.md) and [compact evidence and diagnostics](benchmarks/reference/capacity/report.md). Validate the evidence without regenerating the large snapshots:
+
+```bash
+python benchmarks/validate_capacity.py --directory benchmarks/reference/capacity
+```
+
+New full runs use `python benchmarks/run_capacity.py --size 10000000 --working-set-mib 1536 --output results/capacity-new` on Windows. The native mutable builder is unchanged; this establishes single-collection mapped retrieval at 64D with streamed construction.
 
 ## Build and test
 
@@ -259,14 +280,14 @@ its answer scores are not a controlled comparison with this study.
 - Original FP32 vectors are retained for reranking. FP16/INT8 reduce the encoded search payload but increase total snapshot size in this release.
 - Encoded vectors are decoded before scoring; FP16 conversion and cache locking can dominate latency.
 - Compressed cosine uses approximate dot products of quantized normalized vectors; it does not renormalize each decoded vector.
-- Index construction is in memory. Disk-backed querying does not imply out-of-core training.
+- The native mutable builder constructs indexes in memory. The large-capacity benchmark separately streams FP32 snapshots, trains on a bounded sample and assigns every vector; it does not extend the mutable builder's memory capacity.
 - Metadata remains in RAM, and the OS controls mapped-page residency. Application-cold benchmarks do not flush the OS cache.
 - Metadata headers are checksummed; full vector payload integrity is not checksummed. Non-finite fetched values are rejected.
 - HNSW, PQ, GPU support, online index maintenance, filtering, distributed search, and crash recovery are future work.
 
 ## Verification status
 
-Local Windows GCC Release and Debug tests pass, including 63,666 native assertions. The expanded Python suite has 92 passing tests, including 19 new embedding-study regressions alongside the existing scaling and real-RAG checks. Public comparison checksums, dataset separation, vector archives and official answer scoring also pass validation. The original release passed a separate fresh-checkout check of the native suite, installed package, quick start and offline evaluation.
+Local Windows GCC Release and Debug tests pass, including 63,666 native assertions. The expanded Python suite has 101 passing tests, including nine capacity regressions and the existing embedding-study, scaling and real-RAG checks. Public comparison checksums, dataset separation, vector archives and official answer scoring also pass validation. The original release passed a separate fresh-checkout check of the native suite, installed package, quick start and offline evaluation.
 
 The [first hosted CI run](https://github.com/atharvasheersh/Vortex/actions/runs/42356271644) could not start any job because of an account restriction. Windows/MSVC, Linux, and Linux sanitizer execution remain unverified. The local MinGW installation also lacks its sanitizer runtime; no sanitizer pass is claimed.
 

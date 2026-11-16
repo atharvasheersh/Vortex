@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#121a19" />
+    <meta
+      name="description"
+      content="Explore native vector search, inspect document matches, and read the recorded Vortex benchmarks."
+    />
+    <title>Vortex · Search workbench</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23121a19'/%3E%3Cpath d='m8 11 24 4-13 18 2-15Z' fill='%23c8f49b'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to workspace</a>
+    <aside class="sidebar" id="sidebar">
+      <button
+        class="icon-button sidebar-close"
+        id="close-menu"
+        aria-label="Close navigation"
+      >
+        <span data-icon="x"></span>
+      </button>
+      <a href="#playground" class="brand" aria-label="Vortex home"
+        ><svg viewBox="0 0 40 40" aria-hidden="true">
+          <path d="m5 11 29-2-11 27 1-18Z" fill="currentColor" />
+          <path
+            d="m5 11 19 7-1 18L8 24Z"
+            fill="currentColor"
+            opacity=".35"
+          /></svg
+        ><span>vortex<span class="brand-dot">.</span></span></a
+      >
+      <div class="workspace-switch">
+        <span class="workspace-initial">V</span>
+        <div>
+          <strong>Vortex workspace</strong><small>Local development</small>
+        </div>
+        <span class="local-indicator"></span>
+      </div>
+      <div class="nav-caption">WORKSPACE</div>
+      <nav aria-label="Main navigation">
+        <a href="#playground" data-nav="playground" class="nav-link active"
+          ><span data-icon="search"></span>Search playground<span
+            class="nav-shortcut"
+            >Ctrl K</span
+          ></a
+        >
+        <a href="#collection" data-nav="collection" class="nav-link"
+          ><span data-icon="layers"></span>Collection<span
+            class="nav-count"
+            id="nav-count"
+            >—</span
+          ></a
+        >
+        <a href="#benchmarks" data-nav="benchmarks" class="nav-link"
+          ><span data-icon="chart"></span>Benchmarks<span class="nav-dot"></span
+        ></a>
+        <a href="#architecture" data-nav="architecture" class="nav-link"
+          ><span data-icon="workflow"></span>Architecture</a
+        >
+      </nav>
+      <div class="sidebar-history">
+        <div class="nav-caption">
+          RECENT QUERIES
+          <button
+            id="clear-history"
+            class="icon-button dark"
+            aria-label="Clear recent query history"
+          >
+            <span data-icon="trash"></span>
+          </button>
+        </div>
+        <div id="recent-queries" class="recent-list">
+          <p>Your searches will appear here.</p>
+        </div>
+      </div>
+      <a href="#benchmarks" class="milestone"
+        ><span class="milestone-icon" data-icon="orbit"></span
+        ><span class="eyebrow">RESEARCH MILESTONE</span
+        ><strong>10 million vectors.</strong>
+        <p>One collection. Measured locally.</p>
+        <span class="milestone-link"
+          >Explore the results <span data-icon="arrow-up-right"></span></span
+      ></a>
+      <div class="sidebar-footer">
+        <span class="avatar">L</span>
+        <div>
+          <strong>Local workspace</strong><small>No external model calls</small>
+        </div>
+        <span data-icon="shield"></span>
+      </div>
+    </aside>
+
+    <div id="nav-backdrop" class="nav-backdrop" hidden></div>
+
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="breadcrumbs">
+          <button
+            class="icon-button mobile-menu"
+            id="menu-toggle"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+          >
+            <span data-icon="menu"></span></button
+          ><span data-icon="box"></span><span>Workspace</span
+          ><span class="slash">/</span
+          ><strong id="breadcrumb">Search playground</strong>
+        </div>
+        <div class="topbar-actions">
+          <span class="connection" id="connection"><i></i>Connecting</span
+          ><span class="topbar-divider"></span
+          ><a
+            href="https://github.com/atharvasheersh/Vortex"
+            target="_blank"
+            rel="noreferrer"
+            class="repo-link"
+            ><span data-icon="github"></span><span>Repository</span
+            ><span data-icon="arrow-up-right"></span
+          ></a>
+        </div>
+      </header>
+
+      <main id="main" tabindex="-1">
+        <div id="global-error" class="error-banner" role="alert" hidden>
+          <span data-icon="alert"></span>
+          <div>
+            <strong>Couldn’t reach the local engine</strong>
+            <p id="global-error-text">
+              Check that the workbench server is running.
+            </p>
+          </div>
+          <button id="retry-connection" class="button secondary">
+            Retry connection
+          </button>
+        </div>
+
+        <section id="view-playground" class="view">
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow overline">VECTOR SEARCH WORKBENCH</div>
+              <h1>Find your signal.</h1>
+              <p>Query your collection. See what matched, and why.</p>
+            </div>
+            <span class="environment-label"><i></i>LOCAL ENGINE</span>
+          </div>
+          <div class="metrics-grid" id="live-metrics">
+            <article class="metric-card">
+              <div class="metric-top">
+                Indexed vectors<span
+                  class="metric-icon"
+                  data-icon="layers"
+                ></span>
+              </div>
+              <strong id="metric-vectors">—</strong
+              ><span class="metric-caption"
+                ><i class="green-dot"></i>Vortex documentation</span
+              >
+            </article>
+            <article class="metric-card">
+              <div class="metric-top">
+                Vector dimensions<span
+                  class="metric-icon"
+                  data-icon="grid"
+                ></span>
+              </div>
+              <strong>256<span class="metric-unit">D</span></strong
+              ><span class="metric-caption">Local token-hash fixture</span>
+            </article>
+            <article class="metric-card">
+              <div class="metric-top">
+                Similarity metric<span
+                  class="metric-icon"
+                  data-icon="crosshair"
+                ></span>
+              </div>
+              <strong class="metric-word">Cosine</strong
+              ><span class="metric-caption">Normalized FP32 vectors</span>
+            </article>
+            <article class="metric-card">
+              <div class="metric-top">
+                IVF partitions<span
+                  class="metric-icon"
+                  data-icon="workflow"
+                ></span>
+              </div>
+              <strong id="metric-partitions">—</strong
+              ><span class="metric-caption">Seeded native clustering</span>
+            </article>
+          </div>
+
+          <div class="playground-layout">
+            <div class="search-column">
+              <form id="query-form" class="query-panel panel">
+                <div class="panel-heading">
+                  <h2><span data-icon="terminal"></span>Query playground</h2>
+                  <span class="subtle-label">C++20 · FP32</span>
+                </div>
+                <div class="collection-label">
+                  <label for="query">SEARCH COLLECTION</label
+                  ><span
+                    ><span data-icon="database"></span>Vortex documentation
+                    <span class="badge">LIVE</span></span
+                  >
+                </div>
+                <div class="query-input-wrap">
+                  <textarea
+                    id="query"
+                    name="query"
+                    rows="2"
+                    maxlength="2000"
+                    required
+                    placeholder="Ask something about your collection…"
+                    aria-describedby="embedding-note"
+                  ></textarea
+                  ><span class="query-input-icon" data-icon="search"></span>
+                </div>
+                <div class="suggestions" id="suggestions"></div>
+                <div class="search-controls">
+                  <fieldset class="mode-control">
+                    <legend>Search strategy</legend>
+                    <label
+                      ><input
+                        type="radio"
+                        name="mode"
+                        value="exact"
+                        checked
+                      /><span
+                        ><span data-icon="crosshair"></span>Exact</span
+                      ></label
+                    ><label
+                      ><input type="radio" name="mode" value="ivf" /><span
+                        ><span data-icon="zap"></span>IVF
+                        <small>ANN</small></span
+                      ></label
+                    >
+                  </fieldset>
+                  <label class="k-control" for="top-k"
+                    >Top k
+                    <select id="top-k" name="k" aria-label="Top k">
+                      <option value="3">3</option>
+                      <option value="5" selected>5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                    </select></label
+                  >
+                  <div class="submit-group">
+                    <kbd>Ctrl ↵</kbd
+                    ><button
+                      type="submit"
+                      class="button primary"
+                      id="search-button"
+                      disabled
+                    >
+                      Run search<span data-icon="arrow-right"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="probe-row" id="probe-row">
+                  <label for="nprobe"
+                    >Lists to probe
+                    <strong id="probe-value">4 / 8</strong></label
+                  ><input
+                    type="range"
+                    id="nprobe"
+                    min="1"
+                    max="8"
+                    value="4"
+                    disabled
+                  /><span id="probe-note"
+                    >Exact search visits every vector.</span
+                  >
+                </div>
+                <div class="fixture-note" id="embedding-note">
+                  <span data-icon="info"></span>Live native search using an
+                  offline token-hash fixture. No semantic model or LLM is
+                  running.
+                </div>
+              </form>
+              <section
+                class="results-panel panel"
+                aria-labelledby="results-title"
+              >
+                <div class="panel-heading">
+                  <h2 id="results-title">
+                    Search results
+                    <span class="count-pill" id="results-count">0</span>
+                  </h2>
+                  <button id="export-results" class="text-button" disabled>
+                    <span data-icon="download"></span>Export JSON
+                  </button>
+                </div>
+                <div
+                  id="result-summary"
+                  class="result-summary"
+                  aria-live="polite"
+                >
+                  Run a query to inspect its nearest neighbors.
+                </div>
+                <div id="results" class="result-list">
+                  <div class="empty-state">
+                    <span data-icon="search"></span>
+                    <h3>Your next discovery starts here</h3>
+                    <p>Write a query or choose an example above.</p>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <aside class="inspector-column">
+              <section class="panel map-panel">
+                <div class="panel-heading">
+                  <h2>Vector neighborhood</h2>
+                  <span class="badge neutral">PCA · 2D</span>
+                </div>
+                <div
+                  class="map-area"
+                  id="vector-map"
+                  aria-label="Two-dimensional projection of the document vectors"
+                ></div>
+                <div class="map-legend">
+                  <span><i class="legend-dot matched"></i>Matched</span
+                  ><span><i class="legend-dot corpus"></i>Collection</span
+                  ><span><i class="query-diamond"></i>Query</span>
+                </div>
+                <p class="map-note">
+                  A projection of 256D token-hash vectors. Full-vector
+                  similarity determines ranking.
+                </p>
+              </section>
+              <section class="panel trace-panel">
+                <div class="panel-heading">
+                  <h2>Query inspector</h2>
+                  <span class="tiny-dot"></span>
+                </div>
+                <div id="query-inspector" class="query-inspector">
+                  <p class="muted">Run a search to inspect the native query.</p>
+                </div>
+              </section>
+              <div class="help-card">
+                <span data-icon="lightbulb"></span>
+                <div>
+                  <strong>Speed is only half the story.</strong>
+                  <p>
+                    Switch to IVF to compare approximate neighbors with the
+                    exact result set.
+                  </p>
+                  <a href="#benchmarks"
+                    >See measured trade-offs
+                    <span data-icon="arrow-right"></span
+                  ></a>
+                </div>
+              </div>
+            </aside>
+          </div>
+          <footer class="workspace-footer">
+            <span
+              ><i class="green-dot"></i>Executed locally · your queries stay on
+              this machine</span
+            ><span id="engine-version">Vortex native engine</span>
+          </footer>
+        </section>
+
+        <section id="view-collection" class="view" hidden>
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow overline">YOUR SEARCH SPACE</div>
+              <h1>A closer look at the collection.</h1>
+              <p>
+                Real documentation, stable IDs, and vectors you can inspect.
+              </p>
+            </div>
+            <span class="environment-label">READ-ONLY</span>
+          </div>
+          <div class="collection-overview panel" id="collection-overview"></div>
+          <div class="panel">
+            <div class="panel-heading collection-toolbar">
+              <h2>
+                Documentation chunks
+                <span class="count-pill" id="document-count">0</span>
+              </h2>
+              <label class="filter-input"
+                ><span data-icon="search"></span
+                ><input
+                  id="document-filter"
+                  placeholder="Filter by title, source, or text"
+                  aria-label="Filter collection documents"
+              /></label>
+            </div>
+            <div class="table-scroll">
+              <table class="documents-table">
+                <thead>
+                  <tr>
+                    <th>DOCUMENT</th>
+                    <th>SOURCE</th>
+                    <th>WORDS</th>
+                    <th>VECTOR ID</th>
+                    <th><span class="sr-only">Inspect document</span></th>
+                  </tr>
+                </thead>
+                <tbody id="documents-body"></tbody>
+              </table>
+            </div>
+            <div id="documents-empty" class="empty-state" hidden>
+              <h3>No documents match</h3>
+              <p>Try a different title or keyword.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-benchmarks" class="view" hidden>
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow overline">EVIDENCE, NOT ESTIMATES</div>
+              <h1>Measure the trade-off.</h1>
+              <p>Recorded capacity results from one local vector collection.</p>
+            </div>
+            <span class="recorded-label"
+              ><span data-icon="clock"></span>RECORDED · 11 NOV 2026</span
+            >
+          </div>
+          <div class="benchmark-scope">
+            <span data-icon="info"></span>
+            <p>
+              Archived synthetic <strong>64D FP32</strong> measurements. These
+              are separate from the live 256D documentation fixture.
+            </p>
+          </div>
+          <div id="benchmark-content">
+            <div class="empty-state"><h3>Loading recorded evidence…</h3></div>
+          </div>
+        </section>
+
+        <section id="view-architecture" class="view" hidden>
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow overline">UNDER THE HOOD</div>
+              <h1>A small engine. Clear boundaries.</h1>
+              <p>
+                Follow a query from its embedding to the evidence it retrieves.
+              </p>
+            </div>
+            <a
+              href="/source/docs/architecture.md"
+              target="_blank"
+              class="button secondary"
+              >Read the design<span data-icon="arrow-up-right"></span
+            ></a>
+          </div>
+          <div class="architecture-steps">
+            <article class="panel">
+              <span class="step-number">01</span>
+              <h2>Encode</h2>
+              <p>
+                An external encoder produces the query vector. This workspace
+                uses a deterministic token-hash fixture.
+              </p>
+              <span class="badge neutral">OUTSIDE THE ENGINE</span>
+            </article>
+            <article class="panel">
+              <span class="step-number">02</span>
+              <h2>Retrieve</h2>
+              <p>
+                The native C++20 engine ranks neighbors with exact or IVF
+                search, using stable IDs and a bounded top-k heap.
+              </p>
+              <span class="badge">NATIVE C++20</span>
+            </article>
+            <article class="panel">
+              <span class="step-number">03</span>
+              <h2>Resolve</h2>
+              <p>
+                Returned IDs resolve to document text. Generation is a separate
+                integration and is not enabled here.
+              </p>
+              <span class="badge neutral">DOCUMENT EVIDENCE</span>
+            </article>
+          </div>
+          <div class="panel architecture-image">
+            <div class="panel-heading">
+              <h2>System architecture</h2>
+              <a href="/architecture.svg" target="_blank" class="text-button"
+                >Open diagram<span data-icon="arrow-up-right"></span
+              ></a>
+            </div>
+            <img
+              src="/architecture.svg"
+              alt="Vortex architecture: external embeddings feed native exact or IVF retrieval, mapped storage backs the engine, and returned IDs resolve to evidence."
+            />
+          </div>
+          <div class="architecture-notes panel">
+            <span data-icon="database"></span>
+            <div>
+              <h2>
+                Construction and querying have different memory boundaries.
+              </h2>
+              <p>
+                The native mutable builder works in memory. Published indexes
+                can be reopened as immutable mapped snapshots. The 10m
+                experiment uses a separate streaming snapshot writer; this
+                workspace keeps its small documentation collection in memory.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="document-dialog" aria-labelledby="dialog-title">
+      <div class="drawer-heading">
+        <span class="eyebrow">DOCUMENT INSPECTOR</span
+        ><button
+          id="close-document"
+          class="icon-button"
+          aria-label="Close document inspector"
+        >
+          <span data-icon="x"></span>
+        </button>
+      </div>
+      <div id="dialog-content"></div>
+    </dialog>
+    <div id="toast" class="toast" role="status" hidden></div>
+  </body>
+</html>

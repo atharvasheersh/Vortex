@@ -13,6 +13,7 @@
 | Python API | pybind11 | Dtype, shape, contiguity, batch errors, installed-package checks |
 | Retrieval metrics | Python deterministic calculations | Hand-calculated ranking fixtures |
 | RAG plumbing | Separate chunk lookup and generation | Fictional support fixture and evidence log |
+| Local workbench | Browser UI and loopback native-search API | Independent cosine reference, exact/IVF agreement, HTTP validation, recorded-evidence preservation and desktop/phone interaction checks |
 | External models | Pinned MiniLM encoder and local Gemma generation | 10 development smoke records and 900 held-out records; official scoring agreement |
 | Baselines | Separate FAISS benchmark | Matched data/metric/thread count; saved sweeps |
 | Scalability | Isolated 1k/10k/100k/1m runs at 64D | Saved query logs, full-probe agreement, NumPy samples and FAISS exact checks |
@@ -21,9 +22,17 @@
 | Reproducibility | JSON/CSV outputs and manifests | Configuration, source and dataset fingerprints |
 | Portability | CMake and CI | Successful hosted Windows/MSVC and Linux native/Python jobs, plus Linux sanitizer CTest, at revision 2523b30 |
 
-Local Windows GCC Release and Debug CTest runs pass, with 63,666 native assertions. The expanded Python suite has 101 passing tests, including nine new capacity checks alongside the existing embedding-study, scaling and real-data checks. Capacity checks cover bounded snapshot construction, native retrieval against independent references, partial-file preservation, resource rejection, Windows resident-limit confirmation, analysis accounting, published evidence and tamper detection. The native engine is unchanged in the capacity extension. The original 55-test release also passed separate fresh-checkout verification of native tests, the installed package, quick start and offline evaluation. Architecture, measured plots, and both private Word documents were rendered and visually reviewed.
+Local Windows GCC Release and Debug CTest runs pass, with 63,666 native assertions. The expanded local Python suite has 122 passing tests, including 21 workbench checks and nine capacity checks alongside the existing embedding-study, scaling and real-data checks. Capacity checks cover bounded snapshot construction, native retrieval against independent references, partial-file preservation, resource rejection, Windows resident-limit confirmation, analysis accounting, published evidence and tamper detection. The native engine is unchanged in the capacity extension. The original 55-test release also passed separate fresh-checkout verification of native tests, the installed package, quick start and offline evaluation. Architecture, measured plots, and both private Word documents were rendered and visually reviewed.
 
 The real-model experiment records 900 held-out generations across five conditions, with zero failed HTTP requests or retries and 16 citation-only answers scored zero. The independent official SQuAD scorer agrees on every stored answer score. Data auditing verifies source spans and split separation. Public hashes and local records are checked by eval/validate_real_rag.py. The archived collector preserves measured source bytes before the maintained runner's stable-ID reference-check correction. Human semantic and citation review is pending at the owner's request.
+
+The workbench extension adds 21 local tests and a browser JavaScript syntax check
+to the native/Python CI job. Its live token-hash fixture, native search calls,
+collection browser and recorded capacity view are distinct from the frozen
+experiments. Browser checks cover desktop and phone breakpoints, exact/IVF
+controls, source previews, collection filtering, empty states, keyboard access,
+probe/size selection and JSON export. The hosted run linked below predates this
+frontend extension; it is evidence for that recorded code revision.
 
 The four scale runs retain the unchanged native-engine revision and the historical runner hash in each manifest. Public validation recomputes recall and percentiles from all 9,840 query records, checks full-probe and mapped agreement, and verifies the export checksums. New full-size measurements are intentionally outside CI; CI exercises the maintained runner with a small fixture and includes its FAISS dependency. Large generated snapshots and private documents remain excluded from Git.
 

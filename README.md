@@ -6,6 +6,32 @@ Vortex implements storage, distance kernels, top-k selection, k-means, IVF lists
 
 [![Vortex architecture showing embeddings entering exact or IVF search, ranked IDs resolving to text for generation, and the mapped snapshot backing retrieval.](assets/system-architecture.png)](assets/system-architecture.svg)
 
+## Local search workbench
+
+Start the browser interface from an installed checkout:
+
+```bash
+python tools/serve_workbench.py
+```
+
+Open [the local workbench](http://127.0.0.1:8765). It includes exact/IVF search,
+top-k and probe controls, measured neighbor recall against exact search, document
+previews, JSON result export, a keyboard-accessible PCA map, a filterable collection
+browser, recorded capacity charts and the system architecture. Use `--port 8766`
+to choose another local port. No JavaScript build step is required.
+
+Live queries use the native C++ engine over a read-only, in-memory collection of
+repository documentation. Its 256D token-hash fixture is deterministic and does
+not establish pretrained semantic-model or LLM quality. The benchmark view reads
+the archived 64D capacity evidence separately and preserves the interrupted
+all-list timing. No model is downloaded, no external API is called, and recent
+queries are stored only in the browser. The server binds to `127.0.0.1`.
+
+See the [workbench guide](docs/workbench.md) for API routes, keyboard shortcuts
+and the boundaries between live search and recorded evidence.
+
+![Vortex local vector search workbench](assets/workbench.jpg)
+
 ## Capabilities
 
 | Area | Implemented behavior |
@@ -287,7 +313,7 @@ its answer scores are not a controlled comparison with this study.
 
 ## Verification status
 
-Local Windows GCC Release and Debug tests pass, including 63,666 native assertions. The expanded Python suite has 101 passing tests, including nine capacity regressions and the existing embedding-study, scaling and real-RAG checks. Public comparison checksums, dataset separation, vector archives and official answer scoring also pass validation. The original release passed a separate fresh-checkout check of the native suite, installed package, quick start and offline evaluation.
+Local Windows GCC Release and Debug tests pass, including 63,666 native assertions. The expanded local Python suite has 122 passing tests, including 21 workbench checks, nine capacity regressions and the existing embedding-study, scaling and real-RAG checks. Public comparison checksums, dataset separation, vector archives and official answer scoring also pass validation. The original release passed a separate fresh-checkout check of the native suite, installed package, quick start and offline evaluation.
 
 [Hosted CI run 43010051379](https://github.com/atharvasheersh/Vortex/actions/runs/43010051379) passed on 11 November 2026 for code revision `2523b30`: Windows/MSVC native tests and all 101 Python tests, Linux native tests and 100 Python tests with one Windows-only skip, and the Linux sanitizer build/test job. Quick start, fixture evaluation and public RAG/embedding evidence validation also passed on both platforms. The earlier account-blocked run is historical. Local MinGW still lacks its sanitizer runtime; the sanitizer evidence comes from Linux CI.
 

@@ -16,6 +16,10 @@ jobs:
       - run: cmake --build build --config Release --parallel 2
       - run: ctest --test-dir build -C Release --output-on-failure
       - run: python -m pip install ".[test]"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check frontend/app.js
       - run: python -m pytest -q
       - run: python examples/quickstart.py
       - run: python eval/run_eval.py

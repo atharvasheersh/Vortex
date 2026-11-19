@@ -44,6 +44,17 @@ int main() {
                 require(close(distance(a.data(), b.data(), d, metric, Kernel::Scalar),
                               distance(a.data(), b.data(), d, metric, Kernel::Auto)),
                         "kernel mismatch");
+            std::vector<std::int8_t> codes(d);
+            std::vector<float> decoded(d);
+            for (std::size_t j = 0; j < d; ++j) {
+                codes[j] = static_cast<std::int8_t>(static_cast<int>(j % 255) - 127);
+                decoded[j] = 0.037f * codes[j];
+            }
+            for (auto metric : {Metric::L2, Metric::InnerProduct, Metric::Cosine})
+                for (auto kernel : {Kernel::Scalar, Kernel::Auto})
+                    require(close(distance(a.data(), decoded.data(), d, metric, kernel),
+                                  distance_int8(a.data(), codes.data(), 0.037f, d, metric, kernel)),
+                            "fused INT8 kernel mismatch");
         }
         for (unsigned bits = 0; bits < 65536; ++bits) {
             if (((bits >> 10) & 31) != 31)
@@ -87,6 +98,14 @@ int main() {
             require(index.search(std::span(queries).subspan(q * d, d), 10, 13).hits == exact[q].hits,
                     "all-list exact agreement");
         index.save(file);
+        auto packed_file = directory / "packed.vtx";
+        index.save(packed_file, true);
+        {
+            auto packed = Index::open(packed_file, 256, 4, Kernel::Auto, 128);
+            auto results = packed->search_batch(queries, 32, 10, 13);
+            for (std::size_t q = 0; q < 32; ++q)
+                require(results[q].hits == exact[q].hits, "clustered save stable-ID agreement");
+        }
         {
             auto mapped = Index::open(file, 256, 4, Kernel::Auto, 128);
             require(mapped->mapped() && mapped->size() == n && mapped->nlist() == 13, "mapped metadata");

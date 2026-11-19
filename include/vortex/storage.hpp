@@ -26,6 +26,7 @@ class MappedFile {
     int fd_ = -1;
 };
 struct CacheStats {
+    std::uint64_t read_calls = 0;
     std::uint64_t hits = 0, misses = 0, evictions = 0;
     std::uint64_t mapped_bytes_fetched = 0, bytes_served = 0;
     std::uint64_t miss_nanoseconds = 0;

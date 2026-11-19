@@ -90,6 +90,7 @@ void BlockCache::read(const MappedFile &file, std::uint64_t offset, void *destin
         throw std::runtime_error("read outside snapshot");
     auto *output = static_cast<std::byte *>(destination);
     std::lock_guard lock(mutex_);
+    ++stats_.read_calls;
     while (bytes) {
         auto block = offset / block_bytes_;
         auto start = static_cast<std::size_t>(block * block_bytes_);

@@ -68,6 +68,75 @@ __attribute__((target("avx2"))) static float simd(const float *a, const float *b
     return sum;
 }
 #endif
+const char *active_kernel(Kernel kernel) {
+#if defined(VORTEX_X86) && (defined(__GNUC__) || defined(__clang__))
+    if (kernel == Kernel::Auto && avx2_available())
+        return "avx2";
+#else
+    (void)kernel;
+#endif
+    return "scalar";
+}
+namespace {
+float int8_scalar(const float *a, const std::int8_t *codes, float scale, std::size_t n, bool l2) {
+    float sum = 0;
+    for (std::size_t i = 0; i < n; ++i) {
+        const float value = scale * codes[i];
+        if (!std::isfinite(value))
+            throw std::runtime_error("non-finite snapshot vector");
+        const float delta = a[i] - value;
+        sum += l2 ? delta * delta : a[i] * value;
+    }
+    return sum;
+}
+#if defined(VORTEX_X86) && (defined(__GNUC__) || defined(__clang__))
+__attribute__((target("avx2"))) float int8_simd(const float *a, const std::int8_t *codes, float scale,
+                                              std::size_t n, bool l2) {
+    auto sums = _mm256_setzero_ps();
+    const auto scales = _mm256_set1_ps(scale);
+    const auto maximum = _mm256_set1_ps(std::numeric_limits<float>::max());
+    const auto sign_mask = _mm256_set1_ps(-0.0f);
+    std::size_t i = 0;
+    for (; i + 8 <= n; i += 8) {
+        const auto packed = _mm_loadl_epi64(reinterpret_cast<const __m128i *>(codes + i));
+        const auto values = _mm256_mul_ps(_mm256_cvtepi32_ps(_mm256_cvtepi8_epi32(packed)), scales);
+        if (_mm256_movemask_ps(_mm256_cmp_ps(_mm256_andnot_ps(sign_mask, values), maximum, _CMP_LE_OQ)) != 255)
+            throw std::runtime_error("non-finite snapshot vector");
+        const auto query = _mm256_loadu_ps(a + i);
+        const auto delta = _mm256_sub_ps(query, values);
+        sums = _mm256_add_ps(sums, l2 ? _mm256_mul_ps(delta, delta) : _mm256_mul_ps(query, values));
+    }
+    alignas(32) float lanes[8];
+    _mm256_store_ps(lanes, sums);
+    float sum = 0;
+    for (auto lane : lanes) sum += lane;
+    // Preserve the same accumulation order as the ordinary AVX2 distance path.
+    for (; i < n; ++i) {
+        const float value = scale * codes[i];
+        if (!std::isfinite(value)) throw std::runtime_error("non-finite snapshot vector");
+        const float delta = a[i] - value;
+        sum += l2 ? delta * delta : a[i] * value;
+    }
+    return sum;
+}
+#endif
+}
+float distance_int8(const float *query, const std::int8_t *codes, float scale, std::size_t n,
+                    Metric metric, Kernel kernel) {
+    if (!std::isfinite(scale) || scale <= 0)
+        throw std::runtime_error("invalid INT8 scale");
+    float value;
+#if defined(VORTEX_X86) && (defined(__GNUC__) || defined(__clang__))
+    if (kernel == Kernel::Auto && avx2_available())
+        value = int8_simd(query, codes, scale, n, metric == Metric::L2);
+    else
+#else
+    (void)kernel;
+#endif
+        value = int8_scalar(query, codes, scale, n, metric == Metric::L2);
+    if (!std::isfinite(value)) throw std::overflow_error("distance exceeded float32 range");
+    return metric == Metric::L2 ? value : -value;
+}
 float distance(const float *a, const float *b, std::size_t n, Metric metric, Kernel kernel) {
     float value;
 #if defined(VORTEX_X86) && (defined(__GNUC__) || defined(__clang__))

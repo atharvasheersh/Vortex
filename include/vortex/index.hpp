@@ -37,7 +37,7 @@ class Index {
     void build_ivf(std::size_t nlist, std::size_t iterations = 12, std::uint64_t seed = 42,
                    std::size_t training_limit = 10000);
     void set_dtype(DType dtype);
-    void save(const std::filesystem::path &path) const;
+    void save(const std::filesystem::path &path, bool clustered = false) const;
     SearchResult search(std::span<const float> query, std::size_t k = 10, std::size_t nprobe = 0,
                         std::size_t rerank_n = 0) const;
     std::vector<SearchResult> search_batch(std::span<const float> queries, std::size_t count,

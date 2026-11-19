@@ -12,6 +12,9 @@ bool avx2_available();
 float scalar_l2(const float *a, const float *b, std::size_t n);
 float scalar_dot(const float *a, const float *b, std::size_t n);
 float distance(const float *a, const float *b, std::size_t n, Metric metric, Kernel kernel);
+float distance_int8(const float *query, const std::int8_t *codes, float scale, std::size_t n,
+                    Metric metric, Kernel kernel);
+const char *active_kernel(Kernel kernel = Kernel::Auto);
 std::vector<float> prepare(std::span<const float> input, std::size_t dimension, Metric metric);
 std::uint16_t to_half(float value);
 float from_half(std::uint16_t bits);

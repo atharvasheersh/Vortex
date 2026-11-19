@@ -54,6 +54,7 @@ PYBIND11_MODULE(_vortex, m) {
     m.doc() = "Native vector retrieval engine";
     m.attr("__version__") = "0.1.0";
     m.def("avx2_available", &avx2_available);
+    m.def("active_kernel", [] { return active_kernel(); });
     py::class_<Index>(m, "Index")
         .def(py::init([](std::size_t dimension, const std::string &metric, std::size_t cache_bytes,
                          std::size_t threads, const std::string &kernel, std::size_t block_bytes) {
@@ -98,10 +99,10 @@ PYBIND11_MODULE(_vortex, m) {
                  index.set_dtype(dtype);
              })
         .def("save",
-             [](const Index &index, const std::string &path) {
+             [](const Index &index, const std::string &path, bool clustered) {
                  py::gil_scoped_release release;
-                 index.save(utf8_path(path));
-             })
+                 index.save(utf8_path(path), clustered);
+             }, py::arg("path"), py::arg("clustered") = false)
         .def(
             "search",
             [](const Index &index, const Array &query, std::size_t k, std::size_t nprobe,
@@ -136,6 +137,7 @@ PYBIND11_MODULE(_vortex, m) {
              [](const Index &index) {
                  auto stats = index.cache_stats();
                  py::dict out;
+                 out["read_calls"] = stats.read_calls;
                  out["hits"] = stats.hits;
                  out["misses"] = stats.misses;
                  out["evictions"] = stats.evictions;

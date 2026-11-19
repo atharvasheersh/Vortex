@@ -33,6 +33,8 @@ if(BUILD_TESTING)
 endif()
 add_executable(vortex_bench benchmarks/microbench.cpp)
 target_link_libraries(vortex_bench PRIVATE vortex)
+add_executable(vortex_profile benchmarks/profile_search.cpp)
+target_link_libraries(vortex_profile PRIVATE vortex)
 if(VORTEX_PYTHON)
   find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
   execute_process(COMMAND "${Python_EXECUTABLE}" -m pybind11 --cmakedir

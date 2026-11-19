@@ -262,15 +262,72 @@ SearchResult Index::search_locked(std::span<const float> query, std::size_t k, s
     auto limit = std::min(ids_.size(), rerank_n ? rerank_n : k);
     Heap heap(&better);
     std::vector<float> scratch;
+    std::vector<std::byte> encoded_scratch;
+    auto score_int8 = [&](const std::byte *bytes) {
+        return distance_int8(q.data(), reinterpret_cast<const std::int8_t *>(bytes + 4),
+                             load<float>(bytes), q.size(), config_.metric, config_.kernel);
+    };
     auto scan = [&](std::size_t row) {
-        auto *v = vector_at(row, false, scratch);
-        auto score = distance(q.data(), v, q.size(), config_.metric, config_.kernel);
+        float score;
+        if (dtype_ == DType::INT8) {
+            const auto bytes = stride(dtype_, config_.dimension);
+            const std::byte *encoded;
+            if (mapped_) {
+                encoded_scratch.resize(bytes);
+                cache_.read(*mapped_, encoded_offset_ + row * bytes, encoded_scratch.data(), bytes);
+                encoded = encoded_scratch.data();
+            } else encoded = encoded_.data() + row * bytes;
+            score = score_int8(encoded);
+        } else {
+            auto *v = vector_at(row, false, scratch);
+            score = distance(q.data(), v, q.size(), config_.metric, config_.kernel);
+        }
         retain(heap, {score, ids_[row], row}, limit);
         ++result.scanned;
     };
+    // Bounded contiguous reads amortize cache locking and metadata lookups.
+    // Validate only the vectors actually scored, preserving lazy corruption
+    // detection and avoiding a second full-corpus resident allocation.
+    std::vector<float> tile;
+    std::vector<std::byte> encoded_tile;
+    const auto row_bytes = stride(dtype_, config_.dimension);
+    const auto tile_rows = std::max<std::size_t>(1, 65536 / row_bytes);
+    auto scan_run = [&](std::size_t first, std::size_t count) {
+        if (!mapped_ || dtype_ == DType::FP16 || count == 1) {
+            for (std::size_t row = first; row < first + count; ++row)
+                scan(row);
+            return;
+        }
+        for (std::size_t done = 0; done < count;) {
+            auto rows = std::min(tile_rows, count - done);
+            if (dtype_ == DType::FP32) {
+                tile.resize(rows * config_.dimension);
+                cache_.read(*mapped_, original_offset_ + (first + done) * row_bytes,
+                            tile.data(), tile.size() * sizeof(float));
+            } else {
+                encoded_tile.resize(rows * row_bytes);
+                cache_.read(*mapped_, encoded_offset_ + (first + done) * row_bytes,
+                            encoded_tile.data(), encoded_tile.size());
+            }
+            for (std::size_t offset = 0; offset < rows; ++offset) {
+                const auto row = first + done + offset;
+                float score;
+                if (dtype_ == DType::INT8) score = score_int8(encoded_tile.data() + offset * row_bytes);
+                else {
+                    const auto *v = tile.data() + offset * config_.dimension;
+                    for (std::size_t j = 0; j < config_.dimension; ++j)
+                        if (!std::isfinite(v[j]))
+                            throw std::runtime_error("non-finite snapshot vector");
+                    score = distance(q.data(), v, q.size(), config_.metric, config_.kernel);
+                }
+                retain(heap, {score, ids_[row], row}, limit);
+                ++result.scanned;
+            }
+            done += rows;
+        }
+    };
     if (nprobe == 0) {
-        for (std::size_t row = 0; row < ids_.size(); ++row)
-            scan(row);
+        scan_run(0, ids_.size());
     } else {
         std::vector<Candidate> clusters;
         for (std::size_t c = 0; c < lists_.size(); ++c)
@@ -279,9 +336,16 @@ SearchResult Index::search_locked(std::span<const float> query, std::size_t k, s
                                 c, c});
         std::partial_sort(clusters.begin(), clusters.begin() + static_cast<std::ptrdiff_t>(nprobe),
                           clusters.end(), better);
-        for (std::size_t i = 0; i < nprobe; ++i)
-            for (auto row : lists_[clusters[i].row])
-                scan(static_cast<std::size_t>(row));
+        for (std::size_t i = 0; i < nprobe; ++i) {
+            const auto &list = lists_[clusters[i].row];
+            for (std::size_t begin = 0; begin < list.size();) {
+                auto end = begin + 1;
+                while (end < list.size() && list[end] == list[end - 1] + 1)
+                    ++end;
+                scan_run(static_cast<std::size_t>(list[begin]), end - begin);
+                begin = end;
+            }
+        }
     }
     std::vector<Candidate> candidates;
     while (!heap.empty()) {
@@ -338,10 +402,12 @@ std::vector<SearchResult> Index::search_batch(std::span<const float> queries, st
         std::rethrow_exception(failure);
     return results;
 }
-void Index::save(const std::filesystem::path &path) const {
+void Index::save(const std::filesystem::path &path, bool clustered) const {
     std::shared_lock lock(mutex_);
     if (stale_)
         throw std::logic_error("cannot save stale IVF; rebuild first");
+    if (clustered && lists_.empty())
+        throw std::logic_error("clustered save requires an IVF index");
     if (path.empty())
         throw std::invalid_argument("snapshot path required");
     auto parent = path.parent_path();
@@ -353,7 +419,7 @@ void Index::save(const std::filesystem::path &path) const {
     try {
         std::ofstream file(temporary, std::ios::binary | std::ios::trunc);
         file.exceptions(std::ios::badbit | std::ios::failbit);
-        if (mapped_) {
+        if (mapped_ && !clustered) {
             file.write(reinterpret_cast<const char *>(mapped_->data()),
                        static_cast<std::streamsize>(mapped_->size()));
         } else {
@@ -377,10 +443,25 @@ void Index::save(const std::filesystem::path &path) const {
                 if (bytes)
                     file.write(static_cast<const char *>(data), static_cast<std::streamsize>(bytes));
             };
-            write(ids_.data(), ids_.size() * 8);
-            write(vectors_.data(), vectors_.size() * 4);
-            write(encoded_.data(), encoded_.size());
-            auto padding = layout.centroids - (layout.encoded + encoded_.size());
+            const auto encoded_bytes = dtype_ == DType::FP32 ? 0 : ids_.size() * stride(dtype_, config_.dimension);
+            auto write_rows = [&](const std::byte *data, std::size_t row_bytes) {
+                if (!clustered) { write(data, ids_.size() * row_bytes); return; }
+                const auto rows_per_buffer = std::max<std::size_t>(1, 65536 / row_bytes);
+                std::vector<std::byte> buffer(rows_per_buffer * row_bytes);
+                std::size_t used = 0;
+                for (const auto &list : lists_)
+                    for (auto row : list) {
+                        std::memcpy(buffer.data() + used * row_bytes, data + row * row_bytes, row_bytes);
+                        if (++used == rows_per_buffer) { write(buffer.data(), buffer.size()); used = 0; }
+                    }
+                write(buffer.data(), used * row_bytes);
+            };
+            write_rows(reinterpret_cast<const std::byte *>(ids_.data()), 8);
+            write_rows(mapped_ ? mapped_->data() + original_offset_ : reinterpret_cast<const std::byte *>(vectors_.data()),
+                       config_.dimension * 4);
+            if (encoded_bytes)
+                write_rows(mapped_ ? mapped_->data() + encoded_offset_ : encoded_.data(), stride(dtype_, config_.dimension));
+            auto padding = layout.centroids - (layout.encoded + encoded_bytes);
             const std::array<char, 8> zeros{};
             write(zeros.data(), static_cast<std::size_t>(padding));
             write(centroids_.data(), centroids_.size() * 4);
@@ -390,8 +471,17 @@ void Index::save(const std::filesystem::path &path) const {
                 offset += list.size();
                 write(&offset, 8);
             }
-            for (const auto &list : lists_)
-                write(list.data(), list.size() * 8);
+            if (clustered) {
+                std::array<std::uint64_t, 8192> rows;
+                for (std::size_t start = 0; start < ids_.size();) {
+                    auto count = std::min(rows.size(), ids_.size() - start);
+                    std::iota(rows.begin(), rows.begin() + static_cast<std::ptrdiff_t>(count), start);
+                    write(rows.data(), count * 8);
+                    start += count;
+                }
+            } else
+                for (const auto &list : lists_)
+                    write(list.data(), list.size() * 8);
         }
         file.flush();
         file.close();

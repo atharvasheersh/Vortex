@@ -79,6 +79,18 @@ void retain(Heap &heap, Candidate candidate, std::size_t limit) {
         heap.push(candidate);
     }
 }
+void wait_for_tasks(std::vector<std::future<void>> &futures, std::exception_ptr failure) {
+    for (auto &future : futures) {
+        try {
+            future.get();
+        } catch (...) {
+            if (!failure)
+                failure = std::current_exception();
+        }
+    }
+    if (failure)
+        std::rethrow_exception(failure);
+}
 void require_little_endian() {
     if constexpr (std::endian::native != std::endian::little)
         throw std::runtime_error("little-endian platform required");
@@ -245,7 +257,7 @@ void Index::build_ivf(std::size_t clusters, std::size_t iterations, std::uint64_
     stale_ = false;
 }
 SearchResult Index::search_locked(std::span<const float> query, std::size_t k, std::size_t nprobe,
-                                  std::size_t rerank_n) const {
+                                  std::size_t rerank_n, std::size_t scan_threads) const {
     auto start = std::chrono::steady_clock::now();
     auto q = prepare(query, config_.dimension, config_.metric);
     if (k == 0)
@@ -256,6 +268,8 @@ SearchResult Index::search_locked(std::span<const float> query, std::size_t k, s
         throw std::logic_error("IVF missing or stale; rebuild first");
     if (nprobe > lists_.size())
         throw std::invalid_argument("nprobe exceeds nlist");
+    if (scan_threads && (!mapped_ || dtype_ != DType::INT8 || scan_threads > config_.threads))
+        throw std::invalid_argument("direct scan requires a mapped INT8 index and enough configured threads");
     SearchResult result;
     if (ids_.empty())
         return result;
@@ -326,18 +340,86 @@ SearchResult Index::search_locked(std::span<const float> query, std::size_t k, s
             done += rows;
         }
     };
-    if (nprobe == 0) {
-        scan_run(0, ids_.size());
-    } else {
-        std::vector<Candidate> clusters;
+    std::vector<Candidate> clusters;
+    if (nprobe) {
+        clusters.reserve(lists_.size());
         for (std::size_t c = 0; c < lists_.size(); ++c)
             clusters.push_back({distance(q.data(), centroids_.data() + c * q.size(), q.size(), config_.metric,
                                          config_.kernel),
                                 c, c});
         std::partial_sort(clusters.begin(), clusters.begin() + static_cast<std::ptrdiff_t>(nprobe),
                           clusters.end(), better);
-        for (std::size_t i = 0; i < nprobe; ++i) {
-            const auto &list = lists_[clusters[i].row];
+        clusters.resize(nprobe);
+    }
+    if (scan_threads) {
+        const auto *encoded = mapped_->data() + encoded_offset_;
+        const auto total = nprobe ? std::accumulate(
+            clusters.begin(), clusters.end(), std::size_t{0},
+            [&](std::size_t sum, const Candidate &c) { return sum + lists_[c.row].size(); }) : ids_.size();
+        auto scan_slice = [&](std::size_t first, std::size_t count, Heap &local) {
+            // Open validated the encoded section and each posting. The shared
+            // index lock keeps the read-only mapping alive through worker join.
+            auto add = [&](std::size_t row) {
+                retain(local, {score_int8(encoded + row * row_bytes), ids_[row], row}, limit);
+            };
+            if (!nprobe) {
+                for (std::size_t row = first; row < first + count; ++row)
+                    add(row);
+                return;
+            }
+            for (const auto &cluster : clusters) {
+                const auto &list = lists_[cluster.row];
+                if (first >= list.size()) {
+                    first -= list.size();
+                    continue;
+                }
+                const auto take = std::min(count, list.size() - first);
+                for (std::size_t i = first; i < first + take; ++i)
+                    add(static_cast<std::size_t>(list[i]));
+                count -= take;
+                if (!count)
+                    break;
+                first = 0;
+            }
+        };
+        const auto workers = std::min(scan_threads, total);
+        if (workers <= 1) {
+            scan_slice(0, total, heap);
+        } else {
+            std::vector<Heap> local;
+            local.reserve(workers);
+            for (std::size_t worker = 0; worker < workers; ++worker)
+                local.emplace_back(&better);
+            std::vector<std::future<void>> futures;
+            futures.reserve(workers);
+            std::exception_ptr failure;
+            try {
+                const auto per_worker = total / workers, remainder = total % workers;
+                for (std::size_t worker = 0; worker < workers; ++worker) {
+                    const auto first = worker * per_worker + std::min(worker, remainder);
+                    const auto count = per_worker + (worker < remainder ? 1 : 0);
+                    futures.push_back(pool_.submit([&, worker, first, count] {
+                        scan_slice(first, count, local[worker]);
+                    }));
+                }
+            } catch (...) {
+                failure = std::current_exception();
+            }
+            wait_for_tasks(futures, failure);
+            // Merge before reranking so the same global shortlist is rescored.
+            for (auto &part : local) {
+                while (!part.empty()) {
+                    retain(heap, part.top(), limit);
+                    part.pop();
+                }
+            }
+        }
+        result.scanned = total;
+    } else if (nprobe == 0) {
+        scan_run(0, ids_.size());
+    } else {
+        for (const auto &cluster : clusters) {
+            const auto &list = lists_[cluster.row];
             for (std::size_t begin = 0; begin < list.size();) {
                 auto end = begin + 1;
                 while (end < list.size() && list[end] == list[end - 1] + 1)
@@ -365,9 +447,9 @@ SearchResult Index::search_locked(std::span<const float> query, std::size_t k, s
     return result;
 }
 SearchResult Index::search(std::span<const float> q, std::size_t k, std::size_t nprobe,
-                           std::size_t rerank_n) const {
+                           std::size_t rerank_n, std::size_t scan_threads) const {
     std::shared_lock lock(mutex_);
-    return search_locked(q, k, nprobe, rerank_n);
+    return search_locked(q, k, nprobe, rerank_n, scan_threads);
 }
 std::vector<SearchResult> Index::search_batch(std::span<const float> queries, std::size_t count,
                                               std::size_t k, std::size_t nprobe, std::size_t rerank_n) const {
@@ -390,16 +472,7 @@ std::vector<SearchResult> Index::search_batch(std::span<const float> queries, st
     } catch (...) {
         failure = std::current_exception();
     }
-    for (auto &future : futures) {
-        try {
-            future.get();
-        } catch (...) {
-            if (!failure)
-                failure = std::current_exception();
-        }
-    }
-    if (failure)
-        std::rethrow_exception(failure);
+    wait_for_tasks(futures, failure);
     return results;
 }
 void Index::save(const std::filesystem::path &path, bool clustered) const {

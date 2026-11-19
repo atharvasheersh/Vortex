@@ -106,16 +106,17 @@ PYBIND11_MODULE(_vortex, m) {
         .def(
             "search",
             [](const Index &index, const Array &query, std::size_t k, std::size_t nprobe,
-               std::size_t rerank_n) {
+               std::size_t rerank_n, std::size_t scan_threads) {
                 auto copy = copy_array(query, 1, index.dimension());
                 SearchResult result;
                 {
                     py::gil_scoped_release release;
-                    result = index.search(copy, k, nprobe, rerank_n);
+                    result = index.search(copy, k, nprobe, rerank_n, scan_threads);
                 }
                 return result_dict(result);
             },
-            py::arg("query").noconvert(), py::arg("k") = 10, py::arg("nprobe") = 0, py::arg("rerank_n") = 0)
+            py::arg("query").noconvert(), py::arg("k") = 10, py::arg("nprobe") = 0,
+            py::arg("rerank_n") = 0, py::arg("scan_threads") = 0)
         .def(
             "search_batch",
             [](const Index &index, const Array &queries, std::size_t k, std::size_t nprobe,

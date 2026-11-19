@@ -39,7 +39,7 @@ class Index {
     void set_dtype(DType dtype);
     void save(const std::filesystem::path &path, bool clustered = false) const;
     SearchResult search(std::span<const float> query, std::size_t k = 10, std::size_t nprobe = 0,
-                        std::size_t rerank_n = 0) const;
+                        std::size_t rerank_n = 0, std::size_t scan_threads = 0) const;
     std::vector<SearchResult> search_batch(std::span<const float> queries, std::size_t count,
                                            std::size_t k = 10, std::size_t nprobe = 0,
                                            std::size_t rerank_n = 0) const;
@@ -53,7 +53,8 @@ class Index {
     bool mapped() const { return static_cast<bool>(mapped_); }
 
   private:
-    SearchResult search_locked(std::span<const float>, std::size_t, std::size_t, std::size_t) const;
+    SearchResult search_locked(std::span<const float>, std::size_t, std::size_t, std::size_t,
+                               std::size_t scan_threads = 0) const;
     const float *vector_at(std::size_t row, bool original, std::vector<float> &scratch) const;
     void ensure_mutable() const;
     Config config_;

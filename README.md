@@ -144,6 +144,11 @@ that missed the held-out quality target. [Compact evidence](benchmarks/reference
 and `python benchmarks/validate_performance.py` reproduce its checks.
 The historical capacity results above remain unchanged.
 
+For packed INT8 lookups, the later [phase 2 study](docs/retrieval_speed_phase2.md)
+measured **543.04 ms → 151.66 ms p95** on 10m vectors with identical results
+and 97.66% Recall@10. Open the snapshot with `threads=2` and pass
+`scan_threads=2` to `search` to use the direct two-worker scan.
+
 ![Retrieval optimization measurements](assets/performance-optimization.png)
 
 ## Build and test

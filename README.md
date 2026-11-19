@@ -123,6 +123,29 @@ python benchmarks/validate_capacity.py --directory benchmarks/reference/capacity
 
 New full runs use `python benchmarks/run_capacity.py --size 10000000 --working-set-mib 1536 --output results/capacity-new` on Windows. The native mutable builder is unchanged; this establishes single-collection mapped retrieval at 64D with streamed construction.
 
+## Retrieval optimization
+
+A new matched 10m, 64D experiment measured **10.36x IVF p95 speedup**
+(90.3% lower latency): **24.025s → 2.320s**, with
+identical results, identical scan counts and **98.1% Recall@10**.
+The comparison uses the same 1536 MiB process working-set policy, 32 lists and
+24 probes. It has 32 held-out queries in one round; 100k/1m checks use 100 held-out
+queries in three rounds. These are retrieval-call timings, not RAG answer latency.
+
+Use `index.save("packed.vtx", clustered=True)` after building IVF, or
+`python benchmarks/repack_snapshot.py original.vtx packed.vtx` for an existing
+version-1 snapshot. Public IDs and old-reader compatibility are preserved.
+Bounded contiguous reads and fused INT8 scoring provide additional improvements.
+INT8 retains FP32 originals; it reduces the hot scoring payload, not total file size.
+
+The [optimization report](docs/performance_optimization.md) separates layout and
+engine effects, includes memory/recall tradeoffs and records the tuned setting
+that missed the held-out quality target. [Compact evidence](benchmarks/reference/performance)
+and `python benchmarks/validate_performance.py` reproduce its checks.
+The historical capacity results above remain unchanged.
+
+![Retrieval optimization measurements](assets/performance-optimization.png)
+
 ## Build and test
 
 Requirements: Python 3.10+, a C++20 compiler, and CMake 3.20+. No vector database is required. Build dependencies for Python packaging are installed automatically.
@@ -304,7 +327,7 @@ its answer scores are not a controlled comparison with this study.
 ## Limitations
 
 - Original FP32 vectors are retained for reranking. FP16/INT8 reduce the encoded search payload but increase total snapshot size in this release.
-- Encoded vectors are decoded before scoring; FP16 conversion and cache locking can dominate latency.
+- FP16 scoring still uses decoded buffers; INT8 conversion is fused into distance scoring. Conversion and cache access can still affect latency.
 - Compressed cosine uses approximate dot products of quantized normalized vectors; it does not renormalize each decoded vector.
 - The native mutable builder constructs indexes in memory. The large-capacity benchmark separately streams FP32 snapshots, trains on a bounded sample and assigns every vector; it does not extend the mutable builder's memory capacity.
 - Metadata remains in RAM, and the OS controls mapped-page residency. Application-cold benchmarks do not flush the OS cache.
@@ -313,7 +336,9 @@ its answer scores are not a controlled comparison with this study.
 
 ## Verification status
 
-Local Windows GCC Release and Debug tests pass, including 63,666 native assertions. The expanded local Python suite has 122 passing tests, including 21 workbench checks, nine capacity regressions and the existing embedding-study, scaling and real-RAG checks. Public comparison checksums, dataset separation, vector archives and official answer scoring also pass validation. The original release passed a separate fresh-checkout check of the native suite, installed package, quick start and offline evaluation.
+Current optimization validation passes 162 local Python tests and 63,740 native assertions, including fresh Windows Release/Debug checks and Ubuntu address/undefined-behavior sanitizer CTest. The hosted runs below predate these native changes. See the [optimization report](docs/performance_optimization.md) for measured conditions and limits.
+
+Before this optimization, Windows GCC Release/Debug checks recorded 63,666 native assertions and the workbench Python suite had 122 passing tests, including 21 workbench checks, nine capacity regressions and the existing embedding-study, scaling and real-RAG checks. Public comparison checksums, dataset separation, vector archives and official answer scoring also pass validation. The original release passed a separate fresh-checkout check of the native suite, installed package, quick start and offline evaluation.
 
 [Hosted CI run 43010051379](https://github.com/atharvasheersh/Vortex/actions/runs/43010051379) passed on 11 November 2026 for code revision `2523b30`: Windows/MSVC native tests and all 101 Python tests, Linux native tests and 100 Python tests with one Windows-only skip, and the Linux sanitizer build/test job. Quick start, fixture evaluation and public RAG/embedding evidence validation also passed on both platforms. The earlier account-blocked run is historical. Local MinGW still lacks its sanitizer runtime; the sanitizer evidence comes from Linux CI.
 

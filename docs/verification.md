@@ -39,3 +39,31 @@ The four scale runs retain the unchanged native-engine revision and the historic
 The separate 1m/10m bounded pair passed all 960 recorded measurements, full-corpus FAISS references for twenty queries per size, three direct float64 references per size and full-list/exact agreement. The 10m all-list timing contains a retained 63.9-minute wall/CPU gap; it is flagged rather than treated as a clean latency sample. A post-collection 64 KiB resident-accounting allowance permits the observed 16 KiB Windows peak excess, while retaining the actual peak and frozen initial code. Full snapshot hashes were checked locally; the compact public archive excludes the large files. Run `python benchmarks/validate_capacity.py --directory benchmarks/reference/capacity` to verify its checksums, diagnostics and all query-derived summaries.
 
 The [initial hosted CI run](https://github.com/atharvasheersh/Vortex/actions/runs/42356271644) failed before runner assignment because of an account restriction. That historical result is superseded by [successful run 43010051379](https://github.com/atharvasheersh/Vortex/actions/runs/43010051379), completed on 11 November 2026 for code revision `2523b30`. Windows/MSVC passed native CTest and all 101 Python tests. Linux passed native CTest and 100 Python tests with the Windows-only resident-limit integration test skipped. Both platforms also passed quick start, fixture evaluation and public real-RAG/embedding evidence validation. The separate Linux sanitizer build and CTest job passed. Local MinGW sanitizer linking remains unavailable because that toolchain lacks libsanitizer.spec; the successful sanitizer evidence is from hosted Linux execution.
+
+## Retrieval optimization verification
+
+The local optimization extension passes **162 Python tests** and
+**63,740 native assertions**. Windows GCC Release/Debug CTest and
+Ubuntu GCC address/undefined-behavior sanitizer CTest pass. The installed package
+is checked separately from the preserved baseline module. Existing scaling,
+capacity, real-RAG and embedding evidence validators still pass; their archives
+are unchanged. The earlier local/hosted counts above are revision-specific.
+
+The new compact archive retains 8,924 final calls and 768 tuning calls. Its
+validator checks file hashes, measured source fingerprints, independent-reference
+recall, query/round coverage, paired ordered results, candidate counts, memory
+policies, timing diagnostics, summary statistics and bootstrap intervals.
+Regression tests reject rehashed changes to summaries, results, splits and
+memory settings. Native/API coverage includes bounded reads, dimensions larger
+than a tile, stable uint64 IDs/ties, encoded/original association, corrupt scales,
+non-finite payloads, overflow, concurrent batches and partial-file preservation.
+
+The primary 10m result is 10.36x p95 IVF speedup at matched recall
+and memory policy. There are 32 held-out queries and one round at that size;
+three-round 100-query checks cover 100k/1m and cached real vectors. The selected
+128-list tuning setting misses the held-out 95% recall target and remains a
+negative result. See [the full report](performance_optimization.md).
+
+This local review does not establish hosted Windows/MSVC or Linux CI for the
+optimized revision. Check its new workflow run when published; previous hosted
+runs are not evidence for this new native revision.

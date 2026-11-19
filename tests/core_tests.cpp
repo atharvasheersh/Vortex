@@ -142,10 +142,19 @@ int main() {
         for (auto type : {DType::FP16, DType::INT8}) {
             index.set_dtype(type);
             index.save(file);
-            auto mapped = Index::open(file, 0);
+            auto mapped = Index::open(file, 0, 2);
             auto results = mapped->search_batch(queries, 32, 10, 13, n);
             for (std::size_t q = 0; q < 32; ++q)
                 require(results[q].hits == exact[q].hits, "full rerank exact agreement");
+            if (type == DType::INT8) {
+                for (auto probes : {0u, 6u, 13u}) {
+                    auto query = std::span(queries).first(d);
+                    auto cached = mapped->search(query, 10, probes, 25);
+                    auto direct = mapped->search(query, 10, probes, 25, 2);
+                    require(cached.hits == direct.hits && cached.scanned == direct.scanned,
+                            "direct worker merge preserves the rerank shortlist");
+                }
+            }
             require(mapped->cache_stats().resident_bytes == 0, "zero cache budget");
             rejects([&] { index.add(9999, std::span(matrix).first(d)); });
         }

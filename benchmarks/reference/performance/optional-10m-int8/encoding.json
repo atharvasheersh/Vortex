@@ -1,0 +1,10 @@
+{
+  "source_sha256": "6057d25f818907f2ea1b8138215bf04e7dc4182b6d99757af6ee41d9ef935dad",
+  "snapshot_sha256": "4d31a8f419de5d07c48d26702116d3e2187aa23cc1fd9eef7ffce88325efecc1",
+  "snapshot_bytes": 3400008584,
+  "dtype": "int8",
+  "count": 10000000,
+  "dimension": 64,
+  "seconds": 45.678408900042996,
+  "retains_fp32_originals": true
+}

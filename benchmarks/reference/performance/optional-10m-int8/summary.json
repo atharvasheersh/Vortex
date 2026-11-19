@@ -1,0 +1,36 @@
+[
+  {
+    "condition": "10m-int8-baseline",
+    "nprobe": 24,
+    "calls": 32,
+    "distinct_queries": 32,
+    "rounds": 1,
+    "p50_ms": 1436.44115,
+    "p95_ms": 1515.278,
+    "mean_ms": 1420.84345,
+    "sequential_qps": 0.7038073054424117,
+    "recall_at_10": 0.98125,
+    "mean_scanned": 7511389.40625,
+    "round_p95_ms": {
+      "0": 1515.278
+    },
+    "timing_gaps": 0
+  },
+  {
+    "condition": "10m-int8-optimized",
+    "nprobe": 24,
+    "calls": 32,
+    "distinct_queries": 32,
+    "rounds": 1,
+    "p50_ms": 496.82219999999995,
+    "p95_ms": 534.153065,
+    "mean_ms": 500.683634375,
+    "sequential_qps": 1.9972691962426399,
+    "recall_at_10": 0.98125,
+    "mean_scanned": 7511389.40625,
+    "round_p95_ms": {
+      "0": 534.153065
+    },
+    "timing_gaps": 0
+  }
+]

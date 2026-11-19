@@ -1,0 +1,272 @@
+[
+  {
+    "baseline": "100k-baseline",
+    "optimized": "100k-locality",
+    "nprobe": 0,
+    "p95_speedup": 1.8085008808260539,
+    "latency_reduction_percent": 44.70558402253925,
+    "paired_query_bootstrap_95_interval": [
+      1.6673521631565595,
+      1.8877111415311307
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  },
+  {
+    "baseline": "100k-baseline",
+    "optimized": "100k-optimized",
+    "nprobe": 0,
+    "p95_speedup": 2.3170290287269046,
+    "latency_reduction_percent": 56.841283056800904,
+    "paired_query_bootstrap_95_interval": [
+      2.1915975623083046,
+      2.4363986473393546
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  },
+  {
+    "baseline": "100k-baseline",
+    "optimized": "100k-locality",
+    "nprobe": 24,
+    "p95_speedup": 11.087444127932557,
+    "latency_reduction_percent": 90.98078882327168,
+    "paired_query_bootstrap_95_interval": [
+      9.830079643146183,
+      11.99675015549123
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  },
+  {
+    "baseline": "100k-baseline",
+    "optimized": "100k-optimized",
+    "nprobe": 24,
+    "p95_speedup": 12.90164125498302,
+    "latency_reduction_percent": 92.24904816188585,
+    "paired_query_bootstrap_95_interval": [
+      11.834584901727126,
+      13.916801619370709
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  },
+  {
+    "baseline": "1m-baseline",
+    "optimized": "1m-locality",
+    "nprobe": 0,
+    "p95_speedup": 1.1251031431034004,
+    "latency_reduction_percent": 11.119259942544046,
+    "paired_query_bootstrap_95_interval": [
+      1.101873716255634,
+      1.1765058180325003
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  },
+  {
+    "baseline": "1m-baseline",
+    "optimized": "1m-optimized",
+    "nprobe": 0,
+    "p95_speedup": 1.23230432213017,
+    "latency_reduction_percent": 18.85121377555562,
+    "paired_query_bootstrap_95_interval": [
+      1.2098233509210927,
+      1.2893700574955176
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  },
+  {
+    "baseline": "1m-baseline",
+    "optimized": "1m-locality",
+    "nprobe": 24,
+    "p95_speedup": 8.028645694615552,
+    "latency_reduction_percent": 87.54459920095047,
+    "paired_query_bootstrap_95_interval": [
+      7.922026535334944,
+      8.252665489082764
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  },
+  {
+    "baseline": "1m-baseline",
+    "optimized": "1m-optimized",
+    "nprobe": 24,
+    "p95_speedup": 8.37462680656649,
+    "latency_reduction_percent": 88.05916940423056,
+    "paired_query_bootstrap_95_interval": [
+      8.197945334673273,
+      8.666080928587593
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  },
+  {
+    "baseline": "10m-baseline",
+    "optimized": "10m-locality",
+    "nprobe": 0,
+    "p95_speedup": 0.912098304535007,
+    "latency_reduction_percent": -9.637304995299356,
+    "paired_query_bootstrap_95_interval": [
+      0.9039849409463397,
+      0.9270019424408559
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 32,
+    "rounds": 1
+  },
+  {
+    "baseline": "10m-baseline",
+    "optimized": "10m-optimized",
+    "nprobe": 0,
+    "p95_speedup": 0.9845393519925393,
+    "latency_reduction_percent": -1.5703433261627486,
+    "paired_query_bootstrap_95_interval": [
+      0.9325615400322398,
+      1.0501219697188908
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 32,
+    "rounds": 1
+  },
+  {
+    "baseline": "10m-baseline",
+    "optimized": "10m-locality",
+    "nprobe": 24,
+    "p95_speedup": 8.858292308531386,
+    "latency_reduction_percent": 88.71114245082087,
+    "paired_query_bootstrap_95_interval": [
+      8.429176052460729,
+      9.779661260468815
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 32,
+    "rounds": 1
+  },
+  {
+    "baseline": "10m-baseline",
+    "optimized": "10m-optimized",
+    "nprobe": 24,
+    "p95_speedup": 10.356241662259329,
+    "latency_reduction_percent": 90.3439873980129,
+    "paired_query_bootstrap_95_interval": [
+      9.789285310194344,
+      10.948249901920782
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 32,
+    "rounds": 1
+  },
+  {
+    "baseline": "real-minilm-baseline",
+    "optimized": "real-minilm-locality",
+    "nprobe": 0,
+    "p95_speedup": 1.2719978774210665,
+    "latency_reduction_percent": 21.383516611877784,
+    "paired_query_bootstrap_95_interval": [
+      1.161363064455892,
+      1.4299314447599487
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  },
+  {
+    "baseline": "real-minilm-baseline",
+    "optimized": "real-minilm-optimized",
+    "nprobe": 0,
+    "p95_speedup": 1.1766831112092873,
+    "latency_reduction_percent": 15.015352011614114,
+    "paired_query_bootstrap_95_interval": [
+      1.033676731793961,
+      1.2980878665496725
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  },
+  {
+    "baseline": "real-minilm-baseline",
+    "optimized": "real-minilm-locality",
+    "nprobe": 24,
+    "p95_speedup": 0.9856521819107127,
+    "latency_reduction_percent": -1.455667460855592,
+    "paired_query_bootstrap_95_interval": [
+      0.9266424193838837,
+      1.133285640475479
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  },
+  {
+    "baseline": "real-minilm-baseline",
+    "optimized": "real-minilm-optimized",
+    "nprobe": 24,
+    "p95_speedup": 0.8663206794714263,
+    "latency_reduction_percent": -15.430697165180952,
+    "paired_query_bootstrap_95_interval": [
+      0.6369991954947708,
+      1.0636314034103906
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  },
+  {
+    "baseline": "1m-int8-baseline",
+    "optimized": "1m-int8-optimized",
+    "nprobe": 0,
+    "p95_speedup": 3.073067961689155,
+    "latency_reduction_percent": 67.4592292631779,
+    "paired_query_bootstrap_95_interval": [
+      3.011028400538119,
+      3.1392366930863775
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  },
+  {
+    "baseline": "1m-int8-baseline",
+    "optimized": "1m-int8-optimized",
+    "nprobe": 24,
+    "p95_speedup": 2.984089958156899,
+    "latency_reduction_percent": 66.48894590906895,
+    "paired_query_bootstrap_95_interval": [
+      2.926998506388342,
+      3.05785652861099
+    ],
+    "bootstrap_unit": "query IDs, retaining all rounds together",
+    "identical_hits_and_scanned": true,
+    "distinct_queries": 100,
+    "rounds": 3
+  }
+]

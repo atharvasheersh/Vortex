@@ -1,0 +1,15 @@
+{
+  "baseline": "10m-int8-baseline",
+  "optimized": "10m-int8-optimized",
+  "nprobe": 24,
+  "p95_speedup": 2.8367861186006675,
+  "latency_reduction_percent": 64.748840476797,
+  "paired_query_bootstrap_95_interval": [
+    2.3621997926440805,
+    2.9270123489735687
+  ],
+  "bootstrap_unit": "query IDs, retaining all rounds together",
+  "identical_hits_and_scanned": true,
+  "distinct_queries": 32,
+  "rounds": 1
+}

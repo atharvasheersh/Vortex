@@ -1,0 +1,17 @@
+{
+  "selected": {
+    "nlist": 128,
+    "nprobe": 64,
+    "calls": 32,
+    "distinct_queries": 32,
+    "p50_ms": 86.83439999999999,
+    "p95_ms": 94.74572,
+    "mean_ms": 83.410696875,
+    "sequential_qps": 11.988869982690694,
+    "recall_at_10": 0.965625,
+    "mean_scanned": 591380.0625,
+    "timing_gaps": 0
+  },
+  "selection_split": "queries 0..31, 1m synthetic reference seed 20261120",
+  "selected_before_final_heldout_collection": true
+}

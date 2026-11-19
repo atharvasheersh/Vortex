@@ -1,0 +1,24 @@
+{
+  "cpu": {
+    "Name": "12th Gen Intel(R) Core(TM) i7-1255U",
+    "NumberOfCores": 10,
+    "NumberOfLogicalProcessors": 12
+  },
+  "memory": {
+    "TotalVisibleMemorySize": 16400708,
+    "FreePhysicalMemory": 4209192,
+    "Caption": "Microsoft Windows 11 Home Single Language",
+    "Version": "10.0.26300"
+  },
+  "storage": {
+    "FriendlyName": "SAMSUNG MZVL21T0HCLR-00BH1",
+    "MediaType": "SSD",
+    "BusType": "NVMe",
+    "Size": 1024209543168
+  },
+  "compiler": "g++.exe (Rev5, Built by MSYS2 project) 16.1.0\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n",
+  "flags": "-O3 -DNDEBUG; C++20; no fast-math",
+  "selected_kernel": "AVX2 on GNU x86; scalar fallback retained",
+  "profiling": "Scoped microbenchmarks, no sampling-profiler attribution",
+  "timing_run_policy": "No concurrent benchmark or compile workload; ordinary desktop background load uncontrolled"
+}

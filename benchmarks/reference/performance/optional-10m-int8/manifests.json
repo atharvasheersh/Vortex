@@ -1,0 +1,231 @@
+{
+  "baseline": {
+    "snapshot": "packed-int8.vtx",
+    "snapshot_sha256": "4d31a8f419de5d07c48d26702116d3e2187aa23cc1fd9eef7ffce88325efecc1",
+    "snapshot_bytes": 3400008584,
+    "snapshot_info": {
+      "n": 10000000,
+      "d": 64,
+      "nlist": 32,
+      "offsets": [
+        128,
+        80000128,
+        2640000128,
+        3320000128,
+        3320008320,
+        3320008584,
+        3400008584
+      ]
+    },
+    "module": "_vortex.cp312-win_amd64.pyd",
+    "module_sha256": "f2b3531bf79006f0c00a112853448b4e611cc4f493b438472a212205f8dc8acf",
+    "queries_sha256": "dea0e36d0d5eb3c13d97849e50096d07750ea505d2407382edeef90f213520f1",
+    "reference_ids_sha256": "410ba5cbaef598bba183a3f011ecbd5ea823a66f592f264c9c7a061b328b14d4",
+    "reference_scores_sha256": "27c4f33cca8b2d1a2047602b436b04d01b2773855605b60fdb6c080ad92c661e",
+    "query_offset": 32,
+    "query_count": 32,
+    "repeats": 1,
+    "warmups": 3,
+    "probes": [
+      24
+    ],
+    "threads": 1,
+    "kernel": "auto",
+    "cache_bytes": 8388608,
+    "block_bytes": 4096,
+    "working_set_mib": 1536,
+    "max_seconds": 250.05597149999812,
+    "numpy": "2.5.4",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "avx2_available": true,
+    "cache_state": "warmed/OS-managed, not controlled cold",
+    "time_boundary": "complete Index.search Python call",
+    "started_unix": 1795077519.9712174,
+    "status": "completed",
+    "condition": "10m-int8-baseline",
+    "round_id": 0,
+    "rerank_n": 100,
+    "active_kernel": "not exposed by baseline",
+    "paging_start": {
+      "page_faults": 846849,
+      "rss_bytes": 36700160
+    },
+    "power_start": {
+      "available": true,
+      "ac_line_status": 1,
+      "battery_saver": 0
+    },
+    "git_revision": "1b0de43737b32f2f04ea28f261105591ab79ea94",
+    "source_sha256": {
+      "src/distance.cpp": "6c4376ea8b862e6da57d0244db13abd79a2af29cfdff5f5c9b4f711c00f842ce",
+      "src/index.cpp": "808eceb235bde9d0f91f989e902aa7f0055b8646ef838e4ea405b0581a3cce94",
+      "src/storage.cpp": "341c1b68f33ce960b5424ae45c063509d34edf728c5cd9140bb15e3a93db9816",
+      "include/vortex/distance.hpp": "8598e3a749f1195d593d72e49484460d0c14ff959f039af55d23049920126e30",
+      "include/vortex/index.hpp": "30dcd5efb56ca80d7ac0c7d49481b794c17873c5248369671d3903a530ddf0de",
+      "include/vortex/storage.hpp": "9a368bc194117fc1ae76dda4efbdc6023961de5635ea47be2166677212922a05",
+      "include/vortex/thread_pool.hpp": "ae92cee3eae51349233b6a5ad5eb95d0b8060aac8b39f0cca8a5a706db7cc53b",
+      "python/bindings.cpp": "33c6a1faf9bd3b1d91085369ed0522932041eb35e04f3161bc172fcd7ae97488",
+      "CMakeLists.txt": "61c58c9c3b66251479d70dc05cfdab0725c2ca47b8537a215d7dab7862dd085d",
+      "benchmarks/run_performance.py": "0641f5ebc8315cbe41c2c4fbc6d50a380ad821c3b395e2ce6177be9de95aa3bb",
+      "benchmarks/repack_snapshot.py": "de903b4e972db12f4a8dab50757fae20b4219cf40eaff39be5d6c0592e70dfa4",
+      "benchmarks/encode_snapshot.py": "15116ebf98cd256c71d2a687a951a77b6a827c73ea3d179769e65c708e47aef2",
+      "benchmarks/streaming_snapshot.py": "7ea787d78de7a8d721d5365486f468a0f696f3a0232e485cfdf91d5589da1d79",
+      "benchmarks/capacity_resources.py": "9d4fd88992551b7705bef0d70326a9685543b5cd555c5dd421f0a35c1e641968"
+    },
+    "memory_policy": {
+      "enabled": true,
+      "scope": "this process resident working set only; not commit or total OS file cache",
+      "minimum_bytes": 1048576,
+      "maximum_bytes": 1610612736,
+      "flags": 6,
+      "method": "SetProcessWorkingSetSizeEx HARDWS_MAX_ENABLE; verified by GetProcessWorkingSetSizeEx"
+    },
+    "open_seconds": 3.414914899971336,
+    "memory_after_open": {
+      "peak_rss_bytes": 777658368,
+      "current_rss_bytes": 776523776,
+      "method": "GetProcessMemoryInfo; process-wide working set"
+    },
+    "cache_stats": {
+      "hits": 262539718,
+      "misses": 4367373,
+      "evictions": 4365325,
+      "resident_bytes": 8388608,
+      "bytes_served": 17871104172,
+      "mapped_bytes_fetched": 17888759808,
+      "miss_nanoseconds": 6431706500
+    },
+    "memory_final": {
+      "peak_rss_bytes": 1481003008,
+      "current_rss_bytes": 1481003008,
+      "method": "GetProcessMemoryInfo; process-wide working set"
+    },
+    "paging_end": {
+      "page_faults": 1231903,
+      "rss_bytes": 1481007104
+    },
+    "power_end": {
+      "available": true,
+      "ac_line_status": 1,
+      "battery_saver": 0
+    },
+    "elapsed_seconds": 53.7240284999134,
+    "recorded_calls": 32,
+    "native_revision": "c2fdefc653e9a11d4dee2bd1a30d7b8a5929016b"
+  },
+  "optimized": {
+    "snapshot": "packed-int8.vtx",
+    "snapshot_sha256": "4d31a8f419de5d07c48d26702116d3e2187aa23cc1fd9eef7ffce88325efecc1",
+    "snapshot_bytes": 3400008584,
+    "snapshot_info": {
+      "n": 10000000,
+      "d": 64,
+      "nlist": 32,
+      "offsets": [
+        128,
+        80000128,
+        2640000128,
+        3320000128,
+        3320008320,
+        3320008584,
+        3400008584
+      ]
+    },
+    "module": "_vortex.cp312-win_amd64.pyd",
+    "module_sha256": "570e6d0d1af196dee0c9aa90f0538d5b571980b6f029ec826b0af2757d33a6a7",
+    "queries_sha256": "dea0e36d0d5eb3c13d97849e50096d07750ea505d2407382edeef90f213520f1",
+    "reference_ids_sha256": "410ba5cbaef598bba183a3f011ecbd5ea823a66f592f264c9c7a061b328b14d4",
+    "reference_scores_sha256": "27c4f33cca8b2d1a2047602b436b04d01b2773855605b60fdb6c080ad92c661e",
+    "query_offset": 32,
+    "query_count": 32,
+    "repeats": 1,
+    "warmups": 3,
+    "probes": [
+      24
+    ],
+    "threads": 1,
+    "kernel": "auto",
+    "cache_bytes": 8388608,
+    "block_bytes": 4096,
+    "working_set_mib": 1536,
+    "max_seconds": 190.3630810000468,
+    "numpy": "2.5.4",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "avx2_available": true,
+    "cache_state": "warmed/OS-managed, not controlled cold",
+    "time_boundary": "complete Index.search Python call",
+    "started_unix": 1795077579.1953983,
+    "status": "completed",
+    "condition": "10m-int8-optimized",
+    "round_id": 0,
+    "rerank_n": 100,
+    "active_kernel": "avx2",
+    "paging_start": {
+      "page_faults": 846846,
+      "rss_bytes": 36700160
+    },
+    "power_start": {
+      "available": true,
+      "ac_line_status": 1,
+      "battery_saver": 0
+    },
+    "git_revision": "1b0de43737b32f2f04ea28f261105591ab79ea94",
+    "source_sha256": {
+      "src/distance.cpp": "6c4376ea8b862e6da57d0244db13abd79a2af29cfdff5f5c9b4f711c00f842ce",
+      "src/index.cpp": "808eceb235bde9d0f91f989e902aa7f0055b8646ef838e4ea405b0581a3cce94",
+      "src/storage.cpp": "341c1b68f33ce960b5424ae45c063509d34edf728c5cd9140bb15e3a93db9816",
+      "include/vortex/distance.hpp": "8598e3a749f1195d593d72e49484460d0c14ff959f039af55d23049920126e30",
+      "include/vortex/index.hpp": "30dcd5efb56ca80d7ac0c7d49481b794c17873c5248369671d3903a530ddf0de",
+      "include/vortex/storage.hpp": "9a368bc194117fc1ae76dda4efbdc6023961de5635ea47be2166677212922a05",
+      "include/vortex/thread_pool.hpp": "ae92cee3eae51349233b6a5ad5eb95d0b8060aac8b39f0cca8a5a706db7cc53b",
+      "python/bindings.cpp": "33c6a1faf9bd3b1d91085369ed0522932041eb35e04f3161bc172fcd7ae97488",
+      "CMakeLists.txt": "61c58c9c3b66251479d70dc05cfdab0725c2ca47b8537a215d7dab7862dd085d",
+      "benchmarks/run_performance.py": "0641f5ebc8315cbe41c2c4fbc6d50a380ad821c3b395e2ce6177be9de95aa3bb",
+      "benchmarks/repack_snapshot.py": "de903b4e972db12f4a8dab50757fae20b4219cf40eaff39be5d6c0592e70dfa4",
+      "benchmarks/encode_snapshot.py": "15116ebf98cd256c71d2a687a951a77b6a827c73ea3d179769e65c708e47aef2",
+      "benchmarks/streaming_snapshot.py": "7ea787d78de7a8d721d5365486f468a0f696f3a0232e485cfdf91d5589da1d79",
+      "benchmarks/capacity_resources.py": "9d4fd88992551b7705bef0d70326a9685543b5cd555c5dd421f0a35c1e641968"
+    },
+    "memory_policy": {
+      "enabled": true,
+      "scope": "this process resident working set only; not commit or total OS file cache",
+      "minimum_bytes": 1048576,
+      "maximum_bytes": 1610612736,
+      "flags": 6,
+      "method": "SetProcessWorkingSetSizeEx HARDWS_MAX_ENABLE; verified by GetProcessWorkingSetSizeEx"
+    },
+    "open_seconds": 3.3573347999481484,
+    "memory_after_open": {
+      "peak_rss_bytes": 777695232,
+      "current_rss_bytes": 776568832,
+      "method": "GetProcessMemoryInfo; process-wide working set"
+    },
+    "cache_stats": {
+      "read_calls": 276773,
+      "hits": 272351,
+      "misses": 4367373,
+      "evictions": 4365325,
+      "resident_bytes": 8388608,
+      "bytes_served": 17871104172,
+      "mapped_bytes_fetched": 17888759808,
+      "miss_nanoseconds": 6733104400
+    },
+    "memory_final": {
+      "peak_rss_bytes": 1481601024,
+      "current_rss_bytes": 1481601024,
+      "method": "GetProcessMemoryInfo; process-wide working set"
+    },
+    "paging_end": {
+      "page_faults": 1231879,
+      "rss_bytes": 1481605120
+    },
+    "power_end": {
+      "available": true,
+      "ac_line_status": 1,
+      "battery_saver": 0
+    },
+    "elapsed_seconds": 21.490077399997972,
+    "recorded_calls": 32,
+    "native_revision": "1b0de43737b32f2f04ea28f261105591ab79ea94"
+  }
+}

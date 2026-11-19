@@ -1,0 +1,13 @@
+{
+  "status": "completed",
+  "budget_seconds": 300,
+  "query_count": 32,
+  "query_offset": 32,
+  "rounds": 1,
+  "nprobe": 24,
+  "rerank_n": 100,
+  "working_set_mib": 1536,
+  "classification": "optional exploratory expansion after primary completion; fixed pre-existing codec/rerank settings, no tuning",
+  "primary_elapsed_seconds": 2327.2103339000605,
+  "elapsed_seconds": 136.49480860005133
+}

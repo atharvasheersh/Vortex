@@ -1,0 +1,24 @@
+{
+  "n": 10000000,
+  "d": 64,
+  "nlist": 32,
+  "offsets": [
+    128,
+    80000128,
+    2640000128,
+    2640000128,
+    2640008320,
+    2640008584,
+    2720008584
+  ],
+  "snapshot_sha256": "8652d6f5041c79fe024ece9525fb663f67f5af51ce28461df45840356ae2a738",
+  "queries_sha256": "dea0e36d0d5eb3c13d97849e50096d07750ea505d2407382edeef90f213520f1",
+  "ids_sha256": "410ba5cbaef598bba183a3f011ecbd5ea823a66f592f264c9c7a061b328b14d4",
+  "scores_sha256": "27c4f33cca8b2d1a2047602b436b04d01b2773855605b60fdb6c080ad92c661e",
+  "query_seed": 20261120,
+  "tuning_count": 32,
+  "heldout_count": 32,
+  "method": "blocked FAISS IndexFlatL2; three direct float64 full-corpus checks",
+  "seconds": 52.8688818999799,
+  "faiss_version": "1.15.1"
+}

@@ -1,0 +1,14 @@
+scope,milliseconds
+resident_exact_12_queries,32.8106
+resident_ivf24_12_queries,73.171
+resident_fp16_exact_12_queries,1373.37
+resident_int8_exact_12_queries,113.047
+mapped_exact_12_queries,226.564
+mapped_ivf24_12_queries,1214.76
+mapped_batch12_4_workers,119.29
+distance_scalar_one_pass,5.7254
+distance_auto_one_pass,2.9126
+finite_validation_one_pass,3.013
+topk_heap_one_pass,1.1986
+cache_one_read_per_vector,25.4759
+cache_one_read_per_256_vectors,12.9732
